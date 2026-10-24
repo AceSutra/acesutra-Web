@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-charcoal-950 border-t border-subtleBorder text-warmWhite pt-16 pb-12 relative overflow-hidden">
       {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-brand-orange/5 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-brand-blue/10 blur-3xl rounded-full pointer-events-none" />
 
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-subtleBorder">
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
                 <li key={service.id}>
                   <Link
                     to={`/services/${service.slug}`}
-                    className="hover:text-brand-orange transition-colors"
+                    className="hover:text-cyan-400 transition-colors"
                   >
                     {service.title}
                   </Link>
@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/services/ai-automation"
-                  className="hover:text-brand-orange transition-colors"
+                  className="hover:text-cyan-400 transition-colors"
                 >
                   AI & Automation
                 </Link>
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/services/cloud-solutions"
-                  className="hover:text-brand-orange transition-colors"
+                  className="hover:text-cyan-400 transition-colors"
                 >
                   Cloud & Infrastructure
                 </Link>
@@ -72,32 +72,32 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm text-mutedGray">
               <li>
-                <Link to="/about" className="hover:text-brand-orange transition-colors">
+                <Link to="/about" className="hover:text-cyan-400 transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/work" className="hover:text-brand-orange transition-colors">
+                <Link to="/work" className="hover:text-cyan-400 transition-colors">
                   Selected Work
                 </Link>
               </li>
               <li>
-                <Link to="/insights" className="hover:text-brand-orange transition-colors">
+                <Link to="/insights" className="hover:text-cyan-400 transition-colors">
                   Insights & Strategy
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-brand-orange transition-colors">
+                <Link to="/contact" className="hover:text-cyan-400 transition-colors">
                   Contact & Inquiries
                 </Link>
               </li>
               <li>
-                <Link to="/privacy-policy" className="hover:text-brand-orange transition-colors">
+                <Link to="/privacy-policy" className="hover:text-cyan-400 transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms-and-conditions" className="hover:text-brand-orange transition-colors">
+                <Link to="/terms-and-conditions" className="hover:text-cyan-400 transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -115,9 +115,9 @@ export const Footer: React.FC = () => {
             <div className="pt-1">
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-brand-orange transition-colors group"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-cyan-400 transition-colors group"
               >
-                <Mail className="w-4 h-4 text-brand-orange" />
+                <Mail className="w-4 h-4 text-cyan-400" />
                 <span>{siteConfig.email}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
@@ -132,7 +132,7 @@ export const Footer: React.FC = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-charcoal-800 border border-subtleBorder text-mutedGray hover:text-white hover:border-brand-orange hover:bg-charcoal-700 transition-all text-xs"
+                    className="p-2 rounded-lg bg-charcoal-800 border border-subtleBorder text-mutedGray hover:text-white hover:border-brand-cyan hover:bg-charcoal-700 transition-all text-xs"
                     aria-label={`AceSutra on ${social.label}`}
                   >
                     {social.label}

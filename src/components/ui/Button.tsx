@@ -24,12 +24,12 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-900 disabled:opacity-50 disabled:cursor-not-allowed group';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-900 disabled:opacity-50 disabled:cursor-not-allowed group';
 
   const variantStyles = {
-    primary: 'bg-brand-orange text-white hover:bg-brand-hover shadow-sm hover:shadow-glow-orange active:translate-y-0.5',
+    primary: 'bg-brand-blue text-white hover:bg-brand-hover shadow-sm hover:shadow-glow-blue active:translate-y-0.5',
     secondary: 'bg-charcoal-800 text-warmWhite hover:bg-charcoal-700 border border-subtleBorder hover:border-subtleBorderHover active:translate-y-0.5',
-    outline: 'bg-transparent text-warmWhite border border-subtleBorder hover:border-brand-orange hover:text-white hover:bg-brand-orange/5 active:translate-y-0.5',
+    outline: 'bg-transparent text-warmWhite border border-subtleBorder hover:border-brand-cyan hover:text-white hover:bg-brand-blue/10 active:translate-y-0.5',
     ghost: 'bg-transparent text-mutedGray hover:text-white hover:bg-charcoal-800/60',
   };
 

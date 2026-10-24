@@ -1,18 +1,24 @@
 :root {
   /* Core Brand Colors */
-  --color-charcoal-deep: #101114;
-  --color-surface-dark: #181A20;
-  --color-surface-elevated: #1F222A;
-  --color-surface-hover: #262A34;
-  --color-warm-white: #F7F7F5;
+  --color-charcoal-deep: #0C0F17;
+  --color-surface-dark: #121722;
+  --color-surface-elevated: #182030;
+  --color-surface-hover: #222D42;
+  --color-warm-white: #F8FAFC;
   --color-pure-white: #FFFFFF;
-  --color-brand-orange: #FF6B35;
-  --color-brand-orange-hover: #FF8552;
-  --color-brand-orange-dark: #E5531E;
-  --color-brand-orange-glow: rgba(255, 107, 53, 0.15);
-  --color-muted-gray: #A3A5AD;
-  --color-subtle-border: #2D3038;
-  --color-subtle-border-hover: #3E434E;
+  --color-brand-blue: #0066FF;
+  --color-brand-cyan: #00C2FF;
+  --color-brand-hover: #0085FF;
+  --color-brand-dark: #0047BA;
+  --color-brand-glow: rgba(0, 102, 255, 0.2);
+  --color-brand-cyan-glow: rgba(0, 194, 255, 0.25);
+  --color-brand-orange: #0066FF;
+  --color-brand-orange-hover: #0085FF;
+  --color-brand-orange-dark: #0047BA;
+  --color-brand-orange-glow: rgba(0, 102, 255, 0.2);
+  --color-muted-gray: #94A3B8;
+  --color-subtle-border: #1E293B;
+  --color-subtle-border-hover: #334155;
   
   /* Semantic Tokens */
   --bg-primary: var(--color-charcoal-deep);
@@ -20,7 +26,7 @@
   --bg-card: var(--color-surface-elevated);
   --text-primary: var(--color-warm-white);
   --text-secondary: var(--color-muted-gray);
-  --text-accent: var(--color-brand-orange);
+  --text-accent: var(--color-brand-cyan);
   --border-default: var(--color-subtle-border);
   --border-hover: var(--color-subtle-border-hover);
   

@@ -41,7 +41,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                 onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 select-none ${
                   isActive
-                    ? 'bg-brand-orange text-white shadow-glow-orange font-semibold'
+                    ? 'bg-brand-blue text-white shadow-glow-blue font-semibold'
                     : 'bg-charcoal-800 text-mutedGray hover:text-white hover:bg-charcoal-700 border border-subtleBorder'
                 }`}
                 aria-pressed={isActive}
@@ -68,7 +68,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           <button
             type="button"
             onClick={() => setActiveCategory('All')}
-            className="text-sm font-semibold text-brand-orange hover:underline"
+            className="text-sm font-semibold text-cyan-400 hover:underline"
           >
             Show All Projects
           </button>

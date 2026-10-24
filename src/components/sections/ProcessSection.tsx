@@ -10,35 +10,35 @@ export const ProcessSection: React.FC = () => {
       title: 'Discover',
       tagline: 'Deep Context & Opportunity Audit',
       description: 'We explore your business model, customer touchpoints, competitive landscape, and digital bottlenecks to establish clear baseline objectives.',
-      icon: <Search className="w-5 h-5 text-brand-orange" />,
+      icon: <Search className="w-5 h-5 text-cyan-400" />,
     },
     {
       step: '02',
       title: 'Strategize',
       tagline: 'Roadmap & Architecture Blueprint',
       description: 'We define the technical stack, campaign messaging, exact deliverables, sprint schedules, and verifiable criteria for success.',
-      icon: <Compass className="w-5 h-5 text-brand-orange" />,
+      icon: <Compass className="w-5 h-5 text-cyan-400" />,
     },
     {
       step: '03',
       title: 'Design & Build',
       tagline: 'Agile Craft & Engineering',
       description: 'We build the brand assets, interactive prototypes, performant frontend code, or automated pipelines with transparent milestone check-ins.',
-      icon: <PenTool className="w-5 h-5 text-brand-orange" />,
+      icon: <PenTool className="w-5 h-5 text-cyan-400" />,
     },
     {
       step: '04',
       title: 'Launch',
       tagline: 'Rigorous QA & Production Deployment',
       description: 'Full cross-browser testing, SEO audit, security hardening, latency profiling, and seamless production cutover with zero downtime.',
-      icon: <Rocket className="w-5 h-5 text-brand-orange" />,
+      icon: <Rocket className="w-5 h-5 text-cyan-400" />,
     },
     {
       step: '05',
       title: 'Improve',
       tagline: 'Telemetry & Continuous Evolution',
       description: 'We analyze live user interactions, conversion cohorts, and operational feedback to identify incremental optimizations that drive ongoing gains.',
-      icon: <LineChart className="w-5 h-5 text-brand-orange" />,
+      icon: <LineChart className="w-5 h-5 text-cyan-400" />,
     },
   ];
 
@@ -56,29 +56,29 @@ export const ProcessSection: React.FC = () => {
         {/* Connected Horizontal Timeline for Desktops, Vertical on Mobile */}
         <div className="relative">
           {/* Subtle connection line for larger screens */}
-          <div className="hidden lg:block absolute top-12 left-12 right-12 h-0.5 bg-gradient-to-r from-brand-orange/20 via-brand-orange to-brand-orange/20 -z-0" />
+          <div className="hidden lg:block absolute top-12 left-12 right-12 h-0.5 bg-gradient-to-r from-sky-400/20 via-brand-blue to-cyan-400/20 -z-0" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 relative z-10">
             {steps.map((item) => (
               <div
                 key={item.step}
-                className="group flex flex-col rounded-2xl bg-charcoal-900/90 border border-subtleBorder hover:border-brand-orange/50 p-6 transition-all duration-300 shadow-card-dark"
+                className="group flex flex-col rounded-2xl bg-charcoal-900/90 border border-subtleBorder hover:border-brand-cyan/50 p-6 transition-all duration-300 shadow-card-dark"
               >
                 {/* Step Header with Number & Icon */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-charcoal-800 border border-subtleBorder group-hover:border-brand-orange/40 flex items-center justify-center transition-colors shadow-inner">
+                  <div className="w-10 h-10 rounded-xl bg-charcoal-800 border border-subtleBorder group-hover:border-brand-cyan/40 flex items-center justify-center transition-colors shadow-inner">
                     {item.icon}
                   </div>
-                  <span className="font-mono text-sm font-bold px-2 py-0.5 rounded bg-brand-orange/10 border border-brand-orange/20 text-brand-orange">
+                  <span className="font-mono text-sm font-bold px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400">
                     {item.step}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-white group-hover:text-brand-orange transition-colors">
+                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
                   {item.title}
                 </h3>
 
-                <span className="text-[11px] font-semibold text-brand-orange/80 mt-1">
+                <span className="text-[11px] font-semibold text-cyan-400/80 mt-1">
                   {item.tagline}
                 </span>
 

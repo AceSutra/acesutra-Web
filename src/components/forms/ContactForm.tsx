@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
@@ -55,7 +55,7 @@ export const ContactForm: React.FC = () => {
   return (
     <div className="bg-charcoal-800/90 border border-subtleBorder rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-brand-orange/5 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-brand-cyan/10 blur-3xl rounded-full pointer-events-none" />
 
       {submissionStatus && (
         <div
@@ -103,7 +103,7 @@ export const ContactForm: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label htmlFor="fullName" className="block text-xs font-semibold uppercase tracking-wider text-mutedGray mb-2">
-              Full Name <span className="text-brand-orange">*</span>
+              Full Name <span className="text-cyan-400">*</span>
             </label>
             <input
               id="fullName"
@@ -111,8 +111,8 @@ export const ContactForm: React.FC = () => {
               autoComplete="name"
               placeholder="e.g. Alex Morgan"
               {...register('fullName')}
-              className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white placeholder-mutedGray/50 focus:outline-none focus:ring-2 focus:ring-brand-orange transition-colors text-sm ${
-                errors.fullName ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-orange'
+              className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white placeholder-mutedGray/50 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors text-sm ${
+                errors.fullName ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-cyan'
               }`}
               aria-invalid={errors.fullName ? 'true' : 'false'}
               aria-describedby={errors.fullName ? 'fullName-error' : undefined}
@@ -127,7 +127,7 @@ export const ContactForm: React.FC = () => {
 
           <div>
             <label htmlFor="businessEmail" className="block text-xs font-semibold uppercase tracking-wider text-mutedGray mb-2">
-              Business Email <span className="text-brand-orange">*</span>
+              Business Email <span className="text-cyan-400">*</span>
             </label>
             <input
               id="businessEmail"
@@ -135,8 +135,8 @@ export const ContactForm: React.FC = () => {
               autoComplete="email"
               placeholder="alex@company.com"
               {...register('businessEmail')}
-              className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white placeholder-mutedGray/50 focus:outline-none focus:ring-2 focus:ring-brand-orange transition-colors text-sm ${
-                errors.businessEmail ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-orange'
+              className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white placeholder-mutedGray/50 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors text-sm ${
+                errors.businessEmail ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-cyan'
               }`}
               aria-invalid={errors.businessEmail ? 'true' : 'false'}
               aria-describedby={errors.businessEmail ? 'email-error' : undefined}
@@ -162,7 +162,7 @@ export const ContactForm: React.FC = () => {
               autoComplete="organization"
               placeholder="e.g. Acme Corp"
               {...register('companyName')}
-              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white placeholder-mutedGray/50 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white placeholder-mutedGray/50 focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue transition-colors text-sm"
             />
           </div>
 
@@ -176,7 +176,7 @@ export const ContactForm: React.FC = () => {
               autoComplete="tel"
               placeholder="+1 (555) 000-0000"
               {...register('phone')}
-              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white placeholder-mutedGray/50 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white placeholder-mutedGray/50 focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue transition-colors text-sm"
             />
           </div>
         </div>
@@ -184,13 +184,13 @@ export const ContactForm: React.FC = () => {
         {/* Service of Interest */}
         <div>
           <label htmlFor="serviceOfInterest" className="block text-xs font-semibold uppercase tracking-wider text-mutedGray mb-2">
-            Primary Area of Need <span className="text-brand-orange">*</span>
+            Primary Area of Need <span className="text-cyan-400">*</span>
           </label>
           <select
             id="serviceOfInterest"
             {...register('serviceOfInterest')}
-            className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white focus:outline-none focus:ring-2 focus:ring-brand-orange transition-colors text-sm ${
-              errors.serviceOfInterest ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-orange'
+            className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors text-sm ${
+              errors.serviceOfInterest ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-cyan'
             }`}
             aria-invalid={errors.serviceOfInterest ? 'true' : 'false'}
             aria-describedby={errors.serviceOfInterest ? 'service-error' : undefined}
@@ -222,7 +222,7 @@ export const ContactForm: React.FC = () => {
             <select
               id="budget"
               {...register('budget')}
-              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue transition-colors text-sm"
             >
               <option value="">Select budget range...</option>
               <option value="Under $5,000">Under $5,000</option>
@@ -241,7 +241,7 @@ export const ContactForm: React.FC = () => {
             <select
               id="timeline"
               {...register('timeline')}
-              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-subtleBorder text-white focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-blue transition-colors text-sm"
             >
               <option value="">Select expected timeline...</option>
               <option value="Immediate (< 1 month)">Immediate (within 1 month)</option>
@@ -255,15 +255,15 @@ export const ContactForm: React.FC = () => {
         {/* Project Description */}
         <div>
           <label htmlFor="projectDescription" className="block text-xs font-semibold uppercase tracking-wider text-mutedGray mb-2">
-            Project Overview & Goals <span className="text-brand-orange">*</span>
+            Project Overview & Goals <span className="text-cyan-400">*</span>
           </label>
           <textarea
             id="projectDescription"
             rows={4}
             placeholder="Tell us about what you want to achieve, your primary business challenges, and any specific requirements or references..."
             {...register('projectDescription')}
-            className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white placeholder-mutedGray/50 focus:outline-none focus:ring-2 focus:ring-brand-orange transition-colors text-sm resize-y min-h-[120px] ${
-              errors.projectDescription ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-orange'
+            className={`w-full px-4 py-3 rounded-xl bg-charcoal-900 border text-white placeholder-mutedGray/50 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors text-sm resize-y min-h-[120px] ${
+              errors.projectDescription ? 'border-rose-500 focus:ring-rose-500' : 'border-subtleBorder focus:border-brand-cyan'
             }`}
             aria-invalid={errors.projectDescription ? 'true' : 'false'}
             aria-describedby={errors.projectDescription ? 'description-error' : undefined}
@@ -282,11 +282,11 @@ export const ContactForm: React.FC = () => {
             <input
               type="checkbox"
               {...register('privacyConsent')}
-              className="mt-1 w-4 h-4 rounded border-subtleBorder bg-charcoal-900 text-brand-orange focus:ring-brand-orange focus:ring-offset-charcoal-900"
+              className="mt-1 w-4 h-4 rounded border-subtleBorder bg-charcoal-900 text-cyan-400 focus:ring-brand-blue focus:ring-offset-charcoal-900"
             />
             <span className="text-xs text-mutedGray leading-relaxed group-hover:text-warmWhite transition-colors">
               I agree to the processing of this information in accordance with AceSutra's{' '}
-              <Link to="/privacy-policy" className="text-brand-orange underline hover:text-brand-hover" target="_blank">
+              <Link to="/privacy-policy" className="text-cyan-400 underline hover:text-sky-300" target="_blank">
                 Privacy Policy
               </Link>
               . We never sell or distribute your data.
@@ -313,7 +313,7 @@ export const ContactForm: React.FC = () => {
             Submit Project Inquiry
           </Button>
           <p className="text-xs text-mutedGray/70 mt-3 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             Typical discovery response within 24 business hours. No spam, guaranteed.
           </p>
         </div>

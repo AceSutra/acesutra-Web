@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import type { ProjectItem } from '../../types';
 
@@ -8,7 +8,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
-    <div className="group rounded-2xl bg-charcoal-800/60 border border-subtleBorder hover:border-brand-orange/50 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-card-dark">
+    <div className="group rounded-2xl bg-charcoal-800/60 border border-subtleBorder hover:border-brand-cyan/50 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-card-dark">
       <div>
         {/* Project Thumbnail Image with Subtle Zoom */}
         <div className="relative aspect-[16/10] overflow-hidden bg-charcoal-900">
@@ -22,7 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
           {/* Badges Overlay */}
           <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-charcoal-900/90 text-brand-orange border border-brand-orange/30 backdrop-blur-md">
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-charcoal-900/90 text-cyan-400 border border-brand-cyan/30 backdrop-blur-md">
               {project.category}
             </span>
             <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-black/60 text-warmWhite/80 backdrop-blur-md">
@@ -33,11 +33,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
         {/* Content Body */}
         <div className="p-6">
-          <h3 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">
+          <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
             {project.name}
           </h3>
 
-          <p className="mt-2 text-xs font-medium text-brand-orange/90">
+          <p className="mt-2 text-xs font-medium text-cyan-400/90">
             {project.tagline}
           </p>
 
@@ -78,7 +78,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             href={project.externalUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-orange hover:text-brand-hover transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-sky-300 transition-colors"
           >
             <span>Visit Live Project</span>
             <ExternalLink className="w-3.5 h-3.5" />

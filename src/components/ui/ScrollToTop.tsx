@@ -42,7 +42,7 @@ export const FloatingScrollToTopButton: React.FC = () => {
       type="button"
       onClick={scrollToTop}
       aria-label="Scroll back to top"
-      className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-charcoal-800/90 text-warmWhite hover:text-white border border-subtleBorder hover:border-brand-orange hover:bg-charcoal-700 shadow-card-dark transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+      className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-charcoal-800/90 text-warmWhite hover:text-white border border-subtleBorder hover:border-brand-cyan hover:shadow-glow-cyan hover:bg-charcoal-700 shadow-card-dark transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
     >
       <ArrowUp className="w-4 h-4" />
     </button>

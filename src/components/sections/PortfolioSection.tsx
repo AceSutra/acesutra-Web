@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -19,7 +19,7 @@ export const PortfolioSection: React.FC = () => {
               title="Work That Moves Ideas Forward."
               description="Explore representative architectural concepts, digital flagship prototypes, and technical implementations crafted to enterprise standards."
             />
-            <div className="mt-2 flex items-center gap-2 text-xs text-brand-orange/90">
+            <div className="mt-2 flex items-center gap-2 text-xs text-cyan-400/90">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Flagship Capability Demonstrations & Prototypes</span>
             </div>

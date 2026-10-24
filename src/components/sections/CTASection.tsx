@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ArrowRight, Sparkles, MessageSquare } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
@@ -16,12 +16,12 @@ export const CTASection: React.FC<CTASectionProps> = ({
     <section className="py-20 lg:py-28 relative overflow-hidden bg-charcoal-900 border-t border-subtleBorder">
       {/* Background Radial Glow */}
       <div className="absolute inset-0 bg-radial-glow opacity-80 pointer-events-none" />
-      <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-orange/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-cyan/10 blur-[120px] rounded-full pointer-events-none" />
 
       <Container>
-        <div className="relative rounded-3xl bg-gradient-to-b from-charcoal-800 to-charcoal-800/80 border border-brand-orange/30 p-8 sm:p-12 lg:p-16 text-center max-w-5xl mx-auto shadow-2xl">
+        <div className="relative rounded-3xl bg-gradient-to-b from-charcoal-800 to-charcoal-800/80 border border-brand-cyan/30 p-8 sm:p-12 lg:p-16 text-center max-w-5xl mx-auto shadow-2xl">
           {/* Subtle top indicator */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400 text-xs font-semibold mb-6">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Strategy • Creativity • Scalable Technology</span>
           </div>
@@ -49,7 +49,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
               to="/contact"
               variant="secondary"
               size="lg"
-              leftIcon={<MessageSquare className="w-4 h-4 text-brand-orange" />}
+              leftIcon={<MessageSquare className="w-4 h-4 text-cyan-400" />}
               className="w-full sm:w-auto"
             >
               Talk to Our Team

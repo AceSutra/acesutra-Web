@@ -1,19 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
   <defs>
-    <linearGradient id="ace-grad-1" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FF5500"/>
-      <stop offset="50%" stop-color="#FF6B35"/>
-      <stop offset="100%" stop-color="#FFA070"/>
+    <!-- Cyan to Royal Blue primary gradient -->
+    <linearGradient id="as-blue-grad" x1="15" y1="85" x2="85" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0052D4"/>
+      <stop offset="50%" stop-color="#0080FF"/>
+      <stop offset="100%" stop-color="#00D2FF"/>
     </linearGradient>
-    <linearGradient id="ace-grad-2" x1="14" y1="36" x2="34" y2="12" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#E04810"/>
-      <stop offset="100%" stop-color="#FF8552"/>
+
+    <!-- Deep 3D Shadow Gradient -->
+    <linearGradient id="as-dark-grad" x1="30" y1="30" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B1E3D"/>
+      <stop offset="100%" stop-color="#031024"/>
     </linearGradient>
+
+    <!-- Glowing Cyan for Waves & Highlights -->
+    <linearGradient id="as-cyan-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#0077FF"/>
+    </linearGradient>
+
+    <!-- Metallic Node Sphere Radial Gradient -->
+    <radialGradient id="as-node-sphere" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#38BDF8"/>
+      <stop offset="70%" stop-color="#0066FF"/>
+      <stop offset="100%" stop-color="#002D72"/>
+    </radialGradient>
+
+    <!-- Subtle Drop Shadow filter -->
+    <filter id="as-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0080FF" flood-opacity="0.45"/>
+    </filter>
   </defs>
-  <!-- Main Forward/Upward Arrow Apex Geometric Mark -->
-  <path d="M8 38L24 10L40 38L32 38L24 22L16 38H8Z" fill="url(#ace-grad-1)"/>
-  <!-- Dynamic Inner Speed Chevron / Arrowhead -->
-  <path d="M19 35L24 24L29 35H34L24 16L14 35H19Z" fill="#FFFFFF" fill-opacity="0.95"/>
-  <!-- Forward Accent Blade -->
-  <path d="M24 10L28 17L37 34L40 38L32 38L24 22V10Z" fill="url(#ace-grad-2)" opacity="0.65"/>
+
+  <g filter="url(#as-glow)">
+    <!-- Wifi / Broadcast Signal Arcs -->
+    <!-- Small lower wave -->
+    <path d="M 23 67 A 10 10 0 0 1 29 61" stroke="url(#as-cyan-glow)" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 19 72 A 16 16 0 0 1 29 55" stroke="url(#as-cyan-glow)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Central larger wave cluster -->
+    <path d="M 45 45 A 11 11 0 0 1 57 45" stroke="url(#as-cyan-glow)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <path d="M 40 40 A 18 18 0 0 1 62 40" stroke="url(#as-cyan-glow)" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M 35 35 A 25 25 0 0 1 67 35" stroke="url(#as-cyan-glow)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+
+    <!-- 3D Circuit Zigzag Base Paths -->
+    <!-- Lower dark 3D bevel layer -->
+    <path d="M 23 77 L 42 58 L 57 73 L 83 37 L 85 40 L 57 77 L 42 62 L 23 81 Z" fill="url(#as-dark-grad)" opacity="0.85"/>
+
+    <!-- Main Electric Blue Circuit Path -->
+    <path d="M 22 75 L 42 55 L 56 69 L 82 34" stroke="url(#as-blue-grad)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Highlight inner stroke for glossy 3D chrome rim -->
+    <path d="M 22 74 L 42 54 L 56 68 L 82 33" stroke="#BAE6FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+    <!-- Upward Growth Arrowhead (3D Beveled) -->
+    <!-- Left light-catching facet -->
+    <polygon points="88,14 62,26 74,32" fill="url(#as-cyan-glow)"/>
+    <!-- Right deep blue facet -->
+    <polygon points="88,14 74,32 80,44" fill="#0052D4"/>
+    <!-- Central reflection crease -->
+    <line x1="88" y1="14" x2="74" y2="32" stroke="#FFFFFF" stroke-width="1.2" opacity="0.9"/>
+
+    <!-- Circuit Connection Nodes (Metallic Glowing Spheres) -->
+    <!-- Node 1: Start node -->
+    <circle cx="20" cy="77" r="5" fill="url(#as-node-sphere)"/>
+    <circle cx="20" cy="77" r="5" stroke="#BAE6FD" stroke-width="1" fill="none"/>
+
+    <!-- Node 2: Peak node -->
+    <circle cx="42" cy="55" r="5.5" fill="url(#as-node-sphere)"/>
+    <circle cx="42" cy="55" r="5.5" stroke="#BAE6FD" stroke-width="1" fill="none"/>
+
+    <!-- Node 3: Valley node -->
+    <circle cx="56" cy="69" r="5.5" fill="url(#as-node-sphere)"/>
+    <circle cx="56" cy="69" r="5.5" stroke="#BAE6FD" stroke-width="1" fill="none"/>
+
+    <!-- Node 4: Pre-arrow node on the shaft -->
+    <circle cx="70" cy="49" r="4.5" fill="url(#as-node-sphere)"/>
+    <circle cx="70" cy="49" r="4.5" stroke="#BAE6FD" stroke-width="0.8" fill="none"/>
+    <circle cx="78" cy="38" r="4" fill="url(#as-node-sphere)"/>
+
+    <!-- Center wave dot -->
+    <circle cx="51" cy="49" r="2.5" fill="url(#as-cyan-glow)"/>
+  </g>
 </svg>

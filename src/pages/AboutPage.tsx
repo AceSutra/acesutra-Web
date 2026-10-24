@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Target, Compass, Sparkles, Code2, Shield, ArrowRight } from 'lucide-react';
 import { Container } from '../components/layout/Container';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
@@ -18,22 +18,22 @@ export const AboutPage: React.FC = () => {
     {
       title: 'Intellectual Honesty',
       desc: 'We tell you what will genuinely move the needle for your business, not just what is easy to sell. If a technology or campaign strategy is unsuited to your needs, we say so upfront.',
-      icon: <Compass className="w-5 h-5 text-brand-orange" />,
+      icon: <Compass className="w-5 h-5 text-cyan-400" />,
     },
     {
       title: 'Craft Over Templates',
       desc: 'Every brand identity, web interface, and software application is intentionally tailored. We avoid generic, copy-paste templates that dilute your market differentiation.',
-      icon: <Sparkles className="w-5 h-5 text-brand-orange" />,
+      icon: <Sparkles className="w-5 h-5 text-cyan-400" />,
     },
     {
       title: 'Sustainable Engineering',
       desc: 'We write clean, modular, and type-safe code designed for long-term maintainability. We build systems your internal team or future partners can easily scale.',
-      icon: <Code2 className="w-5 h-5 text-brand-orange" />,
+      icon: <Code2 className="w-5 h-5 text-cyan-400" />,
     },
     {
       title: 'Direct Accountability',
       desc: 'Transparent milestones, clear acceptance criteria, and weekly progress demos. No vanity metrics or bloated layers of intermediary management.',
-      icon: <Shield className="w-5 h-5 text-brand-orange" />,
+      icon: <Shield className="w-5 h-5 text-cyan-400" />,
     },
   ];
 
@@ -41,13 +41,13 @@ export const AboutPage: React.FC = () => {
     <div className="pt-28 pb-0">
       {/* 1. Hero & Mission */}
       <section className="py-16 sm:py-24 bg-charcoal-900 border-b border-subtleBorder relative overflow-hidden">
-        <div className="absolute top-1/3 right-1/4 w-[500px] h-[350px] bg-brand-orange/10 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[350px] bg-brand-cyan/10 blur-[130px] rounded-full pointer-events-none" />
 
         <Container>
           <Breadcrumbs items={[{ label: 'About Us' }]} className="mb-8" />
 
           <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25">
               <span>OUR PURPOSE & METHODOLOGY</span>
             </div>
 
@@ -67,7 +67,7 @@ export const AboutPage: React.FC = () => {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             <div className="p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-subtleBorder">
-              <div className="p-3 rounded-xl bg-charcoal-800 border border-subtleBorder w-fit mb-5 text-brand-orange">
+              <div className="p-3 rounded-xl bg-charcoal-800 border border-subtleBorder w-fit mb-5 text-cyan-400">
                 <Target className="w-6 h-6" />
               </div>
               <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
@@ -76,8 +76,8 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-brand-orange/30 shadow-glow-orange">
-              <div className="p-3 rounded-xl bg-charcoal-800 border border-subtleBorder w-fit mb-5 text-brand-orange">
+            <div className="p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-brand-cyan/30 shadow-glow-blue">
+              <div className="p-3 rounded-xl bg-charcoal-800 border border-subtleBorder w-fit mb-5 text-cyan-400">
                 <Sparkles className="w-6 h-6" />
               </div>
               <h2 className="text-2xl font-bold text-white mb-4">Our Vision</h2>
@@ -102,7 +102,7 @@ export const AboutPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 rounded-2xl bg-charcoal-800/40 border border-subtleBorder">
-              <span className="text-xs uppercase font-bold tracking-widest text-brand-orange block mb-3">
+              <span className="text-xs uppercase font-bold tracking-widest text-cyan-400 block mb-3">
                 01 • Strategy
               </span>
               <h3 className="text-xl font-bold text-white mb-3">
@@ -113,8 +113,8 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-charcoal-800/40 border border-brand-orange/40 bg-charcoal-800/70 shadow-sm">
-              <span className="text-xs uppercase font-bold tracking-widest text-brand-orange block mb-3">
+            <div className="p-8 rounded-2xl bg-charcoal-800/40 border border-brand-cyan/40 bg-charcoal-800/70 shadow-sm">
+              <span className="text-xs uppercase font-bold tracking-widest text-cyan-400 block mb-3">
                 02 • Creativity
               </span>
               <h3 className="text-xl font-bold text-white mb-3">
@@ -126,7 +126,7 @@ export const AboutPage: React.FC = () => {
             </div>
 
             <div className="p-8 rounded-2xl bg-charcoal-800/40 border border-subtleBorder">
-              <span className="text-xs uppercase font-bold tracking-widest text-brand-orange block mb-3">
+              <span className="text-xs uppercase font-bold tracking-widest text-cyan-400 block mb-3">
                 03 • Technology
               </span>
               <h3 className="text-xl font-bold text-white mb-3">
@@ -154,9 +154,9 @@ export const AboutPage: React.FC = () => {
             {coreValues.map((val, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-3xl bg-charcoal-900 border border-subtleBorder hover:border-brand-orange/40 transition-colors flex items-start gap-5"
+                className="p-8 rounded-3xl bg-charcoal-900 border border-subtleBorder hover:border-brand-cyan/40 transition-colors flex items-start gap-5"
               >
-                <div className="p-3 rounded-2xl bg-charcoal-800 border border-subtleBorder text-brand-orange flex-shrink-0">
+                <div className="p-3 rounded-2xl bg-charcoal-800 border border-subtleBorder text-cyan-400 flex-shrink-0">
                   {val.icon}
                 </div>
                 <div>
@@ -178,7 +178,7 @@ export const AboutPage: React.FC = () => {
         <Container>
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-charcoal-800 to-charcoal-800/50 border border-subtleBorder flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-4 max-w-2xl">
-              <span className="text-xs uppercase font-bold tracking-widest text-brand-orange">
+              <span className="text-xs uppercase font-bold tracking-widest text-cyan-400">
                 COLLABORATIVE ENGAGEMENT
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white">

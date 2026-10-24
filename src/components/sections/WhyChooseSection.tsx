@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Compass, Lightbulb, Cpu, BarChart3 } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -10,28 +10,28 @@ export const WhyChooseSection: React.FC = () => {
       title: 'Strategy First',
       headline: 'Diagnosis before prescription.',
       desc: 'We investigate your market realities, audience objections, and financial unit economics before writing a line of code or deploying ad spend. No wasted motion.',
-      icon: <Compass className="w-6 h-6 text-brand-orange" />,
+      icon: <Compass className="w-6 h-6 text-cyan-400" />,
     },
     {
       num: '02',
       title: 'Creative Thinking',
       headline: 'Distinctive, memorable craft.',
       desc: 'Generic agency templates dilute customer trust. We create customized visual systems and engaging copy that establish authority and resonate with high-value clients.',
-      icon: <Lightbulb className="w-6 h-6 text-brand-orange" />,
+      icon: <Lightbulb className="w-6 h-6 text-cyan-400" />,
     },
     {
       num: '03',
       title: 'Technology That Scales',
       headline: 'Maintainable, clean engineering.',
       desc: 'We reject bloated page builders in favor of modern, type-safe React, clean CSS, and dependable cloud primitives built to survive traffic surges and long-term evolution.',
-      icon: <Cpu className="w-6 h-6 text-brand-orange" />,
+      icon: <Cpu className="w-6 h-6 text-cyan-400" />,
     },
     {
       num: '04',
       title: 'Measurable Progress',
       headline: 'Evidence-guided iteration.',
       desc: 'We monitor concrete business outcomes—speed metrics, conversion paths, and cost per acquisition—using verifiable telemetry to inform continuous improvements.',
-      icon: <BarChart3 className="w-6 h-6 text-brand-orange" />,
+      icon: <BarChart3 className="w-6 h-6 text-cyan-400" />,
     },
   ];
 
@@ -50,23 +50,23 @@ export const WhyChooseSection: React.FC = () => {
           {pillars.map((pillar) => (
             <div
               key={pillar.num}
-              className="group rounded-2xl bg-charcoal-800/50 border border-subtleBorder hover:border-brand-orange/40 hover:bg-charcoal-800/80 p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between"
+              className="group rounded-2xl bg-charcoal-800/50 border border-subtleBorder hover:border-brand-cyan/40 hover:bg-charcoal-800/80 p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 rounded-xl bg-charcoal-900 border border-subtleBorder group-hover:border-brand-orange/40 transition-colors">
+                  <div className="p-3 rounded-xl bg-charcoal-900 border border-subtleBorder group-hover:border-brand-cyan/40 transition-colors">
                     {pillar.icon}
                   </div>
-                  <span className="font-mono text-2xl font-bold text-mutedGray/30 group-hover:text-brand-orange/40 transition-colors">
+                  <span className="font-mono text-2xl font-bold text-mutedGray/30 group-hover:text-cyan-400/40 transition-colors">
                     {pillar.num}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">
+                <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
                   {pillar.title}
                 </h3>
 
-                <p className="mt-1 text-xs font-semibold text-brand-orange/80">
+                <p className="mt-1 text-xs font-semibold text-cyan-400/80">
                   {pillar.headline}
                 </p>
 

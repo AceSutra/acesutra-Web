@@ -42,7 +42,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
     <div className="pt-28 pb-0">
       {/* 1. Service Hero & Breadcrumbs */}
       <section className="py-14 sm:py-20 bg-charcoal-900 border-b border-subtleBorder relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-orange/10 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-cyan/10 blur-[130px] rounded-full pointer-events-none" />
 
         <Container>
           <Breadcrumbs
@@ -54,7 +54,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
           />
 
           <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25">
               <span>{service.eyebrow}</span>
             </div>
 
@@ -112,13 +112,13 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
             </div>
 
             {/* The AceSutra Solution */}
-            <div className="p-8 rounded-3xl bg-charcoal-900 border border-brand-orange/30 flex flex-col justify-between shadow-glow-orange">
+            <div className="p-8 rounded-3xl bg-charcoal-900 border border-brand-cyan/30 flex flex-col justify-between shadow-glow-blue">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-xl bg-brand-orange/10 border border-brand-orange/20 text-brand-orange">
+                  <div className="p-2 rounded-xl bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xs uppercase font-bold tracking-wider text-brand-orange">
+                  <h3 className="text-xs uppercase font-bold tracking-wider text-cyan-400">
                     The AceSutra Solution
                   </h3>
                 </div>
@@ -148,10 +148,10 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
             {service.capabilities.map((cap, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-2xl bg-charcoal-800/50 border border-subtleBorder hover:border-brand-orange/40 transition-colors"
+                className="p-8 rounded-2xl bg-charcoal-800/50 border border-subtleBorder hover:border-brand-cyan/40 transition-colors"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-brand-orange"></span>
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(0,194,255,0.8)]"></span>
                   <h3 className="text-lg font-bold text-white">
                     {cap.title}
                   </h3>
@@ -214,7 +214,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
                 className="p-6 rounded-2xl bg-charcoal-800/40 border border-subtleBorder flex flex-col justify-between"
               >
                 <div>
-                  <span className="font-mono text-sm font-bold px-2 py-0.5 rounded bg-brand-orange/10 border border-brand-orange/20 text-brand-orange mb-4 inline-block">
+                  <span className="font-mono text-sm font-bold px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400 mb-4 inline-block">
                     {step.step}
                   </span>
                   <h3 className="text-base font-bold text-white mb-2">
@@ -236,7 +236,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
           <Container>
             <div className="flex items-center justify-between mb-12">
               <div>
-                <span className="text-xs uppercase font-bold tracking-widest text-brand-orange block mb-1">
+                <span className="text-xs uppercase font-bold tracking-widest text-cyan-400 block mb-1">
                   CASE SPECIFICATIONS
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
@@ -262,7 +262,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
         <section className="py-20 lg:py-24 bg-charcoal-900 border-b border-subtleBorder">
           <Container size="narrow">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20 mb-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25 mb-3">
                 <HelpCircle className="w-3.5 h-3.5" />
                 <span>FREQUENTLY ASKED QUESTIONS</span>
               </div>

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+﻿import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Lazy-loaded page components for optimal route code-splitting
@@ -19,7 +19,7 @@ const NotFoundPage = lazy(() => import('../pages/NotFoundPage').then((m) => ({ d
 const RouteLoadingFallback: React.FC = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
     <div className="flex flex-col items-center gap-3">
-      <div className="w-8 h-8 border-2 border-brand-orange border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-8 h-8 border-2 border-brand-cyan border-t-transparent rounded-full animate-spin"></div>
       <span className="text-xs uppercase tracking-widest text-mutedGray font-mono">Loading AceSutra...</span>
     </div>
   </div>

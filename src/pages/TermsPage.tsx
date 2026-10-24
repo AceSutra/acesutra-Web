@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Container } from '../components/layout/Container';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { AlertCircle } from 'lucide-react';
@@ -68,7 +68,7 @@ export const TermsPage: React.FC = () => {
             <section className="space-y-3">
               <h2 className="text-xl font-bold text-white">5. Governing Law & Amendments</h2>
               <p>
-                We reserve the right to amend these terms periodically. Continued use of this website following notice of updates represents acceptance of modified terms. For legal inquiries, contact <a href="mailto:contact@acesutra.com" className="text-brand-orange underline">contact@acesutra.com</a>.
+                We reserve the right to amend these terms periodically. Continued use of this website following notice of updates represents acceptance of modified terms. For legal inquiries, contact <a href="mailto:contact@acesutra.com" className="text-cyan-400 underline">contact@acesutra.com</a>.
               </p>
             </section>
           </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ArrowRight, Layers } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -10,7 +10,7 @@ export const ServicesSection: React.FC = () => {
   return (
     <section id="services" className="py-20 lg:py-28 bg-charcoal-950 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-orange/5 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-cyan/10 blur-3xl rounded-full pointer-events-none" />
 
       <Container>
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -48,7 +48,7 @@ export const ServicesSection: React.FC = () => {
         {/* Integrated Solution Banner */}
         <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-charcoal-900 border border-subtleBorder flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-brand-orange/10 border border-brand-orange/20 text-brand-orange">
+            <div className="p-3 rounded-xl bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400">
               <Layers className="w-6 h-6" />
             </div>
             <div>

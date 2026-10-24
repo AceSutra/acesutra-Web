@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Container } from '../components/layout/Container';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { AlertCircle } from 'lucide-react';
@@ -82,7 +82,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             <section className="space-y-3">
               <h2 className="text-xl font-bold text-white">5. Contact Regarding Privacy</h2>
               <p>
-                If you have questions regarding this privacy draft or wish to request data deletion, contact us at: <a href="mailto:contact@acesutra.com" className="text-brand-orange underline">contact@acesutra.com</a>.
+                If you have questions regarding this privacy draft or wish to request data deletion, contact us at: <a href="mailto:contact@acesutra.com" className="text-cyan-400 underline">contact@acesutra.com</a>.
               </p>
             </section>
           </div>

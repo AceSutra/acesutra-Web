@@ -43,7 +43,7 @@ export const Accordion: React.FC<AccordionProps> = ({
             key={item.id}
             className={`border rounded-xl transition-colors duration-200 ${
               isOpen
-                ? 'bg-charcoal-800/80 border-brand-orange/40 shadow-sm'
+                ? 'bg-charcoal-800/80 border-brand-cyan/40 shadow-glow-cyan'
                 : 'bg-charcoal-800/40 border-subtleBorder hover:border-subtleBorderHover'
             }`}
           >
@@ -53,14 +53,14 @@ export const Accordion: React.FC<AccordionProps> = ({
               aria-expanded={isOpen}
               aria-controls={contentId}
               onClick={() => toggle(item.id)}
-              className="w-full py-4 sm:py-5 px-5 sm:px-6 flex items-center justify-between text-left group gap-4 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-xl"
+              className="w-full py-4 sm:py-5 px-5 sm:px-6 flex items-center justify-between text-left group gap-4 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-xl"
             >
-              <span className="font-semibold text-base sm:text-lg text-white group-hover:text-brand-orange transition-colors duration-200">
+              <span className="font-semibold text-base sm:text-lg text-white group-hover:text-cyan-400 transition-colors duration-200">
                 {item.question}
               </span>
               <span
                 className={`p-1.5 rounded-full bg-charcoal-700/60 border border-subtleBorder text-mutedGray group-hover:text-white transition-transform duration-200 flex-shrink-0 ${
-                  isOpen ? 'rotate-180 text-brand-orange' : ''
+                  isOpen ? 'rotate-180 text-cyan-400 border-brand-cyan/30' : ''
                 }`}
               >
                 <ChevronDown className="w-4 h-4" />

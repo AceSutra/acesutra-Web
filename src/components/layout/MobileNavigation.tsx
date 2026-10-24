@@ -47,7 +47,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                   type="button"
                   onClick={onClose}
                   aria-label="Close menu"
-                  className="p-2 rounded-lg text-mutedGray hover:text-white bg-charcoal-800 border border-subtleBorder focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+                  className="p-2 rounded-lg text-mutedGray hover:text-white bg-charcoal-800 border border-subtleBorder focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -62,13 +62,13 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                         <button
                           type="button"
                           onClick={() => setExpandedServices(!expandedServices)}
-                          className="w-full flex items-center justify-between py-2 text-base font-semibold text-white hover:text-brand-orange transition-colors"
+                          className="w-full flex items-center justify-between py-2 text-base font-semibold text-white hover:text-cyan-400 transition-colors"
                           aria-expanded={expandedServices}
                         >
                           <span>{link.label}</span>
                           <ChevronDown
                             className={`w-4 h-4 text-mutedGray transition-transform duration-200 ${
-                              expandedServices ? 'rotate-180 text-brand-orange' : ''
+                              expandedServices ? 'rotate-180 text-cyan-400' : ''
                             }`}
                           />
                         </button>
@@ -79,7 +79,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden pl-3 mt-1 space-y-1 border-l-2 border-brand-orange/30"
+                              className="overflow-hidden pl-3 mt-1 space-y-1 border-l-2 border-brand-cyan/40"
                             >
                               {link.children.map((child) => (
                                 <NavLink
@@ -89,7 +89,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                                   className={({ isActive }) =>
                                     `block py-2 text-sm transition-colors ${
                                       isActive
-                                        ? 'text-brand-orange font-medium'
+                                        ? 'text-cyan-400 font-semibold'
                                         : 'text-mutedGray hover:text-white'
                                     }`
                                   }
@@ -112,7 +112,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                       className={({ isActive }) =>
                         `block py-3 text-base font-medium transition-colors ${
                           isActive
-                            ? 'text-brand-orange font-semibold'
+                            ? 'text-cyan-400 font-semibold'
                             : 'text-warmWhite/90 hover:text-white'
                         }`
                       }

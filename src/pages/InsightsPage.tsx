@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { BookOpen, Clock, Tag } from 'lucide-react';
 import { Container } from '../components/layout/Container';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
@@ -17,13 +17,13 @@ export const InsightsPage: React.FC = () => {
     <div className="pt-28 pb-0">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 bg-charcoal-900 border-b border-subtleBorder relative overflow-hidden">
-        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-brand-orange/10 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-brand-cyan/10 blur-[130px] rounded-full pointer-events-none" />
 
         <Container>
           <Breadcrumbs items={[{ label: 'Insights & Perspectives' }]} className="mb-8" />
 
           <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25">
               <BookOpen className="w-3.5 h-3.5" />
               <span>PERSPECTIVES & ANALYSIS</span>
             </div>
@@ -47,12 +47,12 @@ export const InsightsPage: React.FC = () => {
               <article
                 key={article.id}
                 id={article.slug}
-                className="scroll-mt-32 p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-subtleBorder hover:border-brand-orange/40 transition-colors shadow-2xl space-y-6"
+                className="scroll-mt-32 p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-subtleBorder hover:border-brand-cyan/40 transition-colors shadow-2xl space-y-6"
               >
                 {/* Meta details */}
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-subtleBorder/60 pb-5">
                   <div className="flex items-center gap-3">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25">
                       {article.category}
                     </span>
                     <span className="text-xs text-mutedGray">{article.publishedDate}</span>
@@ -69,7 +69,7 @@ export const InsightsPage: React.FC = () => {
                   {article.title}
                 </h2>
 
-                <p className="text-base text-brand-orange/90 font-medium leading-relaxed">
+                <p className="text-base text-cyan-400/90 font-medium leading-relaxed">
                   {article.excerpt}
                 </p>
 

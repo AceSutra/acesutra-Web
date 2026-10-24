@@ -10,13 +10,13 @@ import { navigationLinks } from '../../data/navigation';
 import { useScrollPosition } from '../../hooks/useScrollPosition';
 
 const iconMap: Record<string, React.ReactNode> = {
-  '/services/digital-marketing': <TrendingUp className="w-4 h-4 text-brand-orange" />,
-  '/services/web-development': <Globe className="w-4 h-4 text-brand-orange" />,
-  '/services/branding-design': <Palette className="w-4 h-4 text-brand-orange" />,
-  '/services/software-development': <Code className="w-4 h-4 text-brand-orange" />,
-  '/services/mobile-app-development': <Smartphone className="w-4 h-4 text-brand-orange" />,
-  '/services/ai-automation': <Cpu className="w-4 h-4 text-brand-orange" />,
-  '/services/cloud-solutions': <Server className="w-4 h-4 text-brand-orange" />,
+  '/services/digital-marketing': <TrendingUp className="w-4 h-4 text-cyan-400" />,
+  '/services/web-development': <Globe className="w-4 h-4 text-cyan-400" />,
+  '/services/branding-design': <Palette className="w-4 h-4 text-cyan-400" />,
+  '/services/software-development': <Code className="w-4 h-4 text-cyan-400" />,
+  '/services/mobile-app-development': <Smartphone className="w-4 h-4 text-cyan-400" />,
+  '/services/ai-automation': <Cpu className="w-4 h-4 text-cyan-400" />,
+  '/services/cloud-solutions': <Server className="w-4 h-4 text-cyan-400" />,
 };
 
 export const Header: React.FC = () => {
@@ -75,14 +75,14 @@ export const Header: React.FC = () => {
                         aria-expanded={servicesDropdownOpen}
                         className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                           location.pathname.startsWith('/services') || servicesDropdownOpen
-                            ? 'text-brand-orange bg-charcoal-800/50'
+                            ? 'text-cyan-400 bg-charcoal-800/50'
                             : 'text-warmWhite/90 hover:text-white hover:bg-charcoal-800/40'
                         }`}
                       >
                         <span>{link.label}</span>
                         <ChevronDown
                           className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                            servicesDropdownOpen ? 'rotate-180 text-brand-orange' : 'text-mutedGray'
+                            servicesDropdownOpen ? 'rotate-180 text-cyan-400' : 'text-mutedGray'
                           }`}
                         />
                       </button>
@@ -104,7 +104,7 @@ export const Header: React.FC = () => {
                               <NavLink
                                 to="/#services"
                                 onClick={() => setServicesDropdownOpen(false)}
-                                className="text-xs text-brand-orange hover:underline font-medium"
+                                className="text-xs text-cyan-400 hover:underline font-medium"
                               >
                                 View All &rarr;
                               </NavLink>
@@ -119,21 +119,21 @@ export const Header: React.FC = () => {
                                   className={({ isActive }) =>
                                     `group flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 ${
                                       isActive
-                                        ? 'bg-charcoal-700/80 border border-brand-orange/30'
+                                        ? 'bg-charcoal-700/80 border border-brand-cyan/30'
                                         : 'hover:bg-charcoal-700/60 border border-transparent'
                                     }`
                                   }
                                 >
-                                  <div className="mt-0.5 p-2 rounded-lg bg-charcoal-900 border border-subtleBorder group-hover:border-brand-orange/40 transition-colors">
-                                    {iconMap[child.href] || <Code className="w-4 h-4 text-brand-orange" />}
+                                  <div className="mt-0.5 p-2 rounded-lg bg-charcoal-900 border border-subtleBorder group-hover:border-brand-cyan/40 transition-colors">
+                                    {iconMap[child.href] || <Code className="w-4 h-4 text-cyan-400" />}
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center justify-between">
-                                      <span className="text-sm font-semibold text-white group-hover:text-brand-orange transition-colors">
+                                      <span className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">
                                         {child.label}
                                       </span>
                                       {child.badge && (
-                                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-brand-orange/10 text-brand-orange border border-brand-orange/20">
+                                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25">
                                           {child.badge}
                                         </span>
                                       )}
@@ -161,7 +161,7 @@ export const Header: React.FC = () => {
                     className={({ isActive }) =>
                       `px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                         isActive
-                          ? 'text-brand-orange bg-charcoal-800/40 font-semibold'
+                          ? 'text-cyan-400 bg-charcoal-800/40 font-semibold'
                           : 'text-warmWhite/90 hover:text-white hover:bg-charcoal-800/40'
                       }`
                     }
@@ -189,7 +189,7 @@ export const Header: React.FC = () => {
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="Open mobile navigation"
-                className="lg:hidden p-2 rounded-lg text-mutedGray hover:text-white bg-charcoal-800/80 border border-subtleBorder focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+                className="lg:hidden p-2 rounded-lg text-mutedGray hover:text-white bg-charcoal-800/80 border border-subtleBorder focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
               >
                 <Menu className="w-5 h-5" />
               </button>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ArrowRight, CheckCircle2, Target, Sparkles, Terminal } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -9,17 +9,17 @@ export const AboutSection: React.FC = () => {
     {
       title: 'Think Strategically',
       desc: 'We analyze market dynamics, target audiences, and unit economics before defining technical or marketing roadmaps.',
-      icon: <Target className="w-5 h-5 text-brand-orange" />,
+      icon: <Target className="w-5 h-5 text-cyan-400" />,
     },
     {
       title: 'Create With Purpose',
       desc: 'Design is not superficial decoration; it is functional communication that inspires trust and guides customer action.',
-      icon: <Sparkles className="w-5 h-5 text-brand-orange" />,
+      icon: <Sparkles className="w-5 h-5 text-cyan-400" />,
     },
     {
       title: 'Build for the Future',
       desc: 'We engineer maintainable software and scalable growth funnels that compound value rather than requiring immediate rewrites.',
-      icon: <Terminal className="w-5 h-5 text-brand-orange" />,
+      icon: <Terminal className="w-5 h-5 text-cyan-400" />,
     },
   ];
 
@@ -81,7 +81,7 @@ export const AboutSection: React.FC = () => {
 
               {/* Floating Overlay Card */}
               <div className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl bg-charcoal-900/90 border border-subtleBorder backdrop-blur-md">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-brand-orange block mb-1">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-cyan-400 block mb-1">
                   The AceSutra Promise
                 </span>
                 <p className="text-sm font-semibold text-white leading-snug">

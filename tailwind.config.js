@@ -9,23 +9,28 @@ export default {
     extend: {
       colors: {
         charcoal: {
-          950: '#0B0C0E',
-          900: '#101114', // Deep charcoal
-          800: '#181A20', // Dark surface
-          700: '#1F222A', // Dark surface elevated
-          600: '#282C37',
+          950: '#07090E',
+          900: '#0C0F17', // Deep tech charcoal with navy tint
+          800: '#121722', // Dark surface
+          700: '#182030', // Dark surface elevated
+          600: '#222D42',
         },
         brand: {
-          orange: '#FF6B35', // Primary brand orange
-          hover: '#FF8552',
-          glow: 'rgba(255, 107, 53, 0.15)',
-          dark: '#E5531E',
-          light: '#FFF0EB',
+          blue: '#0066FF',
+          cyan: '#00C2FF',
+          navy: '#0B1E3D',
+          hover: '#0085FF',
+          dark: '#0047BA',
+          light: '#E0F2FE',
+          glow: 'rgba(0, 102, 255, 0.2)',
+          'cyan-glow': 'rgba(0, 194, 255, 0.25)',
+          // Backward-compatible alias for existing components
+          orange: '#0066FF',
         },
-        warmWhite: '#F7F7F5',
-        mutedGray: '#A3A5AD',
-        subtleBorder: '#2D3038',
-        subtleBorderHover: '#424652',
+        warmWhite: '#F8FAFC',
+        mutedGray: '#94A3B8',
+        subtleBorder: '#1E293B',
+        subtleBorderHover: '#334155',
       },
       fontFamily: {
         sans: [
@@ -44,9 +49,13 @@ export default {
         ],
       },
       boxShadow: {
-        'glow-orange': '0 0 25px -5px rgba(255, 107, 53, 0.3)',
-        'glow-orange-lg': '0 0 50px -10px rgba(255, 107, 53, 0.4)',
-        'card-dark': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
+        'glow-blue': '0 0 25px -5px rgba(0, 102, 255, 0.4)',
+        'glow-blue-lg': '0 0 50px -10px rgba(0, 102, 255, 0.5)',
+        'glow-cyan': '0 0 25px -5px rgba(0, 194, 255, 0.45)',
+        'glow-cyan-lg': '0 0 50px -10px rgba(0, 194, 255, 0.55)',
+        'glow-orange': '0 0 25px -5px rgba(0, 102, 255, 0.4)',
+        'glow-orange-lg': '0 0 50px -10px rgba(0, 102, 255, 0.5)',
+        'card-dark': '0 10px 30px -10px rgba(0, 0, 0, 0.6)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

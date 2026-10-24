@@ -1,26 +1,26 @@
-import React from 'react';
+﻿import React from 'react';
 import { Compass, Lightbulb, Cpu, Handshake } from 'lucide-react';
 import { Container } from '../layout/Container';
 
 export const TrustStrip: React.FC = () => {
   const valuePillars = [
     {
-      icon: <Compass className="w-5 h-5 text-brand-orange" />,
+      icon: <Compass className="w-5 h-5 text-cyan-400" />,
       title: 'Strategy-Led Execution',
       desc: 'Understanding business context before recommending a line of code or ad campaign.',
     },
     {
-      icon: <Lightbulb className="w-5 h-5 text-brand-orange" />,
+      icon: <Lightbulb className="w-5 h-5 text-cyan-400" />,
       title: 'Creative Problem-Solving',
       desc: 'Distinctive brand identities and engaging digital experiences that stand out.',
     },
     {
-      icon: <Cpu className="w-5 h-5 text-brand-orange" />,
+      icon: <Cpu className="w-5 h-5 text-cyan-400" />,
       title: 'Technology Built for Scale',
       desc: 'Clean React codebases, robust APIs, and resilient cloud architectures.',
     },
     {
-      icon: <Handshake className="w-5 h-5 text-brand-orange" />,
+      icon: <Handshake className="w-5 h-5 text-cyan-400" />,
       title: 'Transparent Partnership',
       desc: 'Honest communication, shared accountability, and long-term business alignment.',
     },
