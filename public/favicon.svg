@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="ace-grad-1" x1="6" y1="42" x2="42" y2="6" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF5500"/>
+      <stop offset="50%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FFA070"/>
+    </linearGradient>
+    <linearGradient id="ace-grad-2" x1="14" y1="36" x2="34" y2="12" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E04810"/>
+      <stop offset="100%" stop-color="#FF8552"/>
+    </linearGradient>
+  </defs>
+  <!-- Main Forward/Upward Arrow Apex Geometric Mark -->
+  <path d="M8 38L24 10L40 38L32 38L24 22L16 38H8Z" fill="url(#ace-grad-1)"/>
+  <!-- Dynamic Inner Speed Chevron / Arrowhead -->
+  <path d="M19 35L24 24L29 35H34L24 16L14 35H19Z" fill="#FFFFFF" fill-opacity="0.95"/>
+  <!-- Forward Accent Blade -->
+  <path d="M24 10L28 17L37 34L40 38L32 38L24 22V10Z" fill="url(#ace-grad-2)" opacity="0.65"/>
+</svg>
