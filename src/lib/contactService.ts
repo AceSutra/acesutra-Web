@@ -1,4 +1,4 @@
-import { ContactFormValues } from './validation';
+import type { ContactFormValues } from './validation';
 
 export interface SubmissionResult {
   success: boolean;

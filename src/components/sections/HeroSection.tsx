@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, CheckCircle2, ChevronDown, Layers, Cpu, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, ChevronDown, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';

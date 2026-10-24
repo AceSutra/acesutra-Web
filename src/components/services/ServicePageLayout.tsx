@@ -7,7 +7,7 @@ import { Button } from '../ui/Button';
 import { Accordion } from '../ui/Accordion';
 import { ProjectCard } from '../portfolio/ProjectCard';
 import { CTASection } from '../sections/CTASection';
-import { ServiceItem } from '../../types';
+import type { ServiceItem } from '../../types';
 import { projectsData } from '../../data/projects';
 import { useDocumentTitle } from '../../lib/seo';
 

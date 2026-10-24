@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
-import { ProjectItem } from '../../types';
+import type { ProjectItem } from '../../types';
 
 interface ProjectCardProps {
   project: ProjectItem;

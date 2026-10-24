@@ -2,7 +2,6 @@ import React from 'react';
 import { BookOpen, Clock, Tag } from 'lucide-react';
 import { Container } from '../components/layout/Container';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
-import { SectionHeading } from '../components/ui/SectionHeading';
 import { CTASection } from '../components/sections/CTASection';
 import { articlesData } from '../data/articles';
 import { useDocumentTitle } from '../lib/seo';

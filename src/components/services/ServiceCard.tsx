@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp, Globe, Palette, Code, Smartphone, Cpu, Server } from 'lucide-react';
-import { ServiceItem } from '../../types';
+import type { ServiceItem } from '../../types';
 
 interface ServiceCardProps {
   service: ServiceItem;

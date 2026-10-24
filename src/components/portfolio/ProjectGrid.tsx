@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectCard } from './ProjectCard';
-import { ProjectItem } from '../../types';
+import type { ProjectItem } from '../../types';
 
 interface ProjectGridProps {
   projects: ProjectItem[];

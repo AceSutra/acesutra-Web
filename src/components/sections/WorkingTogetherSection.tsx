@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquare, Calendar, ShieldCheck, FileCheck, Layers, Users } from 'lucide-react';
+import { Calendar, ShieldCheck, FileCheck, Users } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionHeading } from '../ui/SectionHeading';
 

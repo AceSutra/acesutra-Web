@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Compass, Sparkles, Code2, Users, Shield, ArrowRight } from 'lucide-react';
+import { Target, Compass, Sparkles, Code2, Shield, ArrowRight } from 'lucide-react';
 import { Container } from '../components/layout/Container';
 import { Breadcrumbs } from '../components/ui/Breadcrumbs';
 import { SectionHeading } from '../components/ui/SectionHeading';

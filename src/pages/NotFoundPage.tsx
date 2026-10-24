@@ -1,7 +1,7 @@
 import React from 'react';
-import { Home, ArrowLeft, Search } from 'lucide-react';
+import { Home, Search } from 'lucide-react';
 import { Container } from '../components/layout/Container';
-import { Button } from '../ui/Button';
+import { Button } from '../components/ui/Button';
 import { useDocumentTitle } from '../lib/seo';
 
 export const NotFoundPage: React.FC = () => {
