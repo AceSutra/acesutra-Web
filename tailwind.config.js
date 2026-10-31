@@ -47,6 +47,15 @@ export default {
           'Inter',
           'sans-serif',
         ],
+        heading: [
+          'Syne',
+          'Plus Jakarta Sans',
+          'sans-serif',
+        ],
+        mono: [
+          'Space Grotesk',
+          'monospace',
+        ],
       },
       boxShadow: {
         'glow-blue': '0 0 25px -5px rgba(0, 102, 255, 0.4)',

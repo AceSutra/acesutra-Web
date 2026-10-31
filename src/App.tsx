@@ -5,9 +5,22 @@ import { Footer } from './components/layout/Footer';
 import { AppRoutes } from './app/router';
 import { ScrollToTopOnRoute, FloatingScrollToTopButton } from './components/ui/ScrollToTop';
 
+import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { CustomCursor } from './components/ui/CustomCursor';
+import { GlobalCanvasBackground } from './components/ui/GlobalCanvasBackground';
+
 export const App: React.FC = () => {
+  // Initialize Lenis smooth scroll
+  useSmoothScroll();
+
   return (
     <BrowserRouter>
+      {/* Global Interactive Canvas Background (Constellation & Plasma Orbs) */}
+      <GlobalCanvasBackground />
+
+      {/* Interactive Custom Cursor */}
+      <CustomCursor />
+
       {/* Scroll restoration upon route navigation */}
       <ScrollToTopOnRoute />
 
@@ -19,7 +32,7 @@ export const App: React.FC = () => {
         Skip to main content
       </a>
 
-      <div className="flex flex-col min-h-screen bg-charcoal-900 text-warmWhite selection:bg-brand-blue selection:text-white">
+      <div className="flex flex-col min-h-screen bg-transparent text-warmWhite selection:bg-brand-blue selection:text-white">
         <Header />
 
         <main id="main-content" role="main" className="flex-grow">

@@ -41,7 +41,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
   return (
     <div className="pt-28 pb-0">
       {/* 1. Service Hero & Breadcrumbs */}
-      <section className="py-14 sm:py-20 bg-charcoal-900 border-b border-subtleBorder relative overflow-hidden">
+      <section className="py-14 sm:py-20 bg-transparent border-b border-white/5 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-cyan/10 blur-[130px] rounded-full pointer-events-none" />
 
         <Container>
@@ -54,15 +54,15 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
           />
 
           <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest bg-charcoal-900/90 text-cyan-400 border border-white/10 backdrop-blur-md">
               <span>{service.eyebrow}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-[-0.04em] leading-[0.98] font-display uppercase">
               {service.title}
             </h1>
 
-            <p className="text-lg sm:text-xl text-mutedGray leading-relaxed max-w-3xl">
+            <p className="text-lg sm:text-xl text-mutedGray max-w-3xl leading-relaxed">
               {service.fullDescription}
             </p>
 
@@ -72,6 +72,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
                 variant="primary"
                 size="lg"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
+                data-cursor="DISCUSS"
               >
                 Discuss This Capability
               </Button>
@@ -79,6 +80,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
                 href="#problem-solution"
                 variant="secondary"
                 size="lg"
+                data-cursor="FRAMEWORK"
               >
                 See Solution Framework
               </Button>
@@ -88,21 +90,21 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
       </section>
 
       {/* 2. Problem & Solution Overview */}
-      <section id="problem-solution" className="py-20 bg-charcoal-950 border-b border-subtleBorder">
+      <section id="problem-solution" className="py-20 bg-transparent border-b border-white/5">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {/* The Challenge */}
-            <div className="p-8 rounded-3xl bg-charcoal-900 border border-subtleBorder flex flex-col justify-between">
+            <div className="p-8 sm:p-10 rounded-3xl glass-panel hover:glass-panel-elevated border border-white/10 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400">
                     <AlertCircle className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xs uppercase font-bold tracking-wider text-rose-400">
+                  <h3 className="text-xs uppercase font-mono tracking-wider text-rose-400">
                     The Business Challenge
                   </h3>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-3">
+                <h4 className="text-xl font-bold text-white mb-3 font-display uppercase">
                   Why Standard Approaches Fall Short
                 </h4>
                 <p className="text-sm sm:text-base text-mutedGray leading-relaxed">
@@ -112,17 +114,17 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
             </div>
 
             {/* The AceSutra Solution */}
-            <div className="p-8 rounded-3xl bg-charcoal-900 border border-brand-cyan/30 flex flex-col justify-between shadow-glow-blue">
+            <div className="p-8 sm:p-10 rounded-3xl glass-panel hover:glass-panel-elevated border border-cyan-400/30 flex flex-col justify-between shadow-[0_0_30px_rgba(0,194,255,0.1)]">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-xl bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400">
+                  <div className="p-2 rounded-xl bg-cyan-400/10 border border-cyan-400/25 text-cyan-400">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xs uppercase font-bold tracking-wider text-cyan-400">
+                  <h3 className="text-xs uppercase font-mono tracking-wider text-cyan-400">
                     The AceSutra Solution
                   </h3>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-3">
+                <h4 className="text-xl font-bold text-white mb-3 font-display uppercase">
                   Our Engineering & Strategic Approach
                 </h4>
                 <p className="text-sm sm:text-base text-mutedGray leading-relaxed">
@@ -135,12 +137,12 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
       </section>
 
       {/* 3. Detailed Capabilities */}
-      <section className="py-20 lg:py-28 bg-charcoal-900 border-b border-subtleBorder">
+      <section className="py-20 lg:py-28 bg-transparent border-b border-white/5">
         <Container>
           <SectionHeading
             eyebrow="SPECIFICATIONS"
             title="Core Service Capabilities"
-            description="A breakdown of specific technical and strategic competencies included in our engagements."
+            description="Specific technical and strategic competencies included in our studio engagements."
             className="mb-14"
           />
 
@@ -148,11 +150,11 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
             {service.capabilities.map((cap, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-2xl bg-charcoal-800/50 border border-subtleBorder hover:border-brand-cyan/40 transition-colors"
+                className="p-8 rounded-2xl glass-panel hover:glass-panel-elevated border border-white/10 hover:border-cyan-400/40 transition-colors"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(0,194,255,0.8)]"></span>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-lg font-bold text-white font-display">
                     {cap.title}
                   </h3>
                 </div>
@@ -166,14 +168,14 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
       </section>
 
       {/* 4. Benefits & Tangible Returns */}
-      <section className="py-20 bg-charcoal-950 border-b border-subtleBorder">
+      <section className="py-20 bg-charcoal-950/30 border-b border-white/5">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <SectionHeading
                 eyebrow="VALUE CREATION"
                 title="Measurable Business Outcomes"
-                description="We prioritize deliverables that directly support your enterprise valuation, revenue retention, and operational efficiency."
+                description="Deliverables prioritized to directly support enterprise valuation, revenue retention, and market authority."
               />
             </div>
 
@@ -181,7 +183,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
               {service.benefits.map((benefit, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-4 p-5 rounded-2xl bg-charcoal-900 border border-subtleBorder"
+                  className="flex items-start gap-4 p-5 rounded-2xl glass-panel border border-white/10"
                 >
                   <div className="p-1 rounded-full bg-emerald-500/10 text-emerald-400 mt-0.5 flex-shrink-0">
                     <CheckCircle2 className="w-4 h-4" />
@@ -197,7 +199,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
       </section>
 
       {/* 5. Delivery Process */}
-      <section className="py-20 lg:py-28 bg-charcoal-900 border-b border-subtleBorder">
+      <section className="py-20 lg:py-28 bg-transparent border-b border-white/5">
         <Container>
           <SectionHeading
             eyebrow="DELIVERY CADENCE"
@@ -211,13 +213,13 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
             {service.process.map((step) => (
               <div
                 key={step.step}
-                className="p-6 rounded-2xl bg-charcoal-800/40 border border-subtleBorder flex flex-col justify-between"
+                className="p-6 rounded-2xl glass-panel hover:glass-panel-elevated border border-white/10 flex flex-col justify-between"
               >
                 <div>
-                  <span className="font-mono text-sm font-bold px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400 mb-4 inline-block">
+                  <span className="font-mono text-sm font-bold px-2 py-0.5 rounded bg-cyan-400/10 border border-cyan-400/25 text-cyan-400 mb-4 inline-block">
                     {step.step}
                   </span>
-                  <h3 className="text-base font-bold text-white mb-2">
+                  <h3 className="text-base font-bold text-white mb-2 font-display">
                     {step.title}
                   </h3>
                   <p className="text-xs text-mutedGray leading-relaxed">
@@ -232,18 +234,18 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
 
       {/* 6. Related Capability Projects */}
       {relatedProjects.length > 0 && (
-        <section className="py-20 bg-charcoal-950 border-b border-subtleBorder">
+        <section className="py-20 bg-charcoal-950/20 border-b border-white/5">
           <Container>
             <div className="flex items-center justify-between mb-12">
               <div>
-                <span className="text-xs uppercase font-bold tracking-widest text-cyan-400 block mb-1">
+                <span className="text-xs uppercase font-mono tracking-widest text-cyan-400 block mb-1">
                   CASE SPECIFICATIONS
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-                  Related Architecture Prototypes
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-display uppercase">
+                  Related Architecture Benchmarks
                 </h2>
               </div>
-              <Button to="/work" variant="outline" size="sm">
+              <Button to="/work" variant="outline" size="sm" data-cursor="WORK">
                 View All Work &rarr;
               </Button>
             </div>
@@ -259,14 +261,14 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
 
       {/* 7. FAQs */}
       {service.faqs.length > 0 && (
-        <section className="py-20 lg:py-24 bg-charcoal-900 border-b border-subtleBorder">
+        <section className="py-20 lg:py-24 bg-transparent border-b border-white/5">
           <Container size="narrow">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-cyan-400 border border-brand-cyan/25 mb-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase bg-cyan-400/10 text-cyan-400 border border-cyan-400/25 mb-3">
                 <HelpCircle className="w-3.5 h-3.5" />
                 <span>FREQUENTLY ASKED QUESTIONS</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
                 Common Questions About {service.title}
               </h2>
             </div>
@@ -279,7 +281,7 @@ export const ServicePageLayout: React.FC<ServicePageLayoutProps> = ({ service })
       {/* 8. Conversion CTA */}
       <CTASection
         title={`Ready to Advance Your ${service.badge}?`}
-        description="Let's review your current challenges, discuss architectural possibilities, and map out a practical timeline for your organization."
+        description="Let's review your goals, examine architectural possibilities, and deliver feasibility insights within 24 hours."
       />
     </div>
   );

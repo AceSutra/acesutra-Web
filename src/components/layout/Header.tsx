@@ -48,14 +48,20 @@ export const Header: React.FC = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-charcoal-900/90 backdrop-blur-md border-b border-subtleBorder py-3.5 shadow-lg shadow-black/20'
-            : 'bg-transparent py-5 border-b border-transparent'
+            ? 'bg-charcoal-950/85 backdrop-blur-2xl border-b border-white/10 py-3 shadow-2xl shadow-black/40'
+            : 'bg-charcoal-950/40 backdrop-blur-md py-4 border-b border-white/5'
         }`}
       >
         <Container>
           <div className="flex items-center justify-between">
-            {/* AceSutra Logo */}
-            <AceSutraLogo size="md" />
+            {/* AceSutra Logo + Studio Status */}
+            <div className="flex items-center gap-4">
+              <AceSutraLogo size="md" />
+              <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800/80 border border-white/10 text-[11px] font-mono text-mutedGray">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>OPEN FOR Q1/Q2 PARTNERSHIPS</span>
+              </div>
+            </div>
 
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-1">

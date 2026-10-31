@@ -1,36 +1,41 @@
 import React from 'react';
 import { HeroSection } from '../components/sections/HeroSection';
-import { TrustStrip } from '../components/sections/TrustStrip';
 import { AboutSection } from '../components/sections/AboutSection';
+import { PortfolioSection } from '../components/sections/PortfolioSection';
 import { ServicesSection } from '../components/sections/ServicesSection';
 import { WhyChooseSection } from '../components/sections/WhyChooseSection';
-import { ProcessSection } from '../components/sections/ProcessSection';
-import { PortfolioSection } from '../components/sections/PortfolioSection';
-import { IndustriesSection } from '../components/sections/IndustriesSection';
-import { WorkingTogetherSection } from '../components/sections/WorkingTogetherSection';
 import { InsightsSection } from '../components/sections/InsightsSection';
 import { CTASection } from '../components/sections/CTASection';
 import { useDocumentTitle } from '../lib/seo';
 
 export const HomePage: React.FC = () => {
   useDocumentTitle({
-    title: 'AceSutra — Where Strategy Meets Creativity and Technology',
+    title: 'AceSutra — Creative Technology & Digital Solutions Studio',
     description:
-      'AceSutra helps ambitious businesses build stronger brands, create powerful digital experiences, and accelerate growth through smart marketing and modern technology.',
+      'Where Strategy Meets Radical Creativity. AceSutra engineers bespoke digital flagships, brand identities, and high-velocity web platforms for market-defining leaders.',
   });
 
   return (
     <div className="relative overflow-hidden">
+      {/* 1. Immersive 3D WebGL Hero */}
       <HeroSection />
-      <TrustStrip />
+
+      {/* 2. The Manifesto & Visual Monolith */}
       <AboutSection />
-      <ServicesSection />
-      <WhyChooseSection />
-      <ProcessSection />
+
+      {/* 3. Primary Visual Centerpiece: Selected Work */}
       <PortfolioSection />
-      <IndustriesSection />
-      <WorkingTogetherSection />
+
+      {/* 4. Core Disciplines & Interactive Visual Deck */}
+      <ServicesSection />
+
+      {/* 5. The Standard: 4 Visual Differentiators */}
+      <WhyChooseSection />
+
+      {/* 6. Curated Perspectives */}
       <InsightsSection />
+
+      {/* 7. Final Cinematic Call to Action */}
       <CTASection />
     </div>
   );

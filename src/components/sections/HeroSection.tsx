@@ -1,208 +1,157 @@
 import React from 'react';
-import { ArrowRight, Sparkles, CheckCircle2, ChevronDown, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Zap, Cpu, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
+import { AceSutraScene3D } from '../3d/AceSutraScene3D';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-[92vh] flex items-center pt-32 pb-20 overflow-hidden bg-charcoal-900 bg-subtle-grid">
-      {/* Dynamic Background Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-brand-blue/15 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 -right-20 w-[450px] h-[450px] bg-brand-cyan/15 blur-[130px] rounded-full pointer-events-none" />
+    <section className="relative min-h-[96vh] flex flex-col justify-between pt-32 sm:pt-36 pb-10 overflow-hidden bg-transparent">
+      {/* Background Ambience & Gradient Orbs */}
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[550px] bg-brand-blue/15 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[550px] h-[550px] bg-brand-cyan/20 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 bg-subtle-grid opacity-25 pointer-events-none" />
 
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Messaging & CTAs (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left z-10">
-            {/* Eyebrow */}
+      {/* Noise Texture Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,102,255,0.18),rgba(255,255,255,0))] pointer-events-none" />
+
+      <Container className="relative z-10 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+          {/* Left Column: Bold Typographic Statement (7 Cols) */}
+          <div className="lg:col-span-7 space-y-6 sm:space-y-7 text-left">
+            {/* Minimal High-tech Eyebrow Pill */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-charcoal-800/90 border border-brand-cyan/30 text-warmWhite shadow-sm"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-charcoal-900/90 border border-white/10 backdrop-blur-md"
             >
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(0,194,255,0.8)]"></span>
-              <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
-                STRATEGY • CREATIVITY • TECHNOLOGY
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(0,194,255,0.9)]"></span>
+              <span className="text-[11px] font-mono tracking-widest uppercase text-cyan-400">
+                CREATIVE TECHNOLOGY & STRATEGY STUDIO
               </span>
             </motion.div>
 
-            {/* Primary Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+            {/* Oversized Cinematic Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[64px] font-extrabold text-white tracking-tight leading-[1.1] text-balance"
+              transition={{ duration: 0.65, delay: 0.1 }}
             >
-              Where Strategy Meets{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500">
-                Creativity
-              </span>{' '}
-              and Technology.
-            </motion.h1>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-[80px] font-extrabold text-white tracking-[-0.04em] leading-[0.98] uppercase font-display">
+                Where Strategy <br />
+                <span className="gradient-text-blue">
+                  Meets Radical
+                </span> <br />
+                Creativity.
+              </h1>
+            </motion.div>
 
-            {/* Supporting Text */}
+            {/* Single Punchy Impact Sentence */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="text-lg sm:text-xl text-mutedGray max-w-2xl leading-relaxed text-balance"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl text-mutedGray/90 max-w-lg leading-relaxed font-sans"
             >
-              AceSutra helps ambitious businesses build stronger brands, create powerful digital experiences, and accelerate growth through smart marketing and modern technology.
+              We engineer bespoke digital flagships, brand identities, and high-velocity web platforms for market-defining leaders.
             </motion.p>
 
-            {/* Action Buttons */}
+            {/* Action Buttons & Magnetic Triggers */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
             >
               <Button
                 to="/contact"
                 variant="primary"
                 size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4" />}
-                className="justify-center shadow-glow-blue"
+                rightIcon={<ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
+                className="justify-center shadow-glow-blue px-8 py-4 text-base font-semibold"
+                data-cursor="LET'S TALK"
               >
-                Let's Build Something Great
+                Initiate a Project
               </Button>
 
               <Button
-                href="#services"
+                href="#work"
                 variant="secondary"
                 size="lg"
-                className="justify-center"
+                className="justify-center border-white/10 hover:border-brand-cyan/50 backdrop-blur-md px-7 py-4 text-base"
+                data-cursor="PROJECTS"
               >
-                Explore Our Services
+                Explore Selected Work
               </Button>
             </motion.div>
 
-            {/* Micro Credibility Checklist */}
+            {/* High-Impact Performance Metrics Bar */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-mutedGray"
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="pt-6 grid grid-cols-3 gap-6 border-t border-white/10 max-w-md"
             >
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                <span>Strategy-Led Execution</span>
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-1.5 text-cyan-400">
+                  <Zap className="w-3.5 h-3.5" />
+                  <span className="text-sm font-mono font-bold">0.8s</span>
+                </div>
+                <span className="text-[10px] font-mono text-mutedGray uppercase tracking-wider block">Time to Interactive</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                <span>Modern React & Cloud Tech</span>
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-1.5 text-emerald-400">
+                  <Cpu className="w-3.5 h-3.5" />
+                  <span className="text-sm font-mono font-bold">99+</span>
+                </div>
+                <span className="text-[10px] font-mono text-mutedGray uppercase tracking-wider block">Lighthouse Perf</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                <span>Zero Generic Templates</span>
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-1.5 text-blue-400">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span className="text-sm font-mono font-bold">100%</span>
+                </div>
+                <span className="text-[10px] font-mono text-mutedGray uppercase tracking-wider block">Bespoke Code</span>
               </div>
             </motion.div>
           </div>
 
-          {/* Right Column: Directional Motion Art & Abstract Composition (5 cols) */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
+          {/* Right Column: Full-Scale Interactive 3D WebGL Centerpiece (5 Cols) */}
+          <div className="lg:col-span-5 relative flex items-center justify-center min-h-[440px] sm:min-h-[540px] lg:min-h-[620px]">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative w-full max-w-[460px] aspect-square flex items-center justify-center"
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full h-[460px] sm:h-[540px] lg:h-[620px]"
             >
-              {/* Outer Glowing Concentric Rings */}
-              <div className="absolute inset-0 rounded-full border border-subtleBorder/60 animate-pulse-slow" />
-              <div className="absolute inset-6 rounded-full border border-brand-cyan/20" />
-              <div className="absolute inset-14 rounded-full border border-subtleBorder/40" />
-
-              {/* Main 3D-Inspired Dynamic Card with Official Logo Emblem */}
-              <div className="relative z-10 w-64 h-64 sm:w-72 sm:h-72 p-7 rounded-3xl bg-charcoal-800/80 border border-brand-cyan/30 backdrop-blur-xl shadow-2xl flex flex-col justify-between overflow-hidden">
-                <div className="absolute -top-12 -right-12 w-32 h-32 bg-cyan-400/20 blur-2xl rounded-full" />
-
-                {/* Header of Card */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(0,194,255,0.8)]"></span>
-                    <span className="text-xs font-mono uppercase tracking-wider text-white">AceSutra Engine</span>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-900 border border-subtleBorder text-cyan-400">
-                    Live System
-                  </span>
-                </div>
-
-                {/* Central Dynamic Official 3D Emblem */}
-                <div className="my-auto py-2 flex items-center justify-center">
-                  <div className="relative w-28 h-28 flex items-center justify-center group">
-                    <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full animate-pulse-slow" />
-                    <img
-                      src="/logo-icon.png"
-                      alt="AceSutra 3D Growth Emblem"
-                      className="w-full h-full object-contain filter drop-shadow-[0_0_24px_rgba(0,194,255,0.65)] transform hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                </div>
-
-                {/* Card Bottom Metrics */}
-                <div className="grid grid-cols-3 gap-2 pt-3 border-t border-subtleBorder/80 text-center">
-                  <div>
-                    <span className="block text-[10px] text-mutedGray">Strategy</span>
-                    <span className="block text-xs font-bold text-white">Precise</span>
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-mutedGray">Creative</span>
-                    <span className="block text-xs font-bold text-cyan-400">Bespoke</span>
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-mutedGray">Tech</span>
-                    <span className="block text-xs font-bold text-white">Scalable</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Interface Badge: Growth & Performance */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -left-4 sm:-left-8 bg-charcoal-900/90 border border-subtleBorder p-3.5 rounded-2xl shadow-xl backdrop-blur-md flex items-center gap-3"
-              >
-                <div className="p-2 rounded-lg bg-brand-cyan/10 border border-brand-cyan/20 text-cyan-400">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block text-[11px] text-mutedGray">Growth Model</span>
-                  <span className="block text-xs font-bold text-white">Attribution & ROI</span>
-                </div>
-              </motion.div>
-
-              {/* Floating Interface Badge: Clean Architecture */}
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-4 -right-4 sm:-right-6 bg-charcoal-900/90 border border-subtleBorder p-3.5 rounded-2xl shadow-xl backdrop-blur-md flex items-center gap-3"
-              >
-                <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block text-[11px] text-mutedGray">Engineering</span>
-                  <span className="block text-xs font-bold text-white">Sub-Second Speed</span>
-                </div>
-              </motion.div>
+              {/* Interactive Three.js WebGL Scene */}
+              <AceSutraScene3D />
             </motion.div>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="mt-16 sm:mt-24 flex justify-center">
-          <a
-            href="#trust-strip"
-            className="flex flex-col items-center gap-1.5 text-xs text-mutedGray hover:text-white transition-colors group"
-            aria-label="Scroll to trust overview"
-          >
-            <span className="text-[11px] uppercase tracking-widest">Explore AceSutra</span>
-            <ChevronDown className="w-4 h-4 animate-bounce text-cyan-400" />
-          </a>
         </div>
       </Container>
+
+      {/* Minimal Scroll Down Indicator */}
+      <div className="relative z-10 pt-2 flex justify-center">
+        <a
+          href="#about"
+          className="group flex flex-col items-center gap-2 text-mutedGray hover:text-white transition-colors"
+          aria-label="Scroll down"
+        >
+          <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-mutedGray/70 group-hover:text-cyan-400 transition-colors">
+            SCROLL TO EXPLORE
+          </span>
+          <div className="w-4 h-7 rounded-full border border-white/20 group-hover:border-cyan-400 flex items-start justify-center p-1 transition-colors">
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-1 h-1 rounded-full bg-cyan-400"
+            />
+          </div>
+        </a>
+      </div>
     </section>
   );
 };

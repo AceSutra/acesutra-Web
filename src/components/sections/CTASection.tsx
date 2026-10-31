@@ -1,7 +1,9 @@
-﻿import React from 'react';
-import { ArrowRight, Sparkles, MessageSquare } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Copy, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
+import { siteConfig } from '../../data/navigation';
 
 interface CTASectionProps {
   title?: string;
@@ -9,62 +11,110 @@ interface CTASectionProps {
 }
 
 export const CTASection: React.FC<CTASectionProps> = ({
-  title = "Have an Idea? Let's Make It Happen.",
-  description = "Whether you're building a brand, launching a website, or improving your digital operations, let's explore the right solution for your business.",
+  title = "Have an Ambitious Project? Let's Talk.",
+  description = "Whether scaling an enterprise software platform or forging an unmistakable brand identity, we are ready.",
 }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(siteConfig.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
+
   return (
-    <section className="py-20 lg:py-28 relative overflow-hidden bg-charcoal-900 border-t border-subtleBorder">
-      {/* Background Radial Glow */}
-      <div className="absolute inset-0 bg-radial-glow opacity-80 pointer-events-none" />
-      <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-cyan/10 blur-[120px] rounded-full pointer-events-none" />
+    <section className="py-24 lg:py-36 relative overflow-hidden bg-transparent border-t border-white/10">
+      {/* Memorable 3D Background Visual Atmosphere */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20 filter brightness-60">
+        <img
+          src="/assets/art/architectural_wave.jpg"
+          alt="AceSutra Visual Architecture Background"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/80 to-charcoal-950" />
+      </div>
 
-      <Container>
-        <div className="relative rounded-3xl bg-gradient-to-b from-charcoal-800 to-charcoal-800/80 border border-brand-cyan/30 p-8 sm:p-12 lg:p-16 text-center max-w-5xl mx-auto shadow-2xl">
-          {/* Subtle top indicator */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/25 text-cyan-400 text-xs font-semibold mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Strategy • Creativity • Scalable Technology</span>
-          </div>
+      <Container className="relative z-10">
+        <div className="relative rounded-3xl glass-panel-elevated p-8 sm:p-14 lg:p-20 text-center max-w-4xl mx-auto shadow-2xl border border-white/15 overflow-hidden">
+          {/* Eyebrow Pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-charcoal-900 border border-brand-cyan/30 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>OPEN FOR PARTNERSHIPS</span>
+          </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl mx-auto">
+          {/* Giant Impactful Headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-[-0.04em] leading-[0.98] max-w-2xl mx-auto font-display uppercase"
+          >
             {title}
-          </h2>
+          </motion.h2>
 
-          <p className="mt-5 text-base sm:text-lg text-mutedGray max-w-2xl mx-auto leading-relaxed">
+          {/* Minimal 1-Sentence Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-6 text-base sm:text-lg text-mutedGray max-w-lg mx-auto leading-relaxed"
+          >
             {description}
-          </p>
+          </motion.p>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Interactive CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <Button
               to="/contact"
               variant="primary"
               size="lg"
-              rightIcon={<ArrowRight className="w-4 h-4" />}
-              className="w-full sm:w-auto"
+              rightIcon={<ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
+              className="w-full sm:w-auto shadow-glow-blue px-8 py-4 text-base font-semibold"
+              data-cursor="LET'S TALK"
             >
-              Start a Project
+              Start a Project Discovery
             </Button>
 
-            <Button
-              to="/contact"
-              variant="secondary"
-              size="lg"
-              leftIcon={<MessageSquare className="w-4 h-4 text-cyan-400" />}
-              className="w-full sm:w-auto"
+            <button
+              onClick={handleCopyEmail}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-charcoal-900/90 border border-white/10 hover:border-brand-cyan/40 text-warmWhite font-medium text-base backdrop-blur-md transition-all hover:bg-charcoal-800"
+              data-cursor="COPY"
             >
-              Talk to Our Team
-            </Button>
-          </div>
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                  <span className="text-emerald-400 font-mono text-sm">Copied to Clipboard!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4 text-cyan-400" />
+                  <span className="text-sm font-mono">{siteConfig.email}</span>
+                </>
+              )}
+            </button>
+          </motion.div>
 
-          <div className="mt-8 pt-8 border-t border-subtleBorder/60 flex flex-wrap items-center justify-center gap-6 text-xs text-mutedGray">
-            <span className="flex items-center gap-1.5">
+          {/* Minimal Assurance Footer */}
+          <div className="mt-12 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-xs text-mutedGray font-mono">
+            <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              Fast 24h Discovery Turnaround
+              24h Discovery Turnaround
             </span>
             <span>•</span>
-            <span>No Obligation Feasibility Scoping</span>
-            <span>•</span>
-            <span>Transparent Milestones & Deliverables</span>
+            <span>Direct Technical Principal Review</span>
           </div>
         </div>
       </Container>
