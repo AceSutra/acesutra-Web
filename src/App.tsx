@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   MessageCircle,
   Globe,
-  Instagram,
   Search,
   Check,
   ChevronDown,
@@ -16,9 +15,25 @@ import {
   X,
   Smartphone,
   Star,
-  CheckCircle2,
   Video
 } from 'lucide-react';
+
+// Custom inline SVG for Instagram (lucide-react does not bundle brand icons)
+const Instagram: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
 
 export const App: React.FC = () => {
   const [activePage, setActivePage] = useState<string>('home');
@@ -46,7 +61,6 @@ export const App: React.FC = () => {
     setFormSubmitted(true);
   };
 
-  // Replace 919999999999 with your actual WhatsApp business number
   const WHATSAPP_URL = "https://wa.me/919999999999?text=Hi%20AceSutra,%20I'd%20like%20to%20talk%20about%20marketing%20and%20a%20website%20for%20my%20business.";
 
   return (
@@ -222,7 +236,7 @@ export const App: React.FC = () => {
                 <div>
                   <div className="font-bold text-base text-[#0B1528]">Your Local Business in Pune</div>
                   <div className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Showing on Page 1 • 4.9 ★★★★★
+                    <Check className="w-3.5 h-3.5" /> Showing on Page 1 • 4.9 ★★★★★
                   </div>
                 </div>
               </div>
