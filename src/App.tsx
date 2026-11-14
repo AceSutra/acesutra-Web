@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as THREE from 'three';
 import {
-  Terminal,
   Check,
   X,
   Volume2,
