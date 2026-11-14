@@ -1,79 +1,89 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as THREE from 'three';
 import {
-  TrendingUp,
   Terminal,
-  Smartphone,
-  Compass,
-  MousePointer,
   Check,
   X,
   Volume2,
   VolumeX,
   ArrowRight,
-  Send
+  Send,
+  ArrowUpRight
 } from 'lucide-react';
-// Color themes for WebGL particles
-type PaletteKey = 'cyan' | 'violet' | 'emerald' | 'monolith';
-type ShapeMode = 'torus' | 'sphere' | 'wave';
 
-interface ConceptData {
+// Core Lab Concept Blueprints (R&D Showcase)
+interface ConceptBlueprint {
+  id: string;
+  num: string;
   title: string;
-  subtitle: string;
-  desc: string;
-  stack: string[];
+  tagline: string;
+  summary: string;
+  metrics: string;
+  specs: string[];
+  techStack: string[];
 }
 
-const CONCEPTS: Record<string, ConceptData> = {
-  vortex: {
-    title: 'VORTEX // Algorithmic Ad Engine',
-    subtitle: 'Multi-Touch Machine Learning Attribution & Real-Time ROAS Optimization',
-    desc: 'Our proprietary marketing engine that bypasses traditional platform attribution delays. Tracks cross-channel touchpoints across Meta, Google PMax, and TikTok Ads, predicting Customer Lifetime Value (LTV) within 48 hours of acquisition.',
-    stack: ['Meta Marketing API', 'Google Ads Scripts', 'Server-Side GTM', 'Next.js', 'Python ML']
+const BLUEPRINTS: ConceptBlueprint[] = [
+  {
+    id: 'vortex',
+    num: '01',
+    title: 'VORTEX // ALGORITHMIC MEDIA ENGINE',
+    tagline: 'Multi-Touch Attribution & Automated ROAS Scaling',
+    summary: 'A proprietary performance architecture designed to circumvent cookie degradation and delayed platform attribution. Ingests raw webhooks from Meta CAPI, Google Ads, and TikTok, calculating predictive Customer Lifetime Value (pLTV) within 48 hours of acquisition.',
+    metrics: '<120ms Latency // 99.8% Event Match Quality',
+    specs: ['Real-Time Bid Shading Algorithm', 'Server-Side GTM Container', 'Automated Creative Fatigue Alerting', 'Cross-Channel First-Party Data Layer'],
+    techStack: ['Meta Marketing API', 'Google Ads Scripts', 'Serverless Node.js', 'Redis Cache', 'Next.js']
   },
-  kinetic: {
-    title: 'KINETIC // 3D Spatial E-Commerce',
-    subtitle: 'Real-Time WebGL Product Visualization with Sub-Second Checkout',
-    desc: 'A next-generation e-commerce platform built to replace slow, bloated storefronts. Combines interactive 60FPS 3D geometry manipulation with headless Shopify Plus and single-tap checkout.',
-    stack: ['Three.js / WebGL', 'Shopify Storefront API', 'Tailwind CSS', 'Vercel Edge']
+  {
+    id: 'kinetic',
+    num: '02',
+    title: 'KINETIC // SPATIAL 3D COMMERCE',
+    tagline: '60 FPS WebGL Product Interaction & Single-Tap Checkout',
+    summary: 'A luxury spatial storefront platform engineered to eliminate conversion friction. Features real-time 3D product manipulation, procedural shaders, and sub-second headless checkout powered by Shopify Plus storefront APIs.',
+    metrics: '60 FPS Steady // 100/100 Core Web Vitals',
+    specs: ['Procedural Metallic & Glass Shaders', 'Headless Cart State Machine', 'Touch-Optimized Orbital Rig', 'Instant Edge CDN Hydration'],
+    techStack: ['Three.js WebGL', 'Shopify Storefront API', 'Tailwind CSS', 'Vercel Edge Network']
   },
-  synapse: {
-    title: 'SYNAPSE OS // Cross-Platform Architecture',
-    subtitle: 'Offline-First Mobile Framework with End-to-End Cryptographic Sync',
-    desc: 'An enterprise-grade Flutter architecture template built for speed and reliability. Features biometrics, background sync, real-time push engines, and zero-latency state machines.',
-    stack: ['Flutter 3.x', 'Dart', 'Supabase Realtime', 'AWS Lambda', 'WebSockets']
+  {
+    id: 'synapse',
+    num: '03',
+    title: 'SYNAPSE OS // CROSS-PLATFORM MOBILE',
+    tagline: 'Offline-First iOS & Android Reactive Framework',
+    summary: 'An enterprise-grade Flutter architecture template built for speed, biometric security, and zero-latency state synchronization. Operates smoothly in low-connectivity environments with automatic background conflict resolution.',
+    metrics: 'Native 120Hz ProMotion Support // End-to-End Cryptography',
+    specs: ['Local SQLite Reactive Cache', 'Hardware Enclave Biometric Auth', 'Push Notification Queuing', 'Unified App Store & Play Store CI/CD'],
+    techStack: ['Flutter 3.x', 'Dart', 'Supabase Realtime', 'AWS Lambda', 'WebSockets']
   },
-  neuro: {
-    title: 'NEURO SEO // Semantic Knowledge Pipeline',
-    subtitle: 'Programmatic Topic Modeling & High-Authority Content Generation',
-    desc: 'A technical SEO architecture that reverse-engineers Google’s Search Generative Experience (SGE). Maps internal topical authority graphs and produces crawl-optimized, schema-verified landing architectures.',
-    stack: ['Schema.org JSON-LD', 'Next.js ISR', 'Vector Database', 'Deep Search API']
+  {
+    id: 'neuro',
+    num: '04',
+    title: 'NEURO SEO // KNOWLEDGE GRAPH ENGINE',
+    tagline: 'Semantic Topic Clusters for Google Generative AI Search',
+    summary: 'A next-generation programmatic SEO framework reverse-engineered for Google’s Search Generative Experience (SGE). Dynamically generates crawl-optimized internal linking silos and verified JSON-LD schema networks.',
+    metrics: '99.4% Crawl Efficiency // 100% Schema Validation',
+    specs: ['Deep Nested Entity JSON-LD Schema', 'Automated Semantic Gap Analysis', 'Internal Link Authority Routing', 'Instant Static Regeneration (ISR)'],
+    techStack: ['Schema.org JSON-LD', 'Next.js ISR', 'Vector Database', 'Deep Search API']
   }
-};
+];
 
 export const App: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Studio HUD states
+  // Studio State
   const [liveTime, setLiveTime] = useState<string>('00:00:00 UTC');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
   const [audioCtx, setAudioCtx] = useState<AudioContext | null>(null);
 
-  // WebGL controls
-  const [shapeMode, setShapeMode] = useState<ShapeMode>('torus');
-  const [paletteKey, setPaletteKey] = useState<PaletteKey>('cyan');
+  // Active Lab Modal
+  const [activeBlueprint, setActiveBlueprint] = useState<ConceptBlueprint | null>(null);
 
-  // Custom magnetic cursor states
+  // Custom Cursor Follower
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [followerPos, setFollowerPos] = useState({ x: -100, y: -100 });
-  const [cursorText, setCursorText] = useState<string>('');
-  const [isHovering, setIsHovering] = useState<boolean>(false);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [cursorLabel, setCursorLabel] = useState<string>('');
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  // Concept Modal State
-  const [activeConcept, setActiveConcept] = useState<string | null>(null);
-
-  // Estimator States
+  // Scope Estimator State
   const [selectedServices, setSelectedServices] = useState<{ [key: string]: boolean }>({
     marketing: true,
     web: true,
@@ -81,18 +91,18 @@ export const App: React.FC = () => {
     seo: false,
     brand: false
   });
-  const [speedMultiplier, setSpeedMultiplier] = useState<'standard' | 'rush'>('standard');
+  const [sprintVelocity, setSprintVelocity] = useState<'standard' | 'rush'>('standard');
 
-  // Application Form States
+  // Terminal Form State
   const [applicantName, setApplicantName] = useState<string>('');
   const [applicantEmail, setApplicantEmail] = useState<string>('');
-  const [applicantCompany, setApplicantCompany] = useState<string>('');
-  const [applicantBudget, setApplicantBudget] = useState<string>('6k-12k');
-  const [applicantVision, setApplicantVision] = useState<string>('');
+  const [applicantUrl, setApplicantUrl] = useState<string>('');
+  const [applicantTier, setApplicantTier] = useState<string>('full');
+  const [applicantBrief, setApplicantBrief] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  // 1. Live UTC Clock
+  // 1. Live Studio UTC Clock
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -103,8 +113,8 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2. Sound Synthesizer (Web Audio API)
-  const playSound = (type: 'hover' | 'click') => {
+  // 2. Web Audio Haptic Feedback
+  const triggerAudio = useCallback((tone: 'soft' | 'click') => {
     if (!soundEnabled) return;
     try {
       const ctx = audioCtx || new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
@@ -116,74 +126,75 @@ export const App: React.FC = () => {
       osc.connect(gain);
       gain.connect(ctx.destination);
 
-      const now = ctx.currentTime;
-      if (type === 'hover') {
+      const t = ctx.currentTime;
+      if (tone === 'soft') {
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(480, now);
-        osc.frequency.exponentialRampToValueAtTime(800, now + 0.035);
-        gain.gain.setValueAtTime(0.015, now);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
-        osc.start(now);
-        osc.stop(now + 0.035);
+        osc.frequency.setValueAtTime(320, t);
+        osc.frequency.exponentialRampToValueAtTime(640, t + 0.04);
+        gain.gain.setValueAtTime(0.012, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+        osc.start(t);
+        osc.stop(t + 0.04);
       } else {
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(280, now);
-        osc.frequency.exponentialRampToValueAtTime(140, now + 0.07);
-        gain.gain.setValueAtTime(0.03, now);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
-        osc.start(now);
-        osc.stop(now + 0.07);
+        osc.frequency.setValueAtTime(240, t);
+        osc.frequency.exponentialRampToValueAtTime(120, t + 0.06);
+        gain.gain.setValueAtTime(0.025, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+        osc.start(t);
+        osc.stop(t + 0.06);
       }
     } catch {
-      // Audio fallback silent
+      // Audio fallback safe
     }
-  };
+  }, [soundEnabled, audioCtx]);
 
-  // 3. Custom Cursor Follower Physics
+  // 3. Custom Cursor Mechanics
   useEffect(() => {
     let animId: number;
-    const handleMouseMove = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', onMove);
 
-    const lerpCursor = () => {
+    const lerp = () => {
       setFollowerPos(prev => ({
-        x: prev.x + (cursorPos.x - prev.x) * 0.18,
-        y: prev.y + (cursorPos.y - prev.y) * 0.18
+        x: prev.x + (cursorPos.x - prev.x) * 0.16,
+        y: prev.y + (cursorPos.y - prev.y) * 0.16
       }));
-      animId = requestAnimationFrame(lerpCursor);
+      animId = requestAnimationFrame(lerp);
     };
-    animId = requestAnimationFrame(lerpCursor);
+    animId = requestAnimationFrame(lerp);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', onMove);
       cancelAnimationFrame(animId);
     };
   }, [cursorPos.x, cursorPos.y]);
 
-  const handleInteractiveHover = (label: string) => {
-    setIsHovering(true);
-    setCursorText(label);
-    playSound('hover');
+  const onHover = (label: string) => {
+    setIsHovered(true);
+    setCursorLabel(label);
+    triggerAudio('soft');
   };
 
-  const handleInteractiveLeave = () => {
-    setIsHovering(false);
-    setCursorText('');
+  const onLeave = () => {
+    setIsHovered(false);
+    setCursorLabel('');
   };
 
-  // 4. Three.js WebGL Real-Time Particle Scene
+  // 4. Three.js Real-Time 3D Kinetic Iridescent Silk Wave Ribbon
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const particleCount = 6500;
+    // Scene & Perspective Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 3000);
-    camera.position.z = 700;
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 32);
 
+    // High-performance WebGL Renderer
     const renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
@@ -192,185 +203,147 @@ export const App: React.FC = () => {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
 
-    const palettes = {
-      cyan: { primary: 0x00f2fe, secondary: 0x4facfe },
-      violet: { primary: 0xc084fc, secondary: 0x8b5cf6 },
-      emerald: { primary: 0x00ff87, secondary: 0x60efff },
-      monolith: { primary: 0xffffff, secondary: 0x94a3b8 }
-    };
+    // Build Kinetic Silk Ribbon Plane
+    const width = 85;
+    const height = 48;
+    const segW = 120;
+    const segH = 64;
+    const geometry = new THREE.PlaneGeometry(width, height, segW, segH);
 
-    const getCoords = (mode: ShapeMode, i: number) => {
-      if (mode === 'torus') {
-        const u = (i / particleCount) * Math.PI * 2 * 3;
-        const p = 2, q = 3;
-        const r = 180 + Math.sin(i * 0.1) * 25;
-        return {
-          x: r * (2 + Math.cos(q * u)) * 0.5 * Math.cos(p * u),
-          y: r * (2 + Math.cos(q * u)) * 0.5 * Math.sin(p * u),
-          z: r * Math.sin(q * u) * 1.4 + (Math.random() - 0.5) * 45
-        };
-      } else if (mode === 'sphere') {
-        const phi = Math.acos(-1 + (2 * i) / particleCount);
-        const theta = Math.sqrt(particleCount * Math.PI) * phi;
-        const radius = 240 + Math.sin(i * 0.05) * 35;
-        return {
-          x: radius * Math.cos(theta) * Math.sin(phi),
-          y: radius * Math.sin(theta) * Math.sin(phi),
-          z: radius * Math.cos(phi)
-        };
-      } else {
-        const side = Math.floor(Math.sqrt(particleCount));
-        const row = Math.floor(i / side);
-        const col = i % side;
-        const spacing = 18;
-        return {
-          x: (col - side / 2) * spacing,
-          y: (Math.sin(col * 0.2) + Math.cos(row * 0.2)) * 60,
-          z: (row - side / 2) * spacing
-        };
-      }
-    };
-
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const originalPositions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    const activeColor = palettes[paletteKey];
-    const colorA = new THREE.Color(activeColor.primary);
-    const colorB = new THREE.Color(activeColor.secondary);
-
-    for (let i = 0; i < particleCount; i++) {
-      const coords = getCoords(shapeMode, i);
-      const i3 = i * 3;
-      positions[i3] = coords.x;
-      positions[i3 + 1] = coords.y;
-      positions[i3 + 2] = coords.z;
-
-      originalPositions[i3] = coords.x;
-      originalPositions[i3 + 1] = coords.y;
-      originalPositions[i3 + 2] = coords.z;
-
-      const ratio = i / particleCount;
-      const mixed = colorA.clone().lerp(colorB, Math.sin(ratio * Math.PI));
-      colors[i3] = mixed.r;
-      colors[i3 + 1] = mixed.g;
-      colors[i3 + 2] = mixed.b;
+    // Save base coordinates
+    const count = geometry.attributes.position.count;
+    const originalPos = new Float32Array(count * 3);
+    const posAttr = geometry.attributes.position;
+    for (let i = 0; i < count; i++) {
+      originalPos[i * 3] = posAttr.getX(i);
+      originalPos[i * 3 + 1] = posAttr.getY(i);
+      originalPos[i * 3 + 2] = posAttr.getZ(i);
     }
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    // Particle sprite
-    const pCanvas = document.createElement('canvas');
-    pCanvas.width = 64;
-    pCanvas.height = 64;
-    const pCtx = pCanvas.getContext('2d');
-    if (pCtx) {
-      const gradient = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      gradient.addColorStop(0.2, 'rgba(200, 240, 255, 0.8)');
-      gradient.addColorStop(0.5, 'rgba(0, 242, 254, 0.25)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      pCtx.fillStyle = gradient;
-      pCtx.fillRect(0, 0, 64, 64);
-    }
-    const texture = new THREE.CanvasTexture(pCanvas);
-
-    const material = new THREE.PointsMaterial({
-      size: 4.8,
-      vertexColors: true,
-      map: texture,
-      transparent: true,
-      opacity: 0.85,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
+    // Volumetric Glossy Iridescent Material
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0x090e1a,
+      roughness: 0.18,
+      metalness: 0.85,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0.95,
+      side: THREE.DoubleSide,
+      flatShading: false
     });
 
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -0.35;
+    mesh.rotation.z = 0.12;
+    scene.add(mesh);
 
-    let mouseX = 0, mouseY = 0;
-    let targetRotX = 0, targetRotY = 0;
-    let prevMouse = { x: 0, y: 0 };
-    let dragging = false;
+    // Multi-Point Cinematic Lighting Setup (Lusion Signature)
+    const ambientLight = new THREE.AmbientLight(0x040711, 2.5);
+    scene.add(ambientLight);
 
-    const onMouseMove = (e: MouseEvent) => {
-      const x = e.clientX - window.innerWidth / 2;
-      const y = e.clientY - window.innerHeight / 2;
-      mouseX = (x / window.innerWidth) * 2;
-      mouseY = -(y / window.innerHeight) * 2;
+    // Dynamic Electric Cyan Light
+    const cyanLight = new THREE.PointLight(0x00f2fe, 18, 90);
+    cyanLight.position.set(-15, 12, 18);
+    scene.add(cyanLight);
 
-      if (dragging) {
-        const dx = e.clientX - prevMouse.x;
-        const dy = e.clientY - prevMouse.y;
-        targetRotY += dx * 0.005;
-        targetRotX += dy * 0.005;
-      }
-      prevMouse = { x: e.clientX, y: e.clientY };
+    // Hot Magenta / Purple Crest Light
+    const magentaLight = new THREE.PointLight(0xd946ef, 16, 90);
+    magentaLight.position.set(18, -10, 16);
+    scene.add(magentaLight);
+
+    // Electric Violet Fill Light
+    const violetLight = new THREE.PointLight(0x6366f1, 14, 80);
+    violetLight.position.set(0, 15, -10);
+    scene.add(violetLight);
+
+    // Warm Sunbeam Specular Highlight
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    dirLight.position.set(20, 25, 25);
+    scene.add(dirLight);
+
+    // Mouse Tracking
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+
+    const onWindowMouseMove = (e: MouseEvent) => {
+      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
-    const onMouseDown = (e: MouseEvent) => {
-      dragging = true;
-      setIsDragging(true);
-      prevMouse = { x: e.clientX, y: e.clientY };
+    // Scroll Choreography
+    let scrollProgress = 0;
+    const onWindowScroll = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
     };
 
-    const onMouseUp = () => {
-      dragging = false;
-      setIsDragging(false);
-    };
-
-    const onResize = () => {
+    const onWindowResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
-    window.addEventListener('resize', onResize);
+    window.addEventListener('mousemove', onWindowMouseMove, { passive: true });
+    window.addEventListener('scroll', onWindowScroll, { passive: true });
+    window.addEventListener('resize', onWindowResize);
 
     const clock = new THREE.Clock();
     let frameId: number;
 
     const animate = () => {
       frameId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
-      const pos = geometry.attributes.position.array as Float32Array;
+      const t = clock.getElapsedTime();
 
-      points.rotation.y += (targetRotY - points.rotation.y) * 0.05 + 0.0018;
-      points.rotation.x += (targetRotX - points.rotation.x) * 0.05;
-      points.rotation.z = Math.sin(elapsed * 0.2) * 0.15;
+      // Smooth mouse damping
+      mouseX += (targetMouseX - mouseX) * 0.06;
+      mouseY += (targetMouseY - mouseY) * 0.06;
 
-      const mouseWorldX = mouseX * 350;
-      const mouseWorldY = mouseY * 350;
+      // Orbit dynamic colored lights
+      cyanLight.position.x = Math.sin(t * 0.8) * 22 + mouseX * 8;
+      cyanLight.position.y = Math.cos(t * 0.7) * 14 + mouseY * 6;
 
-      for (let i = 0; i < particleCount; i++) {
+      magentaLight.position.x = Math.cos(t * 0.9) * 24 - mouseX * 8;
+      magentaLight.position.y = Math.sin(t * 0.8) * 16 - mouseY * 6;
+
+      // Scroll camera navigation (cinematic slide)
+      camera.position.z = 32 - scrollProgress * 12;
+      camera.position.y = -scrollProgress * 8;
+      camera.position.x = Math.sin(scrollProgress * Math.PI) * 4;
+      mesh.rotation.y = mouseX * 0.25 + scrollProgress * 0.4;
+      mesh.rotation.x = -0.35 + mouseY * 0.2 - scrollProgress * 0.2;
+
+      // Deform Silk Wave Vertices
+      const pArray = posAttr.array as Float32Array;
+      const mouseWorldX = mouseX * 30;
+      const mouseWorldY = mouseY * 20;
+
+      for (let i = 0; i < count; i++) {
         const i3 = i * 3;
-        const ox = originalPositions[i3];
-        const oy = originalPositions[i3 + 1];
-        const oz = originalPositions[i3 + 2];
+        const ox = originalPos[i3];
+        const oy = originalPos[i3 + 1];
 
-        const wave = Math.sin(elapsed * 1.5 + ox * 0.008 + oy * 0.008) * 4;
-        const dx = pos[i3] - mouseWorldX;
-        const dy = pos[i3 + 1] - mouseWorldY;
-        const distSq = dx * dx + dy * dy;
+        // Multi-frequency harmonic silk waves
+        const wave1 = Math.sin(ox * 0.14 + t * 1.4) * 3.6;
+        const wave2 = Math.cos(oy * 0.18 + t * 1.1) * 3.2;
+        const wave3 = Math.sin((ox + oy) * 0.12 + t * 1.6) * 2.4;
 
-        if (distSq < 15000) {
-          const force = (1 - distSq / 15000) * 18;
-          pos[i3] += (dx / Math.sqrt(distSq)) * force;
-          pos[i3 + 1] += (dy / Math.sqrt(distSq)) * force;
-        } else {
-          pos[i3] += (ox - pos[i3]) * 0.06;
-          pos[i3 + 1] += (oy + wave - pos[i3 + 1]) * 0.06;
-          pos[i3 + 2] += (oz - pos[i3 + 2]) * 0.06;
-        }
+        // Interactive mouse swell
+        const dx = ox - mouseWorldX;
+        const dy = oy - mouseWorldY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const mouseLift = dist < 22 ? (1 - dist / 22) * 5.2 : 0;
+
+        pArray[i3 + 2] = wave1 + wave2 + wave3 + mouseLift;
       }
 
-      geometry.attributes.position.needsUpdate = true;
+      posAttr.needsUpdate = true;
+      geometry.computeVertexNormals();
+
       renderer.render(scene, camera);
     };
 
@@ -378,166 +351,158 @@ export const App: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(frameId);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mouseup', onMouseUp);
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('mousemove', onWindowMouseMove);
+      window.removeEventListener('scroll', onWindowScroll);
+      window.removeEventListener('resize', onWindowResize);
       geometry.dispose();
       material.dispose();
-      texture.dispose();
       renderer.dispose();
     };
-  }, [shapeMode, paletteKey]);
+  }, []);
 
-  // Estimator calculation
-  const calculateTotal = () => {
-    let base = 0;
+  // Scope Calculation Memo
+  const scopeDetails = useMemo(() => {
+    let setup = 0;
     let monthly = 0;
-    const names: string[] = [];
+    const items: string[] = [];
 
     if (selectedServices.marketing) {
-      monthly += 2000;
-      names.push('Paid Media Buying');
+      monthly += 2200;
+      items.push('Performance Marketing & Paid Ads');
     }
     if (selectedServices.web) {
-      base += 3500;
-      names.push('Next.js Web Platform');
+      setup += 3800;
+      items.push('Bespoke Web Platform');
     }
     if (selectedServices.mobile) {
-      base += 5500;
-      names.push('Cross-Platform Mobile App');
+      setup += 5800;
+      items.push('Cross-Platform Mobile App');
     }
     if (selectedServices.seo) {
-      monthly += 1400;
-      names.push('Topical SEO Pipeline');
+      monthly += 1500;
+      items.push('Programmatic SEO Engine');
     }
     if (selectedServices.brand) {
-      base += 1800;
-      names.push('Brand System & Creatives');
+      setup += 1900;
+      items.push('Brand System & Motion');
     }
 
-    if (speedMultiplier === 'rush') {
-      base = Math.round(base * 1.25);
+    if (sprintVelocity === 'rush') {
+      setup = Math.round(setup * 1.25);
     }
 
-    return { base, monthly, names };
+    return { setup, monthly, items };
+  }, [selectedServices, sprintVelocity]);
+
+  const handleApplyScope = () => {
+    triggerAudio('click');
+    const desc = `[Configured Scope: $${scopeDetails.setup.toLocaleString()} setup + $${scopeDetails.monthly.toLocaleString()}/mo // Capabilities: ${scopeDetails.items.join(', ')}]. Applying for founding partner cohort.`;
+    setApplicantBrief(desc);
+    const target = document.getElementById('contact');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const { base: calcBase, monthly: calcMonthly, names: calcNames } = calculateTotal();
-
-  const handleTransferToApplication = () => {
-    playSound('click');
-    const scopeSummary = `[Scope Configured: $${calcBase.toLocaleString()} setup + $${calcMonthly.toLocaleString()}/mo // Systems: ${calcNames.join(', ')}]. Looking forward to discussing founding partnership details.`;
-    setApplicantVision(scopeSummary);
-    const element = document.getElementById('apply');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    playSound('click');
+    triggerAudio('click');
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1100);
+    }, 1200);
   };
 
   return (
-    <div className="relative min-h-screen bg-[#030407] text-slate-100 font-sans overflow-x-hidden selection:bg-[#00f2fe] selection:text-black">
+    <div className="relative min-h-screen bg-[#020306] text-slate-100 font-sans selection:bg-[#00f2fe] selection:text-black overflow-x-hidden">
       
-      {/* Background Interactive 3D WebGL Canvas */}
-      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-auto z-[1]" />
+      {/* Real-time 3D Kinetic Iridescent Ribbon Canvas */}
+      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none z-[1]" />
 
-      {/* Subtle Procedural Grain Noise Filter */}
+      {/* Subtle Procedural Film Grain Overlay */}
       <div 
-        className="fixed inset-0 pointer-events-none opacity-5 z-[99]"
+        className="fixed inset-0 pointer-events-none opacity-4 z-[99]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
         }}
       />
 
-      {/* Custom Trailing Magnetic Cursor */}
+      {/* Custom Magnetic Cursor */}
       <div
-        className="fixed pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200"
+        className="fixed pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 hidden md:block"
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
-          width: isHovering ? 0 : 8,
-          height: isHovering ? 0 : 8,
+          width: isHovered ? 0 : 7,
+          height: isHovered ? 0 : 7,
           backgroundColor: '#ffffff',
           borderRadius: '50%',
-          opacity: isHovering ? 0 : 1
+          opacity: isHovered ? 0 : 1
         }}
       />
       <div
-        className="fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-all duration-300"
+        className="fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-all duration-300 hidden md:flex"
         style={{
           left: `${followerPos.x}px`,
           top: `${followerPos.y}px`,
-          width: isHovering ? 76 : isDragging ? 90 : 42,
-          height: isHovering ? 76 : isDragging ? 90 : 42,
+          width: isHovered ? 78 : 40,
+          height: isHovered ? 78 : 40,
           borderRadius: '50%',
-          backgroundColor: isHovering ? 'rgba(255, 255, 255, 0.95)' : isDragging ? 'rgba(0, 242, 254, 0.2)' : 'transparent',
-          border: isHovering ? 'none' : isDragging ? '1px solid #00f2fe' : '1px solid rgba(255, 255, 255, 0.3)'
+          backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+          border: isHovered ? 'none' : '1px solid rgba(255, 255, 255, 0.25)'
         }}
       >
-        {isHovering && (
-          <span className="text-[8px] font-mono font-bold tracking-widest text-[#030407] uppercase">
-            {cursorText || 'EXPLORE'}
-          </span>
-        )}
-        {isDragging && !isHovering && (
-          <span className="text-[8px] font-mono font-bold tracking-widest text-[#00f2fe] uppercase">
-            DRAG 3D
+        {isHovered && (
+          <span className="text-[8px] font-mono font-bold tracking-widest text-black uppercase">
+            {cursorLabel || 'EXPLORE'}
           </span>
         )}
       </div>
 
       {/* Top Studio HUD Navigation */}
-      <header className="fixed top-0 left-0 w-full z-40 px-6 py-5 flex items-center justify-between border-b border-white/5 backdrop-blur-md bg-black/40">
-        
+      <header className="fixed top-0 left-0 w-full z-40 px-6 sm:px-12 py-6 flex items-center justify-between border-b border-white/5 backdrop-blur-xl bg-black/30">
         <a 
           href="#"
-          onMouseEnter={() => handleInteractiveHover('ACESUTRA')}
-          onMouseLeave={handleInteractiveLeave}
-          className="flex items-center gap-3 cursor-pointer"
+          onMouseEnter={() => onHover('ACESUTRA')}
+          onMouseLeave={onLeave}
+          className="flex items-center gap-3 cursor-pointer group"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#00f2fe] to-[#4facfe] p-[1px]">
-            <div className="w-full h-full bg-[#030407] rounded-[7px] flex items-center justify-center">
-              <span className="font-extrabold text-xs text-[#00f2fe]">A</span>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#00f2fe] via-[#6366f1] to-[#d946ef] p-[1px]">
+            <div className="w-full h-full bg-[#020306] rounded-[7px] flex items-center justify-center">
+              <span className="font-extrabold text-xs text-[#00f2fe] tracking-tighter">A</span>
             </div>
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-lg tracking-tight text-white font-serif">Ace<span className="text-[#00f2fe]">Sutra</span></span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 hidden sm:inline">[ STUDIO // R&D ]</span>
+          <div className="flex flex-col">
+            <span className="font-bold text-lg tracking-tight text-white group-hover:text-[#00f2fe] transition-colors">
+              Ace<span className="text-[#00f2fe]">Sutra</span>
+            </span>
+            <span className="text-[9px] font-mono uppercase tracking-widest text-slate-500 -mt-1">
+              CREATIVE GROWTH STUDIO
+            </span>
           </div>
         </a>
 
-        {/* HUD Center Data */}
+        {/* Center Live Signals */}
         <div className="hidden lg:flex items-center gap-6 text-[11px] font-mono text-slate-400">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span className="text-slate-300">STATUS: ACCEPTING FOUNDING CLIENTS</span>
+            <span className="text-slate-300">FOUNDING COHORT ACTIVE</span>
           </div>
           <div className="text-slate-700">|</div>
-          <div>COORDS: 37.77° N, 122.41° W</div>
+          <div>LAT 37.77° N</div>
           <div className="text-slate-700">|</div>
           <div className="text-[#00f2fe]">{liveTime}</div>
         </div>
 
-        {/* Right HUD Controls */}
+        {/* Action Controls */}
         <div className="flex items-center gap-4">
           <button
             onClick={() => {
               setSoundEnabled(!soundEnabled);
-              playSound('click');
+              triggerAudio('click');
             }}
-            onMouseEnter={() => handleInteractiveHover('AUDIO')}
-            onMouseLeave={handleInteractiveLeave}
-            className={`px-3 py-1.5 rounded-full text-[10px] font-mono uppercase border transition-colors flex items-center gap-1.5 ${
+            onMouseEnter={() => onHover('AUDIO')}
+            onMouseLeave={onLeave}
+            className={`px-3 py-1.5 rounded-full text-[10px] font-mono uppercase border transition-all flex items-center gap-1.5 cursor-pointer ${
               soundEnabled ? 'border-[#00f2fe] text-[#00f2fe] bg-[#00f2fe]/10' : 'border-white/10 text-slate-400 hover:text-white'
             }`}
           >
@@ -546,404 +511,377 @@ export const App: React.FC = () => {
           </button>
 
           <a
-            href="#lab"
-            onMouseEnter={() => handleInteractiveHover('THE LAB')}
-            onMouseLeave={handleInteractiveLeave}
-            className="hidden sm:inline-block text-xs font-mono text-slate-300 hover:text-[#00f2fe] transition-colors"
+            href="#contact"
+            onMouseEnter={() => onHover('START')}
+            onMouseLeave={onLeave}
+            className="px-5 py-2 rounded-full text-xs font-mono text-black bg-white hover:bg-[#00f2fe] transition-all font-semibold flex items-center gap-1.5 cursor-pointer shadow-lg shadow-white/5"
           >
-            [ 01 THE LAB ]
-          </a>
-
-          <a
-            href="#founding"
-            onMouseEnter={() => handleInteractiveHover('COHORT')}
-            onMouseLeave={handleInteractiveLeave}
-            className="hidden sm:inline-block text-xs font-mono text-slate-300 hover:text-[#00f2fe] transition-colors"
-          >
-            [ 02 FOUNDING COHORT ]
-          </a>
-
-          <a
-            href="#apply"
-            onMouseEnter={() => handleInteractiveHover('INITIALIZE')}
-            onMouseLeave={handleInteractiveLeave}
-            className="px-4 py-2 rounded-full text-xs font-mono text-white border border-[#00f2fe]/50 hover:border-[#00f2fe] hover:bg-[#00f2fe]/10 transition-all flex items-center gap-1.5"
-          >
-            INITIALIZE PROJECT <ArrowRight className="w-3.5 h-3.5 text-[#00f2fe]" />
+            START PROJECT <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
       </header>
 
-      {/* Scrollable Main Content */}
+      {/* Main Cinematic Scroll Story */}
       <main className="relative z-10">
 
-        {/* Hero Section */}
-        <section className="min-h-screen flex flex-col justify-between pt-36 pb-12 px-6 sm:px-12 max-w-7xl mx-auto">
+        {/* ACT 1: The Monolith Hero */}
+        <section className="min-h-screen flex flex-col justify-between pt-40 pb-16 px-6 sm:px-12 max-w-7xl mx-auto">
           <div>
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 text-[11px] font-mono text-[#00f2fe] mb-8">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono text-[#00f2fe] mb-8 backdrop-blur-md">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00f2fe] animate-pulse"></span>
-              <span>DISRUPTING CONVENTIONAL MARKETING & SOFTWARE STUDIOS</span>
+              <span>INDEPENDENT DIGITAL PRODUCTION & PERFORMANCE STUDIO</span>
             </div>
 
-            <h1 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-white mb-8 leading-[0.92]">
-              WHERE CODE <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.3)' }}>
-                MEETS CONVERSION.
+            <h1 className="text-6xl sm:text-8xl lg:text-[10rem] font-extrabold tracking-tighter text-white mb-8 leading-[0.88] select-none">
+              WE SHAPE <br />
+              <span 
+                className="text-transparent" 
+                style={{ 
+                  WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.45)',
+                  filter: 'drop-shadow(0 0 35px rgba(0, 242, 254, 0.15))'
+                }}
+              >
+                DIGITAL GRAVITY.
               </span>
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end max-w-5xl">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end max-w-5xl mt-6">
               <div className="md:col-span-8">
-                <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-light">
-                  AceSutra is an avant-garde digital growth studio fusing performance marketing, bespoke web engineering, and mobile app architecture into unfair commercial advantages. We build what ordinary agencies are technically incapable of delivering.
+                <p className="text-lg sm:text-2xl text-slate-300 font-light leading-relaxed">
+                  AceSutra unites mathematical paid media acquisition, high-performance web engineering, and mobile app architecture into unfair commercial advantages. We craft what ordinary agencies lack the technical depth to build.
                 </p>
               </div>
-              <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-3">
+
+              <div className="md:col-span-4 space-y-3">
                 <a
-                  href="#founding"
-                  onMouseEnter={() => handleInteractiveHover('JOIN')}
-                  onMouseLeave={handleInteractiveLeave}
-                  className="w-full text-center py-3.5 px-6 rounded-xl bg-white text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#00f2fe] transition-all shadow-xl"
+                  href="#disciplines"
+                  onMouseEnter={() => onHover('DISCIPLINES')}
+                  onMouseLeave={onLeave}
+                  className="w-full block py-4 text-center rounded-xl bg-white text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#00f2fe] transition-all shadow-xl"
                 >
-                  Become a Founding Client
+                  Explore Capabilities ↓
                 </a>
                 <a
                   href="#lab"
-                  onMouseEnter={() => handleInteractiveHover('EXPLORE')}
-                  onMouseLeave={handleInteractiveLeave}
-                  className="w-full text-center py-3.5 px-6 rounded-xl bg-white/[0.03] border border-white/20 text-white font-mono text-xs uppercase tracking-wider hover:border-[#00f2fe] transition-all"
+                  onMouseEnter={() => onHover('R&D')}
+                  onMouseLeave={onLeave}
+                  className="w-full block py-4 text-center rounded-xl bg-white/[0.03] border border-white/15 text-white font-mono text-xs uppercase tracking-wider hover:border-[#00f2fe] transition-all"
                 >
-                  Inspect R&D Concepts ↓
+                  Inspect The Lab (R&D)
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Real-time 3D Control Dock */}
-          <div className="pt-16 border-t border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-              <MousePointer className="w-4 h-4 text-[#00f2fe]" />
-              <span>CLICK & DRAG ANYWHERE TO INTERACT WITH REAL-TIME 3D PARTICLES</span>
+          {/* Ribbon Hint Indicator */}
+          <div className="pt-20 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono text-slate-500 gap-4">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#00f2fe]"></span>
+              <span>SCROLL TO ADVANCE CINEMATIC STORY // REAL-TIME 3D SILK PHYSICS ACTIVE</span>
+            </div>
+            <div>[ 01 / 05 // INTRODUCTION ]</div>
+          </div>
+        </section>
+
+        {/* ACT 2: The Philosophy Narrative */}
+        <section className="py-36 px-6 sm:px-12 max-w-6xl mx-auto">
+          <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ MANIFESTO // 02 ]</span>
+          
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mt-6 mb-12 leading-[1.05]">
+            THE CHASM BETWEEN CODE AND COMMERCE IS DEADLY.
+          </h2>
+
+          <div className="space-y-12 text-slate-300 text-lg sm:text-2xl font-light leading-relaxed border-l-2 border-[#00f2fe]/40 pl-6 sm:pl-10">
+            <p>
+              Most marketing agencies run ad campaigns to sluggish, bloated landing pages that hemorrhage conversions. Most software consultancies write clean code but have zero intuition for customer acquisition, psychology, or ROAS.
+            </p>
+            <p className="text-white font-normal">
+              <span className="text-[#00f2fe]">AceSutra destroys this silo.</span> When the engineers optimizing your Core Web Vitals sit next to the media buyers scaling your Google and Meta budgets, revenue accelerates predictably.
+            </p>
+          </div>
+
+          {/* Side by side comparison */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/5">
+              <div className="text-xs font-mono text-rose-400 mb-4">[ THE CONVENTIONAL AGENCY ]</div>
+              <ul className="text-sm text-slate-400 space-y-3 font-light">
+                <li>✕ Pitched by founders, offloaded to junior interns</li>
+                <li>✕ Slow 8-week turnarounds for basic CMS landing pages</li>
+                <li>✕ Disconnected ad creatives that burn budget without tracking</li>
+                <li>✕ Zero accountability for real customer acquisition cost (CAC)</li>
+              </ul>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-[10px] font-mono uppercase text-slate-500 mr-1">3D Topology:</span>
-              <button
-                onClick={() => { setShapeMode('torus'); playSound('click'); }}
-                className={`px-3 py-1 rounded-lg text-xs font-mono transition-all ${
-                  shapeMode === 'torus' ? 'bg-[#00f2fe]/20 border border-[#00f2fe] text-[#00f2fe]' : 'bg-white/5 border border-white/10 text-slate-400'
-                }`}
-              >
-                CYBER TORUS
-              </button>
-              <button
-                onClick={() => { setShapeMode('sphere'); playSound('click'); }}
-                className={`px-3 py-1 rounded-lg text-xs font-mono transition-all ${
-                  shapeMode === 'sphere' ? 'bg-[#00f2fe]/20 border border-[#00f2fe] text-[#00f2fe]' : 'bg-white/5 border border-white/10 text-slate-400'
-                }`}
-              >
-                NEURAL CLOUD
-              </button>
-              <button
-                onClick={() => { setShapeMode('wave'); playSound('click'); }}
-                className={`px-3 py-1 rounded-lg text-xs font-mono transition-all ${
-                  shapeMode === 'wave' ? 'bg-[#00f2fe]/20 border border-[#00f2fe] text-[#00f2fe]' : 'bg-white/5 border border-white/10 text-slate-400'
-                }`}
-              >
-                QUANTUM WAVE
-              </button>
-
-              <span className="text-[10px] font-mono uppercase text-slate-500 ml-4 mr-1">Shader:</span>
-              <button
-                onClick={() => { setPaletteKey('cyan'); playSound('click'); }}
-                className={`w-5 h-5 rounded-full bg-[#00f2fe] transition-transform ${paletteKey === 'cyan' ? 'ring-2 ring-white scale-110' : ''}`}
-                title="Cyan Light"
-              />
-              <button
-                onClick={() => { setPaletteKey('violet'); playSound('click'); }}
-                className={`w-5 h-5 rounded-full bg-purple-500 transition-transform ${paletteKey === 'violet' ? 'ring-2 ring-white scale-110' : ''}`}
-                title="Amethyst Violet"
-              />
-              <button
-                onClick={() => { setPaletteKey('emerald'); playSound('click'); }}
-                className={`w-5 h-5 rounded-full bg-emerald-400 transition-transform ${paletteKey === 'emerald' ? 'ring-2 ring-white scale-110' : ''}`}
-                title="Matrix Emerald"
-              />
-              <button
-                onClick={() => { setPaletteKey('monolith'); playSound('click'); }}
-                className={`w-5 h-5 rounded-full bg-slate-200 transition-transform ${paletteKey === 'monolith' ? 'ring-2 ring-white scale-110' : ''}`}
-                title="Monolith White"
-              />
+            <div className="p-8 sm:p-10 rounded-3xl bg-[#00f2fe]/[0.03] border border-[#00f2fe]/30 backdrop-blur-xl">
+              <div className="text-xs font-mono text-[#00f2fe] mb-4">[ THE ACESUTRA STANDARD ]</div>
+              <ul className="text-sm text-slate-200 space-y-3 font-light">
+                <li>✓ Direct founder-to-founder execution on every project</li>
+                <li>✓ High-velocity agile sprints measured in days, not months</li>
+                <li>✓ Custom Next.js, Three.js WebGL & Flutter architectures</li>
+                <li>✓ Full accountability for bottom-line revenue, LTV, and ROAS</li>
+              </ul>
             </div>
           </div>
         </section>
 
-        {/* Marquee Ticker */}
-        <div className="py-5 border-y border-white/10 bg-black/60 overflow-hidden backdrop-blur-md">
-          <div className="flex items-center gap-8 text-xl font-bold tracking-tight text-slate-400 whitespace-nowrap animate-[pulse_6s_infinite]">
-            <span>DIGITAL MARKETING // META & GOOGLE ADS</span>
-            <span className="text-[#00f2fe]">•</span>
-            <span>FULL-STACK WEB PLATFORMS // NEXT.JS & THREE.JS</span>
-            <span className="text-[#00f2fe]">•</span>
-            <span>CROSS-PLATFORM MOBILE APPS // FLUTTER & REACT NATIVE</span>
-            <span className="text-[#00f2fe]">•</span>
-            <span>PROGRAMMATIC SEO & TOPICAL GRAPHS</span>
-            <span className="text-[#00f2fe]">•</span>
-            <span>SPATIAL 3D COMMERCE & CONVERSION ENGINES</span>
-          </div>
-        </div>
-
-        {/* Manifesto Section */}
-        <section className="py-32 px-6 sm:px-12 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            <div className="lg:col-span-4 sticky top-28">
-              <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ MANIFESTO // 01 ]</span>
-              <h2 className="text-4xl font-extrabold text-white mt-3 mb-6">
-                THE AGENCY MODEL IS OBSOLETE.
-              </h2>
-              <div className="text-xs font-mono text-slate-500 space-y-2">
-                <div>// ZERO JUNIOR DELEGATION</div>
-                <div>// ZERO COMMITTEE BLOAT</div>
-                <div>// 100% PRINCIPAL-LED EXECUTION</div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 space-y-12">
-              <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10">
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-6 leading-snug">
-                  "Most marketing agencies cannot write a single line of production code. Most software consultancies have zero intuition for customer acquisition."
-                </div>
-                <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 font-light">
-                  This disconnect costs companies millions. Marketing runs ad campaigns to landing pages that load in 4 seconds; developers build beautiful apps that nobody downloads because the acquisition funnel was an afterthought.
-                </p>
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
-                  <strong className="text-[#00f2fe] font-semibold">AceSutra eliminates the friction.</strong> We unify mathematical paid acquisition, modern full-stack web architectures, and mobile applications into one cohesive, revenue-generating engine.
-                </p>
-              </div>
-
-              {/* Contrast Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                  <div className="text-xs font-mono text-rose-400 mb-2">[ THE CONVENTIONAL AGENCY ]</div>
-                  <ul className="text-xs text-slate-400 space-y-2.5">
-                    <li>✕ Pitched by executives, dumped onto junior interns</li>
-                    <li>✕ Slow 8-week turnaround for basic landing pages</li>
-                    <li>✕ Generic boilerplate WordPress or Webflow templates</li>
-                    <li>✕ Blames the client when ads fail to convert</li>
-                  </ul>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-[#00f2fe]/[0.04] border border-[#00f2fe]/30">
-                  <div className="text-xs font-mono text-[#00f2fe] mb-2">[ THE ACESUTRA STANDARD ]</div>
-                  <ul className="text-xs text-slate-200 space-y-2.5">
-                    <li>✓ Direct founder-to-founder technical execution</li>
-                    <li>✓ Agile sprint shipments measured in days, not months</li>
-                    <li>✓ Custom Next.js, Three.js, and Flutter architectures</li>
-                    <li>✓ Full accountability for bottom-line ROAS and revenue</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Disciplines Section */}
-        <section id="disciplines" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        {/* ACT 3: Core Disciplines (Hover-Reveal Rows) */}
+        <section id="disciplines" className="py-36 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20">
             <div>
-              <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ CAPABILITIES // 02 ]</span>
-              <h2 className="text-4xl sm:text-6xl font-extrabold text-white mt-2">CORE DISCIPLINES</h2>
+              <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ CAPABILITIES // 03 ]</span>
+              <h2 className="text-5xl sm:text-7xl font-extrabold text-white mt-3">OUR DISCIPLINES</h2>
             </div>
-            <p className="text-xs font-mono text-slate-500 max-w-sm mt-4 md:mt-0">
-              WHAT WE ARCHITECT, ENGINEER, AND SCALE DAILY ACROSS PLATFORMS.
+            <p className="text-xs font-mono text-slate-400 max-w-xs mt-4 md:mt-0">
+              HOVER TO INSPECT DETAILED CAPABILITY SCOPE AND DELIVERY MATRICES.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            
+            {/* Discipline 1 */}
+            <div 
+              onMouseEnter={() => onHover('ADS')}
+              onMouseLeave={onLeave}
+              className="p-8 sm:p-12 rounded-3xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-[#00f2fe]/40 transition-all cursor-pointer group"
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="flex items-start gap-6">
+                  <span className="text-xs font-mono text-[#00f2fe] pt-1">01</span>
+                  <div>
+                    <h3 className="text-3xl sm:text-5xl font-extrabold text-white group-hover:text-[#00f2fe] transition-colors">
+                      Performance Marketing & Media
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-400 font-light mt-2 max-w-2xl">
+                      Laser-targeted paid media acquisition across Meta, Google PMax, TikTok, and YouTube Ads. Built with server-side CAPI event matching and predictive customer LTV modeling.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Meta CAPI</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Google Ads</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">TikTok Growth</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-[#00f2fe]/10 text-[#00f2fe] border border-[#00f2fe]/30 font-semibold">
+                    ROAS Scaling →
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Discipline 2 */}
+            <div 
+              onMouseEnter={() => onHover('CODE')}
+              onMouseLeave={onLeave}
+              className="p-8 sm:p-12 rounded-3xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-indigo-400/40 transition-all cursor-pointer group"
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="flex items-start gap-6">
+                  <span className="text-xs font-mono text-indigo-400 pt-1">02</span>
+                  <div>
+                    <h3 className="text-3xl sm:text-5xl font-extrabold text-white group-hover:text-indigo-300 transition-colors">
+                      Full-Stack Web Engineering
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-400 font-light mt-2 max-w-2xl">
+                      Ultra-fast web platforms built with Next.js, React, Tailwind, and Three.js WebGL. Designed for 100/100 Core Web Vitals, headless CMS autonomy, and frictionless checkout funnels.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Next.js & React</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Three.js 3D</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Headless Shopify</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-400/30 font-semibold">
+                    Sub-Second Build →
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Discipline 3 */}
+            <div 
+              onMouseEnter={() => onHover('MOBILE')}
+              onMouseLeave={onLeave}
+              className="p-8 sm:p-12 rounded-3xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-purple-400/40 transition-all cursor-pointer group"
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="flex items-start gap-6">
+                  <span className="text-xs font-mono text-purple-400 pt-1">03</span>
+                  <div>
+                    <h3 className="text-3xl sm:text-5xl font-extrabold text-white group-hover:text-purple-300 transition-colors">
+                      Cross-Platform Mobile Apps
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-400 font-light mt-2 max-w-2xl">
+                      Unified iOS and Android applications written with Flutter and React Native. Smooth 120Hz ProMotion micro-interactions, offline state synchronization, and biometric authorization.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Flutter & Dart</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Supabase Sync</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">In-App Subscriptions</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-purple-500/10 text-purple-300 border border-purple-400/30 font-semibold">
+                    App Store Approval →
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Discipline 4 */}
+            <div 
+              onMouseEnter={() => onHover('SEO')}
+              onMouseLeave={onLeave}
+              className="p-8 sm:p-12 rounded-3xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-emerald-400/40 transition-all cursor-pointer group"
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="flex items-start gap-6">
+                  <span className="text-xs font-mono text-emerald-400 pt-1">04</span>
+                  <div>
+                    <h3 className="text-3xl sm:text-5xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
+                      Brand Systems & Programmatic SEO
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-400 font-light mt-2 max-w-2xl">
+                      Distinctive visual design identities, motion graphics, and programmatic entity-graph SEO architectures engineered to dominate Google’s AI Search Generative Experience (SGE).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Design Systems</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Entity JSON-LD</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-slate-300">Topic Silos</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 font-semibold">
+                    Organic Moat →
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ACT 4: The AceSutra Lab (Cinematic R&D Showcase) */}
+        <section id="lab" className="py-36 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20">
+            <div>
+              <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ R&D & BLUEPRINTS // 04 ]</span>
+              <h2 className="text-5xl sm:text-7xl font-extrabold text-white mt-3">THE ACESUTRA LAB</h2>
+            </div>
+            <p className="text-xs font-mono text-slate-400 max-w-md mt-4 md:mt-0">
+              WE DON’T SHOW GENERIC MOCKUPS. WE SHOW PROPRIETARY ARCHITECTURES BUILT IN-HOUSE. CLICK TO INSPECT SYSTEM SCHEMAS.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-[#00f2fe]/40 transition-all group">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono text-slate-500">[ DISCIPLINE 01 ]</span>
-                <TrendingUp className="w-6 h-6 text-[#00f2fe] group-hover:scale-110 transition-transform" />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4">Performance Marketing & Media</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light">
-                Multi-platform paid customer acquisition. We construct hyper-targeted creative testing engines, server-side Conversion APIs (CAPI), and predictive lifetime-value funnels.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Meta Ads</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Google PMax</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">TikTok Media</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Server-Side Tracking</span>
-              </div>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-indigo-400/40 transition-all group">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono text-slate-500">[ DISCIPLINE 02 ]</span>
-                <Terminal className="w-6 h-6 text-indigo-400 group-hover:scale-110 transition-transform" />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4">High-Performance Web Platforms</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light">
-                Next.js web architectures engineered for sub-second speeds, flawless Core Web Vitals, headless CMS control, and conversion-focused customer journeys.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Next.js & React</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Three.js WebGL</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Headless CMS</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Edge Deployment</span>
-              </div>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-purple-400/40 transition-all group">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono text-slate-500">[ DISCIPLINE 03 ]</span>
-                <Smartphone className="w-6 h-6 text-purple-400 group-hover:scale-110 transition-transform" />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4">Cross-Platform Mobile Apps</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light">
-                Bespoke iOS and Android applications written with Flutter and React Native. Smooth 60FPS micro-interactions, offline state synchronization, and secure backend microservices.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Flutter & Dart</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">React Native</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Supabase & Firebase</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Store Subscriptions</span>
-              </div>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-emerald-400/40 transition-all group">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono text-slate-500">[ DISCIPLINE 04 ]</span>
-                <Compass className="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4">Programmatic SEO & Brand Systems</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light">
-                Topical authority clusters, semantic schema architectures, and distinctive visual identities that capture organic buyer intent and build lasting brand moat.
-              </p>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Semantic Keyword Graphs</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Schema.org JSON-LD</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Design Systems (Figma)</span>
-                <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Conversion Auditing</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* The Lab (R&D Concepts) */}
-        <section id="lab" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
-            <div>
-              <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ R&D & CONCEPTS // 03 ]</span>
-              <h2 className="text-4xl sm:text-6xl font-extrabold text-white mt-2">THE ACESUTRA LAB</h2>
-            </div>
-            <div className="text-xs font-mono text-slate-400 max-w-md mt-4 md:mt-0">
-              WE DON’T SHOW GENERIC MOCKUPS. WE SHOW LIVE ARCHITECTURAL PROTOTYPES DEVELOPED IN-HOUSE. CLICK TO INSPECT BLUEPRINTS.
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {Object.entries(CONCEPTS).map(([key, concept]) => (
+            {BLUEPRINTS.map(bp => (
               <div
-                key={key}
-                onClick={() => { setActiveConcept(key); playSound('click'); }}
-                onMouseEnter={() => handleInteractiveHover('INSPECT')}
-                onMouseLeave={handleInteractiveLeave}
-                className="p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-[#00f2fe]/50 cursor-pointer group transition-all"
+                key={bp.id}
+                onClick={() => {
+                  setActiveBlueprint(bp);
+                  triggerAudio('click');
+                }}
+                onMouseEnter={() => onHover('INSPECT')}
+                onMouseLeave={onLeave}
+                className="p-8 sm:p-10 rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 hover:border-[#00f2fe]/60 transition-all cursor-pointer group flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between text-xs font-mono text-[#00f2fe] mb-4">
-                  <span>[ SYSTEM // R&D ]</span>
-                  <span className="px-2 py-0.5 rounded bg-[#00f2fe]/10 border border-[#00f2fe]/30">CLICK TO INSPECT</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 group-hover:text-[#00f2fe] transition-colors">
-                  {concept.title}
-                </h3>
-                <p className="text-xs font-mono text-slate-400 mb-6">{concept.subtitle}</p>
-                <div className="p-5 rounded-2xl bg-black/60 border border-white/5 flex flex-col justify-between">
-                  <p className="text-xs text-slate-300 font-light leading-relaxed mb-4">{concept.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {concept.stack.map((s, idx) => (
-                      <span key={idx} className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/5 text-[#00f2fe] border border-white/5">
-                        {s}
-                      </span>
-                    ))}
+                <div>
+                  <div className="flex items-center justify-between text-xs font-mono text-[#00f2fe] mb-4">
+                    <span>[ SYSTEM // {bp.num} ]</span>
+                    <span className="flex items-center gap-1 text-[11px] px-2.5 py-0.5 rounded-full bg-[#00f2fe]/10 border border-[#00f2fe]/30">
+                      INSPECT BLUEPRINT <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
+
+                  <h3 className="text-2xl sm:text-4xl font-extrabold text-white group-hover:text-[#00f2fe] transition-colors mb-2">
+                    {bp.title}
+                  </h3>
+                  <p className="text-xs font-mono text-slate-400 mb-6">{bp.tagline}</p>
+                  <p className="text-sm text-slate-300 font-light leading-relaxed mb-6">
+                    {bp.summary}
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+                  <span className="text-emerald-400">{bp.metrics}</span>
+                  <span className="text-slate-500">{bp.techStack.slice(0, 3).join(' • ')}</span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Founding Cohort Advantage */}
-        <section id="founding" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
-          <div className="p-8 sm:p-14 rounded-3xl border border-[#00f2fe]/30 bg-gradient-to-br from-cyan-950/20 via-black to-slate-950">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00f2fe]/10 border border-[#00f2fe]/40 text-[#00f2fe] text-xs font-mono mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00f2fe] animate-ping"></span>
-              <span>LIMITED COHORT: ACCEPTING 4 FOUNDING CLIENTS FOR 2026</span>
+        {/* ACT 5: The Founding Partner Advantage */}
+        <section className="py-36 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10">
+          <div className="p-8 sm:p-16 rounded-3xl border border-[#00f2fe]/30 bg-gradient-to-br from-[#00f2fe]/[0.05] via-black to-slate-950 backdrop-blur-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00f2fe]/10 border border-[#00f2fe]/40 text-[#00f2fe] text-xs font-mono mb-6">
+              <span className="w-2 h-2 rounded-full bg-[#00f2fe] animate-ping"></span>
+              <span>EXCLUSIVE COHORT: ACCEPTING 4 FOUNDING CLIENTS FOR 2026</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+            <h2 className="text-4xl sm:text-6xl font-extrabold text-white mb-6 leading-tight">
               THE FOUNDING PARTNER ADVANTAGE
             </h2>
 
-            <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed mb-10 max-w-3xl">
-              Because AceSutra is intentionally selective and launching our flagship roster, we don't have bureaucratic layers, junior handoffs, or 20 other client distractions. <strong className="text-white">Your brand becomes our marquee case study.</strong> That means an unreasonable level of care, obsessive speed, and founder dedication.
+            <p className="text-slate-300 text-lg sm:text-xl font-light leading-relaxed max-w-3xl mb-12">
+              Because AceSutra is selective and establishing its marquee flagship roster, we don't have junior account managers learning on your dime. <strong className="text-white">Your brand becomes our flagship case study.</strong> That means an extreme level of attention, obsessive engineering speed, and direct founder leadership.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="font-mono text-[#00f2fe] text-xs mb-2">01 // DIRECT FOUNDER ACCESS</div>
-                <div className="font-bold text-white text-lg mb-2">Zero Agency Middlemen</div>
-                <p className="text-slate-400 text-xs leading-relaxed font-light">
-                  You collaborate directly with principal engineers and performance marketers in a shared Slack channel. Zero account managers playing telephone.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10">
+                <div className="text-xs font-mono text-[#00f2fe] mb-2">01 // ZERO MIDDLEMEN</div>
+                <div className="text-xl font-bold text-white mb-2">Founder-Only Execution</div>
+                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                  You collaborate directly with principal software architects and growth strategists in a shared private Slack. No juniors playing telephone.
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="font-mono text-[#00f2fe] text-xs mb-2">02 // 100% SKIN IN THE GAME</div>
-                <div className="font-bold text-white text-lg mb-2">Flagship Case Study Drive</div>
-                <p className="text-slate-400 text-xs leading-relaxed font-light">
-                  We have everything to prove. We treat your campaign and software as if our reputation depends on it—because it literally does.
+              <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10">
+                <div className="text-xs font-mono text-[#00f2fe] mb-2">02 // MAXIMUM SKIN IN GAME</div>
+                <div className="text-xl font-bold text-white mb-2">Flagship Case Study Drive</div>
+                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                  We have everything to prove. We treat your ad campaigns and web architecture as if our studio reputation depends on it—because it literally does.
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="font-mono text-[#00f2fe] text-xs mb-2">03 // PREFERENTIAL LAUNCH RATES</div>
-                <div className="font-bold text-white text-lg mb-2">Founding Cohort Economics</div>
-                <p className="text-slate-400 text-xs leading-relaxed font-light">
-                  Founding partners receive preferential pilot terms and grandfathered retainer rates that will never be offered again once the cohort closes.
+              <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10">
+                <div className="text-xs font-mono text-[#00f2fe] mb-2">03 // PREFERENTIAL ECONOMICS</div>
+                <div className="text-xl font-bold text-white mb-2">Grandfathered Founding Rates</div>
+                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                  Founding partners receive preferential pilot pricing and retainer rates that will never be offered again once the 4 cohort slots are filled.
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a
-                href="#apply"
-                onMouseEnter={() => handleInteractiveHover('CLAIM SPOT')}
-                onMouseLeave={handleInteractiveLeave}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#00f2fe] transition-all text-center"
+                href="#contact"
+                onMouseEnter={() => onHover('APPLY')}
+                onMouseLeave={onLeave}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#00f2fe] transition-all text-center cursor-pointer shadow-xl"
               >
-                Apply for Founding Partner Spot →
+                Apply for Founding Partner Slot →
               </a>
-              <span className="text-xs font-mono text-slate-500">Only 4 slots available for the current sprint cycle.</span>
+              <span className="text-xs font-mono text-slate-500">Applications reviewed within 24 hours under mutual NDA.</span>
             </div>
           </div>
         </section>
 
-        {/* Scope Configurator */}
-        <section id="estimator" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
+        {/* ACT 6: Interactive Scope Configurator */}
+        <section id="estimator" className="py-36 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ ESTIMATOR // 04 ]</span>
+            <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ CONFIGURATOR // 05 ]</span>
             <h2 className="text-4xl sm:text-6xl font-extrabold text-white mt-2 mb-4">SYSTEM SCOPE CALCULATOR</h2>
             <p className="text-slate-400 text-sm font-light">
-              Configure your bespoke digital stack. Real-time scope, turnaround estimate, and investment calculation.
+              Assemble your bespoke digital stack. Real-time scope, turnaround estimate, and investment calculation.
             </p>
           </div>
 
-          <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 max-w-5xl mx-auto">
+          <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-7 space-y-4">
-                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Select Systems Required:</div>
+              
+              <div className="lg:col-span-7 space-y-3.5">
+                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Configure Disciplines:</div>
 
                 <label className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00f2fe]/40 cursor-pointer transition-colors">
                   <div className="flex items-center gap-3">
@@ -954,11 +892,11 @@ export const App: React.FC = () => {
                       className="rounded text-[#00f2fe] focus:ring-0 bg-slate-900 border-white/20"
                     />
                     <div>
-                      <div className="text-sm font-bold text-white">Performance Media Buying (Meta + Google)</div>
-                      <div className="text-xs text-slate-500 font-mono">Full-funnel ads, creative testing, CAPI tracking</div>
+                      <div className="text-sm font-bold text-white">Performance Media Buying (Meta & Google Ads)</div>
+                      <div className="text-xs text-slate-500 font-mono">Full-funnel ads, CAPI server-side event tracking, daily optimization</div>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-[#00f2fe]">+$2,000/mo</span>
+                  <span className="text-xs font-mono text-[#00f2fe]">+$2,200/mo</span>
                 </label>
 
                 <label className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00f2fe]/40 cursor-pointer transition-colors">
@@ -974,7 +912,7 @@ export const App: React.FC = () => {
                       <div className="text-xs text-slate-500 font-mono">Sub-second load times, headless CMS, modern animations</div>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-[#00f2fe]">+$3,500</span>
+                  <span className="text-xs font-mono text-[#00f2fe]">+$3,800</span>
                 </label>
 
                 <label className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00f2fe]/40 cursor-pointer transition-colors">
@@ -990,7 +928,7 @@ export const App: React.FC = () => {
                       <div className="text-xs text-slate-500 font-mono">Flutter architecture, Supabase sync, App Store submission</div>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-[#00f2fe]">+$5,500</span>
+                  <span className="text-xs font-mono text-[#00f2fe]">+$5,800</span>
                 </label>
 
                 <label className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00f2fe]/40 cursor-pointer transition-colors">
@@ -1002,11 +940,11 @@ export const App: React.FC = () => {
                       className="rounded text-[#00f2fe] focus:ring-0 bg-slate-900 border-white/20"
                     />
                     <div>
-                      <div className="text-sm font-bold text-white">Topical SEO & Knowledge Graph Pipeline</div>
+                      <div className="text-sm font-bold text-white">Programmatic SEO Knowledge Graph Pipeline</div>
                       <div className="text-xs text-slate-500 font-mono">High-intent search rankings, schema validation</div>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-[#00f2fe]">+$1,400/mo</span>
+                  <span className="text-xs font-mono text-[#00f2fe]">+$1,500/mo</span>
                 </label>
 
                 <label className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00f2fe]/40 cursor-pointer transition-colors">
@@ -1018,18 +956,18 @@ export const App: React.FC = () => {
                       className="rounded text-[#00f2fe] focus:ring-0 bg-slate-900 border-white/20"
                     />
                     <div>
-                      <div className="text-sm font-bold text-white">Brand System & High-Converting Creatives</div>
+                      <div className="text-sm font-bold text-white">Brand System & High-Converting Motion Creatives</div>
                       <div className="text-xs text-slate-500 font-mono">Figma design system, video ads, motion assets</div>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-[#00f2fe]">+$1,800</span>
+                  <span className="text-xs font-mono text-[#00f2fe]">+$1,900</span>
                 </label>
 
                 <div className="pt-2">
-                  <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Execution Velocity:</label>
+                  <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Delivery Cadence:</label>
                   <select
-                    value={speedMultiplier}
-                    onChange={e => setSpeedMultiplier(e.target.value as 'standard' | 'rush')}
+                    value={sprintVelocity}
+                    onChange={e => setSprintVelocity(e.target.value as 'standard' | 'rush')}
                     className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-[#00f2fe]"
                   >
                     <option value="standard">Standard Engineering Cadence (4-6 Weeks)</option>
@@ -1043,42 +981,44 @@ export const App: React.FC = () => {
                 <div>
                   <div className="text-xs font-mono text-slate-500 uppercase tracking-widest mb-1">[ ESTIMATED INVESTMENT ]</div>
                   <div className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
-                    {calcBase === 0 && calcMonthly === 0
-                      ? 'SELECT SPECIFICATIONS'
-                      : `$${calcBase.toLocaleString()} SETUP ${calcMonthly > 0 ? `+ $${calcMonthly.toLocaleString()}/MO` : ''}`}
+                    {scopeDetails.setup === 0 && scopeDetails.monthly === 0
+                      ? 'SELECT DISCIPLINES'
+                      : `$${scopeDetails.setup.toLocaleString()} SETUP ${scopeDetails.monthly > 0 ? `+ $${scopeDetails.monthly.toLocaleString()}/MO` : ''}`}
                   </div>
                   <div className="text-xs font-mono text-[#00f2fe] bg-white/[0.03] p-3 rounded-lg border border-white/5 leading-relaxed mb-6">
-                    {calcNames.length > 0 ? `${calcNames.length} Systems Configured: ${calcNames.join(', ')}` : 'Select at least 1 system'}
+                    {scopeDetails.items.length > 0 ? `${scopeDetails.items.length} Disciplines Configured: ${scopeDetails.items.join(', ')}` : 'Select at least 1 discipline'}
                   </div>
                   <p className="text-[11px] text-slate-400 font-light leading-relaxed mb-6">
-                    Transparent scope without hidden agency overhead. Founding clients receive priority execution and direct access to founders.
+                    Transparent, contract-free terms. Founding clients receive direct access to founders and dedicated squad velocity.
                   </p>
                 </div>
 
                 <button
                   type="button"
-                  onClick={handleTransferToApplication}
-                  className="w-full py-4 rounded-xl bg-[#00f2fe] hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider transition-all"
+                  onClick={handleApplyScope}
+                  className="w-full py-4 rounded-xl bg-[#00f2fe] hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-[#00f2fe]/20"
                 >
                   Transfer Specs to Application ↓
                 </button>
               </div>
+
             </div>
           </div>
         </section>
 
-        {/* Founding Application Terminal */}
-        <section id="apply" className="py-24 px-6 sm:px-12 max-w-4xl mx-auto border-t border-white/5">
-          <div className="text-center mb-12">
-            <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ INITIALIZE // 05 ]</span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mt-2 mb-3">APPLY FOR FOUNDING PARTNER COHORT</h2>
+        {/* ACT 7: Founding Application Terminal */}
+        <section id="contact" className="py-36 px-6 sm:px-12 max-w-4xl mx-auto border-t border-white/10">
+          <div className="text-center mb-16">
+            <span className="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">[ INITIALIZE // 06 ]</span>
+            <h2 className="text-4xl sm:text-6xl font-extrabold text-white mt-2 mb-3">START A CONVERSATION</h2>
             <p className="text-xs font-mono text-slate-400">
-              WE REVIEW EACH INQUIRY PERSONALLY. RESPONSE WITHIN 24 HOURS GUARANTEED.
+              WE REVIEW EACH BRIEF DIRECTLY. EXPECT A FOUNDER REPLY WITHIN 24 HOURS.
             </p>
           </div>
 
-          <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-2xl relative">
-            <form onSubmit={handleFormSubmit} className="space-y-6">
+          <div className="p-8 sm:p-14 rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 shadow-2xl relative">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-mono uppercase text-slate-400 mb-2">Founder / Name *</label>
@@ -1110,36 +1050,36 @@ export const App: React.FC = () => {
                   <label className="block text-xs font-mono uppercase text-slate-400 mb-2">Company / Project URL</label>
                   <input
                     type="text"
-                    value={applicantCompany}
-                    onChange={e => setApplicantCompany(e.target.value)}
+                    value={applicantUrl}
+                    onChange={e => setApplicantUrl(e.target.value)}
                     placeholder="acme.ai or domain.com"
                     className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00f2fe] transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-slate-400 mb-2">Budget Allocation Tier</label>
+                  <label className="block text-xs font-mono uppercase text-slate-400 mb-2">Budget Tier</label>
                   <select
-                    value={applicantBudget}
-                    onChange={e => setApplicantBudget(e.target.value)}
+                    value={applicantTier}
+                    onChange={e => setApplicantTier(e.target.value)}
                     className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-[#00f2fe] transition-colors"
                   >
-                    <option value="3k-6k">$3,000 - $6,000 (Pilot Sprint)</option>
-                    <option value="6k-12k">$6,000 - $12,000 (Full-Stack Engine)</option>
-                    <option value="12k-25k">$12,000 - $25,000 (Omnichannel Scale)</option>
-                    <option value="25k+">$25,000+ (Enterprise Squad)</option>
+                    <option value="pilot">$3,000 - $6,000 (Targeted Pilot Sprint)</option>
+                    <option value="full">$6,000 - $14,000 (Full-Stack Engine)</option>
+                    <option value="omni">$14,000 - $25,000 (Omnichannel Scale)</option>
+                    <option value="enterprise">$25,000+ (Dedicated Squad)</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase text-slate-400 mb-2">Project Vision & Primary Objectives *</label>
+                <label className="block text-xs font-mono uppercase text-slate-400 mb-2">Project Vision & Desired Outcomes *</label>
                 <textarea
                   rows={4}
                   required
-                  value={applicantVision}
-                  onChange={e => setApplicantVision(e.target.value)}
-                  placeholder="Describe your product, current acquisition bottleneck, target launch date, and desired outcome..."
+                  value={applicantBrief}
+                  onChange={e => setApplicantBrief(e.target.value)}
+                  placeholder="Describe your current bottleneck, target launch date, and desired outcome..."
                   className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00f2fe] transition-colors"
                 />
               </div>
@@ -1153,7 +1093,7 @@ export const App: React.FC = () => {
                   <span>TRANSMITTING SPECIFICATIONS...</span>
                 ) : (
                   <>
-                    <span>Transmit Application to Founders</span>
+                    <span>Transmit Brief to Founders</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}
@@ -1162,7 +1102,7 @@ export const App: React.FC = () => {
               <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-2 border-t border-white/5">
                 <span>// STRICT NDA BY DEFAULT</span>
                 <span>// ZERO JUNIORS</span>
-                <span>// DIRECT TELEGRAM / SLACK INTEGRATION</span>
+                <span>// DIRECT FOUNDER SLACK INTEGRATION</span>
               </div>
             </form>
           </div>
@@ -1170,24 +1110,35 @@ export const App: React.FC = () => {
 
       </main>
 
-      {/* Concept Inspection Modal */}
-      {activeConcept && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-          <div className="p-8 rounded-3xl max-w-2xl w-full bg-slate-900 border border-[#00f2fe]/40 relative shadow-2xl">
+      {/* Blueprint Inspection Modal */}
+      {activeBlueprint && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-xl p-4">
+          <div className="p-8 sm:p-10 rounded-3xl max-w-2xl w-full bg-slate-900 border border-[#00f2fe]/40 relative shadow-2xl">
             <button
-              onClick={() => setActiveConcept(null)}
+              onClick={() => setActiveBlueprint(null)}
               className="absolute top-6 right-6 text-slate-400 hover:text-white font-mono text-xs p-2 flex items-center gap-1 cursor-pointer"
             >
               <X className="w-4 h-4" /> [ ESC // CLOSE ]
             </button>
-            <div className="text-[10px] font-mono text-[#00f2fe] uppercase tracking-widest mb-2">[ ARCHITECTURAL BLUEPRINT ]</div>
-            <h3 className="text-3xl font-bold text-white mb-2">{CONCEPTS[activeConcept]?.title}</h3>
-            <p className="text-xs font-mono text-slate-400 mb-6">{CONCEPTS[activeConcept]?.subtitle}</p>
-            <p className="text-sm text-slate-300 leading-relaxed font-light mb-8">{CONCEPTS[activeConcept]?.desc}</p>
+            
+            <div className="text-[10px] font-mono text-[#00f2fe] uppercase tracking-widest mb-2">[ ARCHITECTURAL BLUEPRINT // {activeBlueprint.num} ]</div>
+            <h3 className="text-3xl font-extrabold text-white mb-2">{activeBlueprint.title}</h3>
+            <p className="text-xs font-mono text-slate-400 mb-6">{activeBlueprint.tagline}</p>
+            <p className="text-sm text-slate-300 leading-relaxed font-light mb-8">{activeBlueprint.summary}</p>
+            
+            <div className="mb-6">
+              <div className="text-[10px] font-mono uppercase text-slate-400 mb-2">Core Architectural Specifications:</div>
+              <ul className="text-xs text-slate-300 font-mono space-y-1.5 list-disc list-inside">
+                {activeBlueprint.specs.map((sp, idx) => (
+                  <li key={idx}>{sp}</li>
+                ))}
+              </ul>
+            </div>
+
             <div className="border-t border-white/10 pt-6">
-              <div className="text-[10px] font-mono uppercase text-slate-400 mb-3">Core Technology Stack:</div>
+              <div className="text-[10px] font-mono uppercase text-slate-400 mb-3">Verified Technology Stack:</div>
               <div className="flex flex-wrap gap-2">
-                {CONCEPTS[activeConcept]?.stack.map((s, idx) => (
+                {activeBlueprint.techStack.map((s, idx) => (
                   <span key={idx} className="px-3 py-1 rounded-full text-xs font-mono bg-white/10 text-[#00f2fe] border border-white/10">
                     {s}
                   </span>
@@ -1198,17 +1149,17 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Success Modal */}
+      {/* Submission Success Modal */}
       {isSubmitted && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
           <div className="p-8 rounded-3xl max-w-md w-full bg-slate-900 border border-[#00f2fe] text-center shadow-2xl relative">
             <div className="w-12 h-12 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center mx-auto mb-4 border border-[#00f2fe]/50">
               <Check className="w-6 h-6" />
             </div>
             <div className="text-[10px] font-mono text-[#00f2fe] uppercase tracking-widest mb-1">[ TRANSMISSION CONFIRMED ]</div>
-            <h3 className="text-2xl font-bold text-white mb-3">Application Logged</h3>
+            <h3 className="text-2xl font-bold text-white mb-3">Brief Logged</h3>
             <p className="text-xs font-mono text-slate-300 leading-relaxed mb-6">
-              Thank you for applying to the <span className="text-[#00f2fe]">AceSutra Founding Cohort</span>. A founder will review your architecture requirements and reach out within 24 hours.
+              Thank you for applying to the <span className="text-[#00f2fe]">AceSutra Founding Cohort</span>. A founder will review your project brief and reply within 24 hours.
             </p>
             <button
               onClick={() => setIsSubmitted(false)}
@@ -1220,18 +1171,17 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Avant-Garde Studio Footer */}
+      {/* Avant-Garde Minimalist Footer */}
       <footer className="border-t border-white/10 py-16 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12">
           <div>
-            <div className="text-2xl font-bold text-white tracking-tight">Ace<span className="text-[#00f2fe]">Sutra</span></div>
-            <div className="text-xs font-mono text-slate-500 mt-1">THE FORMULA FOR UNFAIR DIGITAL GROWTH.</div>
+            <div className="text-3xl font-extrabold text-white tracking-tight">Ace<span className="text-[#00f2fe]">Sutra</span></div>
+            <div className="text-xs font-mono text-slate-500 mt-1">THE FORMULA FOR UNFAIR DIGITAL ADVANTAGE.</div>
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-xs font-mono text-slate-400">
             <a href="#disciplines" className="hover:text-[#00f2fe] transition-colors">CAPABILITIES</a>
             <a href="#lab" className="hover:text-[#00f2fe] transition-colors">THE LAB</a>
-            <a href="#founding" className="hover:text-[#00f2fe] transition-colors">FOUNDING COHORT</a>
             <a href="#estimator" className="hover:text-[#00f2fe] transition-colors">SCOPE CALCULATOR</a>
             <a href="mailto:founders@acesutra.com" className="text-[#00f2fe] hover:underline">FOUNDERS@ACESUTRA.COM</a>
           </div>
@@ -1240,9 +1190,9 @@ export const App: React.FC = () => {
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-600 gap-4">
           <div>© 2026 ACESUTRA STUDIO. ALL RIGHTS RESERVED.</div>
           <div className="flex items-center gap-4">
-            <span>BUILT WITH THREE.JS & TAILWIND</span>
+            <span>VOLUMETRIC KINETIC SILK 3D</span>
             <span>•</span>
-            <span>ZERO JUNIORS</span>
+            <span>100% PRINCIPAL-LED</span>
           </div>
         </div>
       </footer>
