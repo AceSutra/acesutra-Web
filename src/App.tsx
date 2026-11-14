@@ -83,7 +83,7 @@ const playSound = (type: 'click' | 'pop' | 'chime' | 'toggle' | 'whoosh' = 'clic
       osc.type = 'sine';
       osc.frequency.setValueAtTime(150, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.25);
-      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
       osc.start();
       osc.stop(ctx.currentTime + 0.25);
@@ -166,6 +166,51 @@ const Butterfly: React.FC<{ className?: string; style?: React.CSSProperties }> =
     </svg>
   </div>
 );
+
+// Night Sky StarField Component (Appears when day turns to night)
+const StarField: React.FC<{ opacity?: number }> = ({ opacity = 1 }) => {
+  const stars = [
+    { x: 12, y: 15, size: 2, delay: '0s' },
+    { x: 28, y: 35, size: 1.5, delay: '0.4s' },
+    { x: 45, y: 18, size: 2.5, delay: '0.8s' },
+    { x: 62, y: 28, size: 1.5, delay: '1.2s' },
+    { x: 78, y: 12, size: 2, delay: '0.2s' },
+    { x: 88, y: 42, size: 3, delay: '0.6s' },
+    { x: 15, y: 65, size: 2, delay: '1.4s' },
+    { x: 32, y: 80, size: 2.5, delay: '0.9s' },
+    { x: 55, y: 72, size: 1.5, delay: '0.3s' },
+    { x: 70, y: 85, size: 2, delay: '1.1s' },
+    { x: 85, y: 68, size: 2.5, delay: '0.7s' },
+    { x: 92, y: 88, size: 1.5, delay: '1.5s' },
+    { x: 8, y: 40, size: 2, delay: '0.5s' },
+    { x: 22, y: 10, size: 1.5, delay: '1.3s' },
+    { x: 38, y: 50, size: 3, delay: '0.1s' },
+    { x: 50, y: 30, size: 2, delay: '1.0s' },
+    { x: 68, y: 55, size: 2, delay: '0.4s' },
+    { x: 82, y: 25, size: 1.5, delay: '1.2s' },
+    { x: 96, y: 18, size: 2.5, delay: '0.8s' },
+    { x: 48, y: 92, size: 2, delay: '0.6s' }
+  ];
+
+  return (
+    <div className="absolute inset-0 pointer-events-none transition-opacity duration-500 overflow-hidden" style={{ opacity }}>
+      {stars.map((s, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-amber-100 shadow-[0_0_8px_#fef08a] animate-pulse"
+          style={{
+            top: `${s.y}%`,
+            left: `${s.x}%`,
+            width: `${s.size}px`,
+            height: `${s.size}px`,
+            animationDelay: s.delay,
+            animationDuration: '2s'
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 // Classical Renaissance Winged Pegasus & Rider Component (with Smooth Floating Soar Animation)
 const ClassicalPegasus: React.FC<{ className?: string }> = ({ className = "" }) => (
@@ -304,125 +349,169 @@ const BaroqueFrame: React.FC<{ children: React.ReactNode; className?: string }> 
   </div>
 );
 
-// THE EXACT WIRO-STYLE CHAOTIC MARKETING OFFICE INTRO (PINNED DEAD CENTER & ZOOMS SYMMETRICALLY)
-// Features the high-res office, burning monitors, girl sipping coffee, PUNE pillar, and live moving Pegasus sky inside the door.
+// THE EXACT WIRO-STYLE CHAOTIC MARKETING OFFICE INTRO OVERLAY
+// Pinned fixed to screen center. Features:
+// 1. Symmetrical center-zoom (window NEVER moves upward)
+// 2. Girl sitting at desk calmly sipping coffee with Pune pillar and fire
+// 3. DAY BECOMES NIGHT & CLOUDS TURN TO STARS as you zoom
 interface AgencyChaosIntroProps {
-  scrollProgress: number;
+  progress: number;
   onSkip: () => void;
   onSoundPlay: () => void;
 }
 
-const AgencyChaosIntro: React.FC<AgencyChaosIntroProps> = ({ scrollProgress, onSkip, onSoundPlay }) => {
-  // Ultra-precise symmetrical zoom centered directly on the green door (50% 48%)
-  const zoomScale = 1 + Math.pow(scrollProgress, 1.6) * 6.8;
-  const stageOpacity = scrollProgress > 0.85 ? Math.max(0, (1 - scrollProgress) * 6.6) : 1;
+const AgencyChaosIntro: React.FC<AgencyChaosIntroProps> = ({ progress, onSkip, onSoundPlay }) => {
+  // Symmetrical zoom centered strictly on the door (50% 50%)
+  const zoomScale = 1 + Math.pow(progress, 1.7) * 9.5;
+  const officeOpacity = Math.max(0, 1 - progress * 1.4);
+
+  // Day to Night Sky Transition Calculation
+  // 0.0 -> Daytime cyan rgb(56, 189, 248)
+  // 0.4 -> Twilight indigo rgb(30, 27, 75)
+  // 0.8+ -> Midnight black rgb(7, 10, 18)
+  let skyBg = 'rgb(56, 189, 248)';
+  if (progress < 0.4) {
+    const t = progress / 0.4;
+    const r = Math.round(56 + (30 - 56) * t);
+    const g = Math.round(189 + (27 - 189) * t);
+    const b = Math.round(248 + (75 - 248) * t);
+    skyBg = `rgb(${r}, ${g}, ${b})`;
+  } else {
+    const t = Math.min(1, (progress - 0.4) / 0.45);
+    const r = Math.round(30 + (7 - 30) * t);
+    const g = Math.round(27 + (10 - 27) * t);
+    const b = Math.round(75 + (18 - 75) * t);
+    skyBg = `rgb(${r}, ${g}, ${b})`;
+  }
+
+  const cloudOpacity = Math.max(0, 1 - progress * 2.2);
+  const starOpacity = Math.min(1, Math.max(0, (progress - 0.25) * 1.9));
 
   return (
-    <div className="relative w-full h-[220vh] overflow-visible z-20">
-      {/* Pinned Viewport Container (STAYS RIGIDLY CENTERED, NEVER SCROLLS UPWARD) */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#070b13] select-none">
+    <div className="fixed inset-0 z-50 overflow-hidden flex items-center justify-center select-none bg-[#070b13]">
 
-        {/* Serene Sky & Fresco Backdrop (Revealed as the door expands past screen borders) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#38bdf8] via-[#7dd3fc] to-[#bae6fd] opacity-90 pointer-events-none" />
+      {/* BACKGROUND SKY LAYER: DAY TO NIGHT TRANSITION */}
+      <div
+        className="absolute inset-0 transition-colors duration-200 pointer-events-none"
+        style={{ backgroundColor: skyBg }}
+      >
+        {/* StarField revealed as day turns to night */}
+        <StarField opacity={starOpacity} />
+      </div>
 
-        {/* THE MAIN ZOOM STAGE (Centers on the door at 50% 48% and scales symmetrically) */}
+      {/* THE MAIN ZOOM STAGE (Pinned dead center at 50% 50%, zooms symmetrically) */}
+      <div
+        className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none will-change-transform"
+        style={{
+          transform: `scale(${zoomScale})`,
+          transformOrigin: '50% 50%'
+        }}
+      >
+        {/* 16:9 Photorealistic Office Banner with Girl Sipping Coffee, Burning Desks & Pune Pillar */}
         <div
-          className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none will-change-transform"
-          style={{
-            transform: `scale(${zoomScale})`,
-            transformOrigin: '50% 48%',
-            opacity: stageOpacity
-          }}
+          className="relative w-full h-full max-w-[1920px] flex items-center justify-center transition-opacity duration-150"
+          style={{ opacity: officeOpacity }}
         >
-          {/* HIGH-RES PHOTOREALISTIC CHAOTIC OFFICE BANNER */}
-          <div className="relative w-full h-full max-w-[1920px] flex items-center justify-center">
-            <img
-              src={imgOfficeChaos}
-              alt="Marketing Agency Chaos - Pune"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/agency_chaos_pune_opt.jpg';
-              }}
-              className="w-full h-full object-cover select-none pointer-events-auto"
+          <img
+            src={imgOfficeChaos}
+            alt="Agency Chaos - Pune"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/agency_chaos_pune_opt.jpg';
+            }}
+            className="w-full h-full object-cover pointer-events-auto"
+          />
+
+          {/* DYNAMIC WINDOW PORTAL OVERLAY IN THE DOOR PANES */}
+          {/* Aligned directly with the door's glass panes */}
+          <div
+            className="absolute pointer-events-none overflow-hidden"
+            style={{
+              top: '17%',
+              left: '42.6%',
+              width: '14.8%',
+              height: '47.6%',
+              borderRadius: '4px'
+            }}
+          >
+            {/* Dynamic Sky Color inside Door */}
+            <div
+              className="absolute inset-0 transition-colors duration-200"
+              style={{ backgroundColor: skyBg }}
             />
 
-            {/* LIVE MOVING ANIMATION OVERLAY INSIDE THE GREEN DOOR'S GLASS PANES */}
-            {/* Creates the real floating clouds and soaring Pegasus requested by the user */}
+            {/* Stars inside window as night arrives */}
+            <StarField opacity={starOpacity} />
+
+            {/* Pegasus Soaring */}
+            <div className="absolute inset-0 flex items-center justify-center p-2 transform -translate-y-2">
+              <ClassicalPegasus className="w-full max-w-[190px] animate-pulse" />
+            </div>
+
+            {/* Clouds that Dissolve into Stars as you zoom */}
             <div
-              className="absolute pointer-events-none overflow-hidden"
-              style={{
-                top: '17%',
-                left: '42.6%',
-                width: '14.8%',
-                height: '47.6%',
-                borderRadius: '4px'
-              }}
+              className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+              style={{ opacity: cloudOpacity }}
             >
-              {/* Daytime Sky Base */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#38bdf8] via-[#7dd3fc] to-[#bae6fd] opacity-80" />
-
-              {/* Moving Live Classical Pegasus */}
-              <div className="absolute inset-0 flex items-center justify-center p-2 transform -translate-y-2">
-                <ClassicalPegasus className="w-full max-w-[190px] animate-pulse" />
-              </div>
-
-              {/* Live Drifting Clouds */}
               <div className="absolute top-2 left-1 px-2 py-0.5 bg-white/90 rounded-full shadow-sm text-[8px] font-serif font-black text-sky-900 border border-white">
                 ☁️ Clarity
               </div>
               <div className="absolute top-8 right-1 px-2 py-0.5 bg-white/90 rounded-full shadow-sm text-[8px] font-serif font-black text-sky-900 border border-white">
                 ☁️ Pune OS
               </div>
-
-              {/* Crossbar Glass Panes Mullion Overlay */}
-              <div className="absolute inset-0 flex pointer-events-none">
-                <div className="w-1 h-full bg-[#1b3d2b] mx-auto opacity-70" />
-              </div>
-              <div className="absolute inset-0 flex flex-col pointer-events-none">
-                <div className="h-1 w-full bg-[#1b3d2b] my-auto opacity-70" />
-              </div>
             </div>
 
-            {/* INTERACTIVE SKIP INTRO BUTTON (Mounted right above the green door) */}
-            <div
-              className="absolute z-50 pointer-events-auto cursor-pointer"
-              style={{ top: '6.5%', left: '50%', transform: 'translateX(-50%)' }}
+            {/* Mullions Crossbars */}
+            <div className="absolute inset-0 flex pointer-events-none">
+              <div className="w-1 h-full bg-[#1b3d2b] mx-auto opacity-70" />
+            </div>
+            <div className="absolute inset-0 flex flex-col pointer-events-none">
+              <div className="h-1 w-full bg-[#1b3d2b] my-auto opacity-70" />
+            </div>
+          </div>
+
+          {/* INTERACTIVE SKIP INTRO BUTTON (Mounted on the door frame) */}
+          <div
+            className="absolute z-50 pointer-events-auto cursor-pointer"
+            style={{ top: '6.5%', left: '50%', transform: 'translateX(-50%)' }}
+          >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onSoundPlay();
+                onSkip();
+              }}
+              className="px-5 py-2 rounded-full text-xs font-sans font-black tracking-widest uppercase bg-white text-slate-950 hover:bg-slate-100 shadow-[0_6px_25px_rgba(0,0,0,0.6)] border border-slate-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-2"
+              title="Skip intro directly into AceSutra Operating System"
             >
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSoundPlay();
-                  onSkip();
-                }}
-                className="px-5 py-2 rounded-full text-xs font-sans font-black tracking-widest uppercase bg-white text-slate-950 hover:bg-slate-100 shadow-[0_6px_25px_rgba(0,0,0,0.6)] border border-slate-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-2"
-                title="Skip intro directly into AceSutra Operating System"
-              >
-                <span>✦ SKIP INTRO</span>
-              </button>
-            </div>
+              <span>✦ SKIP INTRO</span>
+            </button>
           </div>
         </div>
-
-        {/* FLOATING SCROLL INSTRUCTION PROMPT AT SCREEN BOTTOM */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-none text-white transition-opacity duration-300 z-40"
-          style={{ opacity: Math.max(0, 1 - scrollProgress * 3.5) }}
-        >
-          <div className="px-5 py-2 rounded-full bg-black/75 backdrop-blur-md border border-white/25 shadow-2xl flex items-center gap-2.5">
-            <span className="text-[11px] font-mono tracking-widest uppercase text-slate-200 font-bold">
-              Scroll down to step through portal
-            </span>
-          </div>
-          <ChevronDown className="w-5 h-5 text-amber-300 animate-bounce" />
-        </div>
-
       </div>
+
+      {/* FLOATING SCROLL INSTRUCTION PROMPT */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-none text-white transition-opacity duration-300 z-40"
+        style={{ opacity: Math.max(0, 1 - progress * 3) }}
+      >
+        <div className="px-5 py-2 rounded-full bg-black/75 backdrop-blur-md border border-white/25 shadow-2xl flex items-center gap-2.5">
+          <span className="text-[11px] font-mono tracking-widest uppercase text-slate-200 font-bold">
+            Scroll down to step through portal
+          </span>
+        </div>
+        <ChevronDown className="w-5 h-5 text-amber-300 animate-bounce" />
+      </div>
+
     </div>
   );
 };
 
 export default function App() {
-  // Reactive interaction and scroll state
-  const [scrollY, setScrollY] = useState<number>(0);
+  // Intro zoom controller state (Locked until user zooms through or clicks skip)
+  const [introDone, setIntroDone] = useState<boolean>(false);
+  const [zoomProgress, setZoomProgress] = useState<number>(0);
+
+  // General App & Audio State
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [expandedModule, setExpandedModule] = useState<number | null>(null);
@@ -450,26 +539,69 @@ export default function App() {
     { id: 5, text: "Push Geetanjali Salon bridal campaign live", done: false, priority: "Medium" }
   ]);
 
-  // Ultra-smooth passive 60fps/120fps scroll listener for the intro portal zoom
+  // WHEEL & TOUCH LISTENER: Intercepts scrolling during the intro so the window zooms dead-center
   useEffect(() => {
+    if (introDone) return;
+
     let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (ticking) return;
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        const delta = e.deltaY;
+        if (delta > 0) {
+          setZoomProgress(prev => {
+            const next = prev + 0.055;
+            if (next >= 1.0) {
+              setTimeout(() => {
+                setIntroDone(true);
+                playSound('chime', soundEnabled);
+              }, 250);
+              return 1.0;
+            }
+            return next;
+          });
+        } else if (delta < 0) {
+          setZoomProgress(prev => Math.max(0, prev - 0.055));
+        }
+        ticking = false;
+      });
+    };
+
+    let startY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      const currentY = e.touches[0].clientY;
+      const diff = startY - currentY;
+      if (diff > 10) {
+        setZoomProgress(prev => {
+          const next = prev + 0.04;
+          if (next >= 1.0) {
+            setTimeout(() => setIntroDone(true), 250);
+            return 1.0;
+          }
+          return next;
         });
-        ticking = true;
+      } else if (diff < -10) {
+        setZoomProgress(prev => Math.max(0, prev - 0.04));
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  // Compute scroll progress through the 220vh intro container (0.0 to 1.0)
-  const windowH = typeof window !== 'undefined' ? window.innerHeight : 800;
-  const introThreshold = windowH * 1.15;
-  const introProgress = Math.min(1, Math.max(0, scrollY / (introThreshold || 800)));
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [introDone, soundEnabled]);
 
   // Sound and interaction triggers
   const handleInteraction = (type: 'click' | 'pop' | 'chime' | 'toggle' | 'whoosh' = 'click') => {
@@ -496,18 +628,20 @@ export default function App() {
     setWaitlistModalOpen(false);
   };
 
-  const skipToIntro = () => {
+  const skipIntro = () => {
     handleInteraction('whoosh');
-    const heroEl = document.getElementById('system-hero');
-    if (heroEl) {
-      heroEl.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: introThreshold + 50, behavior: 'smooth' });
-    }
+    setZoomProgress(1.0);
+    setTimeout(() => {
+      setIntroDone(true);
+      const hero = document.getElementById('system-hero');
+      if (hero) hero.scrollIntoView({ behavior: 'smooth' });
+    }, 350);
   };
 
-  const viewIntroPortal = () => {
+  const replayIntro = () => {
     handleInteraction('chime');
+    setIntroDone(false);
+    setZoomProgress(0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -551,7 +685,7 @@ export default function App() {
     }
   ];
 
-  // Case Studies Dataset with Uploaded Base64 Assets & Fallbacks
+  // Case Studies Dataset with High-Definition Base64 Assets & Fallbacks
   const caseStudies = [
     {
       title: "Club 360 Gym & Fitness",
@@ -600,18 +734,20 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#070a12] text-slate-100 font-sans selection:bg-pink-500 selection:text-white relative overflow-x-hidden">
 
-      {/* SECTION 1: THE WIRO-STYLE CHAOTIC MARKETING OFFICE INTRO */}
-      {/* Pinned strictly in screen center; zooms symmetrically into the green door on scroll! */}
-      <AgencyChaosIntro
-        scrollProgress={introProgress}
-        onSkip={skipToIntro}
-        onSoundPlay={() => handleInteraction('whoosh')}
-      />
+      {/* SECTION 1: FIXED WIRO-STYLE INTRO OVERLAY */}
+      {/* Zooms dead center on scroll; day becomes night and clouds turn to stars! */}
+      {!introDone && (
+        <AgencyChaosIntro
+          progress={zoomProgress}
+          onSkip={skipIntro}
+          onSoundPlay={() => handleInteraction('whoosh')}
+        />
+      )}
 
       {/* Floating Golden Butterflies drifting softly across the experience */}
-      <Butterfly className="top-[240vh] left-[8%] hidden sm:block" />
-      <Butterfly className="top-[280vh] right-[10%] hidden md:block" />
-      <Butterfly className="top-[360vh] left-[15%] hidden lg:block" />
+      <Butterfly className="top-[30vh] left-[8%] hidden sm:block" />
+      <Butterfly className="top-[60vh] right-[10%] hidden md:block" />
+      <Butterfly className="top-[120vh] left-[15%] hidden lg:block" />
 
       {/* Toast Notification for Real-Time Sound & Interactions */}
       {toastMessage && (
@@ -621,14 +757,14 @@ export default function App() {
         </div>
       )}
 
-      {/* SECTION 2: THE MAIN SYSTEM & HERO (LANDS HERE AFTER ZOOMING THROUGH WINDOW) */}
+      {/* SECTION 2: THE MAIN SYSTEM & HERO (UNLOCKED AFTER ZOOMING THROUGH WINDOW) */}
       <main id="system-hero" className="relative z-10 scroll-mt-6">
 
         {/* TOP FLOATING NAVIGATION BAR */}
         <header className="sticky top-4 z-40 max-w-6xl mx-auto px-4 sm:px-6">
           <div className="bg-[#0f1422]/90 backdrop-blur-xl border border-white/10 rounded-full px-5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.6)] flex items-center justify-between">
             {/* Logo */}
-            <div className="cursor-pointer" onClick={() => { handleInteraction('pop'); viewIntroPortal(); }}>
+            <div className="cursor-pointer" onClick={() => { handleInteraction('pop'); replayIntro(); }}>
               <AceSutraLogo className="h-8 w-8" />
             </div>
 
@@ -655,7 +791,7 @@ export default function App() {
             <div className="flex items-center gap-2.5">
               {/* Button to Replay/View Office Intro Anytime */}
               <button
-                onClick={viewIntroPortal}
+                onClick={replayIntro}
                 title="View Intro Portal"
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider text-slate-300 hover:text-white border border-white/20 hover:border-amber-400/50 bg-black/40 hover:bg-amber-400/10 transition-all"
               >
@@ -706,7 +842,7 @@ export default function App() {
               <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="py-1 text-slate-200">Pricing</a>
               <a href="#founders" onClick={() => setMobileMenuOpen(false)} className="py-1 text-slate-200">Founders</a>
               <button
-                onClick={() => { setMobileMenuOpen(false); viewIntroPortal(); }}
+                onClick={() => { setMobileMenuOpen(false); replayIntro(); }}
                 className="py-1 text-left text-amber-300 font-mono text-xs uppercase"
               >
                 ✦ Replay Intro Portal
@@ -972,9 +1108,9 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* LOWER BENTO LAYOUT: PROJECTS IN MOTION WITH HIGH VISIBILITY CLIENT IMAGES */}
+                  {/* LOWER BENTO LAYOUT: PROJECTS IN MOTION WITH HIGH VISIBILITY CLIENT PHOTOS */}
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                    {/* Left 2 Cols: Projects in Motion featuring PROMINENT UPLOADED IMAGES */}
+                    {/* Left 2 Cols: Projects in Motion featuring PROMINENT UPLOADED PHOTOS */}
                     <div className="lg:col-span-2 bg-[#121829] border border-white/10 rounded-2xl p-4 sm:p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
@@ -986,7 +1122,7 @@ export default function App() {
                         <span className="text-[10px] font-mono text-slate-400">Click card for case study</span>
                       </div>
 
-                      {/* Client Showcase Rows with User's Uploaded Images */}
+                      {/* Client Showcase Rows with High-Resolution Photos */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         {caseStudies.map((cs, idx) => (
                           <div
@@ -1397,7 +1533,7 @@ export default function App() {
         <section id="founders" className="relative py-20 px-4 sm:px-6 lg:px-8 z-10 border-t border-white/10">
           <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#12182b] to-[#0a0f1d] border border-white/15 rounded-3xl p-8 sm:p-12 shadow-2xl">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="flex flex-col items-center md:text-left text-center">
                 <div className="flex items-center gap-3 mb-4">
                   <VedantAvatar size="w-14 h-14" />
                   <ShreyashAvatar size="w-14 h-14" />
@@ -1474,7 +1610,7 @@ export default function App() {
             </div>
             <div className="flex items-center gap-4 text-slate-400 text-[11px]">
               <span>Kharadi, Pune</span>
-              <button onClick={viewIntroPortal} className="hover:text-white underline">Replay Intro Portal</button>
+              <button onClick={replayIntro} className="hover:text-white underline">Replay Intro Portal</button>
               <a href="#system-os" className="hover:text-white">Top</a>
             </div>
           </div>
