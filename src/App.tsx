@@ -10,12 +10,9 @@ import {
   X,
   Volume2,
   VolumeX,
-  Sparkles,
   ArrowRight,
-  Send,
-  Layers
+  Send
 } from 'lucide-react';
-
 // Color themes for WebGL particles
 type PaletteKey = 'cyan' | 'violet' | 'emerald' | 'monolith';
 type ShapeMode = 'torus' | 'sphere' | 'wave';
