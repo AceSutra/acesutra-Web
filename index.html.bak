@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AceSutra — Creative Technology & Growth Studio</title>
+  <meta name="description" content="AceSutra is an avant-garde digital growth studio fusing performance marketing, full-stack web engineering, and mobile app development into unfair digital advantages.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            noir: '#030407',
+            surface: '#0a0d14',
+            accent: {
+              cyan: '#00f2fe',
+              indigo: '#4facfe',
+              purple: '#8b5cf6',
+              emerald: '#00ff87'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js CDN for WebGL 3D Real-time Scene -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#030407] text-slate-100 antialiased selection:bg-cyan-400 selection:text-black relative">
+
+  <!-- Subtle Film Grain Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Real-Time Interactive 3D WebGL Canvas (Three.js) -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Custom Magnetic Cursor Elements -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-follower">
+    <span class="cursor-text"></span>
+  </div>
+
+  <!-- Top Studio HUD Navigation -->
+  <header class="fixed top-0 left-0 w-full z-40 px-6 py-5 flex items-center justify-between border-b border-white/5 backdrop-blur-md bg-black/40">
+    
+    <!-- Studio Brand Identity -->
+    <a href="#" class="flex items-center gap-3 interactive-target" data-cursor="ACESUTRA">
+      <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-400 to-indigo-600 flex items-center justify-center p-[1px]">
+        <div class="w-full h-full bg-[#030407] rounded-[7px] flex items-center justify-center">
+          <span class="font-display font-extrabold text-xs text-cyan-300">A</span>
+        </div>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="font-display font-bold text-lg tracking-tight text-white">Ace<span class="text-cyan-400">Sutra</span></span>
+        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500 hidden sm:inline">[ STUDIO // R&D ]</span>
+      </div>
+    </a>
+
+    <!-- Center HUD Status Indicators -->
+    <div class="hidden lg:flex items-center gap-6 text-[11px] font-mono text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-slate-300">STATUS: ACCEPTING FOUNDING CLIENTS</span>
+      </div>
+      <div class="text-slate-600">|</div>
+      <div>COORDS: 37.77° N, 122.41° W</div>
+      <div class="text-slate-600">|</div>
+      <div id="liveClock" class="text-cyan-400">12:00:00 UTC</div>
+    </div>
+
+    <!-- Actions & Nav Links -->
+    <div class="flex items-center gap-4">
+      <!-- Web Audio Sound Synthesizer Toggle -->
+      <button id="soundToggleBtn" class="hud-badge px-3 py-1.5 rounded-full text-[10px] font-mono uppercase text-slate-400 hover:text-white transition-all interactive-target" data-cursor="AUDIO">
+        <span class="sound-status">AUDIO: OFF</span>
+      </button>
+
+      <a href="#lab" class="hidden sm:inline-block text-xs font-mono text-slate-300 hover:text-cyan-400 transition-colors interactive-target" data-cursor="THE LAB">
+        [ 01 THE LAB ]
+      </a>
+
+      <a href="#founding" class="hidden sm:inline-block text-xs font-mono text-slate-300 hover:text-cyan-400 transition-colors interactive-target" data-cursor="COHORT">
+        [ 02 FOUNDING COHORT ]
+      </a>
+
+      <a href="#apply" class="hud-badge px-4 py-2 rounded-full text-xs font-mono text-white border border-cyan-400/40 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all interactive-target" data-cursor="INITIALIZE">
+        INITIALIZE PROJECT →
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Scrollable Content Container (Over WebGL) -->
+  <main class="relative z-10">
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-between pt-36 pb-12 px-6 sm:px-12 max-w-7xl mx-auto">
+      
+      <div>
+        <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full hud-badge text-[11px] font-mono text-cyan-400 mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+          <span>DISRUPTING CONVENTIONAL MARKETING & SOFTWARE STUDIOS</span>
+        </div>
+
+        <h1 class="giant-title text-5xl sm:text-7xl lg:text-9xl font-extrabold text-white mb-8">
+          WHERE CODE <br>
+          <span class="text-outline">MEETS CONVERSION.</span>
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end max-w-5xl">
+          <div class="md:col-span-8">
+            <p class="text-base sm:text-xl text-slate-300 leading-relaxed font-light">
+              AceSutra is an avant-garde digital studio fusing performance marketing, bespoke web engineering, and mobile app architecture into unfair commercial advantages. We build what ordinary agencies are technically incapable of delivering.
+            </p>
+          </div>
+          <div class="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-3">
+            <a href="#founding" class="w-full text-center py-3.5 px-6 rounded-xl bg-white text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-xl interactive-target" data-cursor="JOIN">
+              Become a Founding Client
+            </a>
+            <a href="#lab" class="w-full text-center py-3.5 px-6 rounded-xl hud-badge border border-white/20 text-white font-mono text-xs uppercase tracking-wider hover:border-cyan-400 transition-all interactive-target" data-cursor="EXPLORE">
+              Inspect R&D Concepts ↓
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Interactive 3D Control Dock -->
+      <div class="pt-16 border-t border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        
+        <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+          <i data-lucide="mouse-pointer" class="w-4 h-4 text-cyan-400"></i>
+          <span>CLICK & DRAG ANYWHERE TO INTERACT WITH REAL-TIME 3D PARTICLES</span>
+        </div>
+
+        <!-- 3D Controls -->
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="text-[10px] font-mono uppercase text-slate-500 mr-1">3D Topology:</span>
+          <button class="webgl-shape-btn px-3 py-1 rounded-lg text-xs font-mono bg-cyan-500/20 border border-cyan-400 text-cyan-300 transition-all interactive-target" data-shape="torus" data-cursor="TORUS">
+            CYBER TORUS
+          </button>
+          <button class="webgl-shape-btn px-3 py-1 rounded-lg text-xs font-mono bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-all interactive-target" data-shape="sphere" data-cursor="NEURAL">
+            NEURAL CLOUD
+          </button>
+          <button class="webgl-shape-btn px-3 py-1 rounded-lg text-xs font-mono bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-all interactive-target" data-shape="wave" data-cursor="WAVE">
+            QUANTUM FIELD
+          </button>
+
+          <span class="text-[10px] font-mono uppercase text-slate-500 ml-4 mr-1">Shader:</span>
+          <button class="webgl-palette-btn w-5 h-5 rounded-full bg-cyan-400 ring-2 ring-white interactive-target" data-palette="cyan" title="Cyan Light" data-cursor="CYAN"></button>
+          <button class="webgl-palette-btn w-5 h-5 rounded-full bg-purple-500 interactive-target" data-palette="violet" title="Amethyst Violet" data-cursor="VIOLET"></button>
+          <button class="webgl-palette-btn w-5 h-5 rounded-full bg-emerald-400 interactive-target" data-palette="emerald" title="Matrix Emerald" data-cursor="EMERALD"></button>
+          <button class="webgl-palette-btn w-5 h-5 rounded-full bg-slate-200 interactive-target" data-palette="monolith" title="Monolith" data-cursor="MONO"></button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Kinetic Marquee Ticker -->
+    <div class="py-6 border-y border-white/10 bg-black/60 overflow-hidden backdrop-blur-md">
+      <div class="ticker-track flex items-center gap-8 font-display text-2xl font-bold tracking-tight text-slate-500 whitespace-nowrap">
+        <span>DIGITAL MARKETING // META & GOOGLE ADS</span>
+        <span class="text-cyan-400">•</span>
+        <span>FULL-STACK WEB DEVELOPMENT // NEXT.JS & THREE.JS</span>
+        <span class="text-cyan-400">•</span>
+        <span>CROSS-PLATFORM MOBILE APPS // FLUTTER & REACT NATIVE</span>
+        <span class="text-cyan-400">•</span>
+        <span>SEO & ALGORITHMIC TOPICAL GRAPHS</span>
+        <span class="text-cyan-400">•</span>
+        <span>SPATIAL COMMERCE & CONVERSION ARCHITECTURE</span>
+        <span class="text-cyan-400">•</span>
+        <span>DIGITAL MARKETING // META & GOOGLE ADS</span>
+        <span class="text-cyan-400">•</span>
+        <span>FULL-STACK WEB DEVELOPMENT // NEXT.JS & THREE.JS</span>
+      </div>
+    </div>
+
+    <!-- The Manifesto Section -->
+    <section class="py-32 px-6 sm:px-12 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        
+        <div class="lg:col-span-4">
+          <div class="sticky top-28">
+            <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">[ MANIFESTO // 01 ]</span>
+            <h2 class="text-4xl font-extrabold font-display text-white mt-3 mb-6">
+              THE AGENCY MODEL IS OBSOLETE.
+            </h2>
+            <div class="text-xs font-mono text-slate-500 space-y-2">
+              <div>// ZERO JUNIOR DELEGATION</div>
+              <div>// ZERO BLOATED COMMITTEE MEETINGS</div>
+              <div>// 100% PRINCIPAL-LED EXECUTION</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 space-y-12">
+          
+          <div class="lusion-card p-8 sm:p-12 rounded-3xl">
+            <div class="text-2xl sm:text-3xl font-display font-bold text-white mb-6 leading-snug">
+              "Most marketing agencies cannot write a single line of production code. Most software consultancies have zero intuition for human psychology or customer acquisition."
+            </div>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 font-light">
+              This disconnect costs companies millions. Marketing runs ad campaigns to landing pages that load in 4 seconds; developers build beautiful apps that nobody downloads because the acquisition funnel was an afterthought.
+            </p>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+              <strong class="text-cyan-300 font-semibold">AceSutra eliminates the friction.</strong> We unify mathematical paid acquisition, modern full-stack web architectures, and mobile applications into one cohesive, revenue-generating engine.
+            </p>
+          </div>
+
+          <!-- Comparison Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+              <div class="text-xs font-mono text-rose-400 mb-2">[ THE CONVENTIONAL AGENCY ]</div>
+              <ul class="text-xs text-slate-400 space-y-2.5">
+                <li>✕ Pitched by executives, dumped onto junior interns</li>
+                <li>✕ Slow 8-week turnaround for basic landing pages</li>
+                <li>✕ Generic boilerplate WordPress or Webflow templates</li>
+                <li>✕ Blames the client when ads fail to convert</li>
+              </ul>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-cyan-500/[0.04] border border-cyan-500/20">
+              <div class="text-xs font-mono text-cyan-400 mb-2">[ THE ACESUTRA STANDARD ]</div>
+              <ul class="text-xs text-slate-200 space-y-2.5">
+                <li>✓ Direct founder-to-founder technical execution</li>
+                <li>✓ Agile sprint shipments measured in days, not months</li>
+                <li>✓ Custom Next.js, Three.js, and Flutter architectures</li>
+                <li>✓ Full accountability for bottom-line ROAS and revenue</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Capabilities & Core Disciplines -->
+    <section id="disciplines" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">[ CAPABILITIES // 02 ]</span>
+          <h2 class="text-4xl sm:text-6xl font-extrabold font-display text-white mt-2">
+            CORE DISCIPLINES
+          </h2>
+        </div>
+        <p class="text-xs font-mono text-slate-500 max-w-sm mt-4 md:mt-0">
+          WHAT WE ARCHITECT, ENGINEER, AND SCALE DAILY ACROSS PLATFORMS.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Discipline 1: Digital Marketing -->
+        <div class="lusion-card p-8 rounded-3xl group interactive-target" data-cursor="ADS">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-xs font-mono text-slate-500">[ DISCIPLINE 01 ]</span>
+            <i data-lucide="trending-up" class="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-3xl font-display font-bold text-white mb-4">Performance Marketing & Media</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6 font-light">
+            Multi-platform paid customer acquisition. We construct hyper-targeted creative testing engines, server-side Conversion APIs (CAPI), and predictive lifetime-value funnels.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Meta Ads</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Google PMax</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">TikTok Media</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Server-Side Tracking</span>
+          </div>
+        </div>
+
+        <!-- Discipline 2: Web Engineering -->
+        <div class="lusion-card p-8 rounded-3xl group interactive-target" data-cursor="WEB">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-xs font-mono text-slate-500">[ DISCIPLINE 02 ]</span>
+            <i data-lucide="terminal" class="w-6 h-6 text-indigo-400 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-3xl font-display font-bold text-white mb-4">High-Performance Web Platforms</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6 font-light">
+            Next.js web architectures engineered for sub-second speeds, flawless Core Web Vitals, headless CMS control, and conversion-focused customer journeys.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Next.js & React</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Three.js WebGL</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Headless CMS</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Edge Deployment</span>
+          </div>
+        </div>
+
+        <!-- Discipline 3: Mobile Apps -->
+        <div class="lusion-card p-8 rounded-3xl group interactive-target" data-cursor="APP">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-xs font-mono text-slate-500">[ DISCIPLINE 03 ]</span>
+            <i data-lucide="smartphone" class="w-6 h-6 text-purple-400 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-3xl font-display font-bold text-white mb-4">Cross-Platform Mobile Apps</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6 font-light">
+            Bespoke iOS and Android applications written with Flutter and React Native. Smooth 60FPS micro-interactions, offline state synchronization, and secure backend microservices.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Flutter & Dart</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">React Native</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Supabase & Firebase</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Store In-App Purchases</span>
+          </div>
+        </div>
+
+        <!-- Discipline 4: SEO & Strategy -->
+        <div class="lusion-card p-8 rounded-3xl group interactive-target" data-cursor="GROWTH">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-xs font-mono text-slate-500">[ DISCIPLINE 04 ]</span>
+            <i data-lucide="compass" class="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-3xl font-display font-bold text-white mb-4">Programmatic SEO & Brand Systems</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6 font-light">
+            Topical authority clusters, semantic schema architectures, and distinctive visual identities that capture organic buyer intent and build lasting brand moat.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Semantic Keyword Graphs</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Schema.org JSON-LD</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Design Systems (Figma)</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Conversion Auditing</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- The Lab: R&D Concepts & Architecture (Replacing Fake Client Work!) -->
+    <section id="lab" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">[ R&D & CONCEPTS // 03 ]</span>
+          <h2 class="text-4xl sm:text-6xl font-extrabold font-display text-white mt-2">
+            THE ACESUTRA LAB
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-slate-400 max-w-md mt-4 md:mt-0">
+          WE DON’T SHOW GENERIC MOCKUPS. WE SHOW LIVE ARCHITECTURAL PROTOTYPES DEVELOPED IN-HOUSE. CLICK TO INSPECT BLUEPRINTS.
+        </div>
+      </div>
+
+      <!-- 4 Lab Concepts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Concept 1: Vortex -->
+        <div class="concept-card lusion-card p-8 rounded-3xl border border-white/10 cursor-pointer group interactive-target" data-concept="vortex" data-cursor="INSPECT">
+          <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-6">
+            <span>[ SYSTEM 01 // MARKETING ENGINE ]</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-400/30">CLICK TO INSPECT</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-display font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+            VORTEX // Real-Time Ad Attribution
+          </h3>
+          <p class="text-xs text-slate-400 mb-6 font-mono">
+            STATUS: DEPLOYED // CROSS-PLATFORM ROAS OPTIMIZATION PIPELINE
+          </p>
+          <div class="h-44 rounded-2xl bg-gradient-to-br from-indigo-950/80 via-slate-900 to-black p-6 border border-white/5 flex flex-col justify-between overflow-hidden relative">
+            <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-cyan-500/20 rounded-full blur-2xl"></div>
+            <div class="text-xs font-mono text-slate-400">
+              <span class="text-cyan-400">INPUT:</span> Meta API + Google Ads Webhooks<br>
+              <span class="text-emerald-400">CALC:</span> Multi-Touch First-Party Attribution<br>
+              <span class="text-indigo-400">OUTPUT:</span> Automated Budget Scaling Signal
+            </div>
+            <div class="text-xs font-mono text-slate-500 flex items-center justify-between border-t border-white/5 pt-2">
+              <span>LATENCY: &lt;140ms</span>
+              <span class="text-cyan-300">EXPLORE BLUEPRINT →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept 2: Kinetic Commerce -->
+        <div class="concept-card lusion-card p-8 rounded-3xl border border-white/10 cursor-pointer group interactive-target" data-concept="kinetic" data-cursor="INSPECT">
+          <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-6">
+            <span>[ SYSTEM 02 // WEB ARCHITECTURE ]</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-400/30">CLICK TO INSPECT</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-display font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+            KINETIC // 3D Spatial E-Commerce
+          </h3>
+          <p class="text-xs text-slate-400 mb-6 font-mono">
+            STATUS: ACTIVE // 60FPS WEBGL PRODUCT MANIPULATION & INSTANT CHECKOUT
+          </p>
+          <div class="h-44 rounded-2xl bg-gradient-to-br from-cyan-950/80 via-slate-900 to-black p-6 border border-white/5 flex flex-col justify-between overflow-hidden relative">
+            <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-indigo-500/20 rounded-full blur-2xl"></div>
+            <div class="text-xs font-mono text-slate-400">
+              <span class="text-cyan-400">GRAPHICS:</span> Real-Time Three.js Shaders<br>
+              <span class="text-emerald-400">STOREFRONT:</span> Headless Shopify Storefront API<br>
+              <span class="text-indigo-400">SPEED:</span> 100/100 Google Core Web Vitals
+            </div>
+            <div class="text-xs font-mono text-slate-500 flex items-center justify-between border-t border-white/5 pt-2">
+              <span>PERFORMANCE: 60 FPS</span>
+              <span class="text-cyan-300">EXPLORE BLUEPRINT →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept 3: Synapse OS -->
+        <div class="concept-card lusion-card p-8 rounded-3xl border border-white/10 cursor-pointer group interactive-target" data-concept="synapse" data-cursor="INSPECT">
+          <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-6">
+            <span>[ SYSTEM 03 // MOBILE FRAMEWORK ]</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-400/30">CLICK TO INSPECT</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-display font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+            SYNAPSE OS // Cross-Platform Mobile
+          </h3>
+          <p class="text-xs text-slate-400 mb-6 font-mono">
+            STATUS: VALIDATED // OFFLINE-FIRST FLUTTER ARCHITECTURE WITH SECURE ENCLAVE
+          </p>
+          <div class="h-44 rounded-2xl bg-gradient-to-br from-purple-950/80 via-slate-900 to-black p-6 border border-white/5 flex flex-col justify-between overflow-hidden relative">
+            <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-purple-500/20 rounded-full blur-2xl"></div>
+            <div class="text-xs font-mono text-slate-400">
+              <span class="text-purple-400">ENGINE:</span> Flutter 3.x Unified iOS & Android<br>
+              <span class="text-emerald-400">STATE:</span> Reactive Local SQLite + Supabase Sync<br>
+              <span class="text-cyan-400">SECURITY:</span> Hardware Biometric Auth
+            </div>
+            <div class="text-xs font-mono text-slate-500 flex items-center justify-between border-t border-white/5 pt-2">
+              <span>CODEBASE: UNIFIED</span>
+              <span class="text-cyan-300">EXPLORE BLUEPRINT →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept 4: Neuro SEO -->
+        <div class="concept-card lusion-card p-8 rounded-3xl border border-white/10 cursor-pointer group interactive-target" data-concept="neuro" data-cursor="INSPECT">
+          <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-6">
+            <span>[ SYSTEM 04 // ORGANIC ENGINE ]</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-400/30">CLICK TO INSPECT</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-display font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+            NEURO SEO // Knowledge Graph Pipeline
+          </h3>
+          <p class="text-xs text-slate-400 mb-6 font-mono">
+            STATUS: DEPLOYED // SEMANTIC TOPIC GRAPH FOR AI OVERVIEW RANKINGS
+          </p>
+          <div class="h-44 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-slate-900 to-black p-6 border border-white/5 flex flex-col justify-between overflow-hidden relative">
+            <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-emerald-500/20 rounded-full blur-2xl"></div>
+            <div class="text-xs font-mono text-slate-400">
+              <span class="text-emerald-400">SCHEMA:</span> Deep Nested Entity Graph JSON-LD<br>
+              <span class="text-cyan-400">STRUCTURE:</span> Programmatic Silos & Internal Links<br>
+              <span class="text-indigo-400">TARGET:</span> Google Search Generative Experience (SGE)
+            </div>
+            <div class="text-xs font-mono text-slate-500 flex items-center justify-between border-t border-white/5 pt-2">
+              <span>CRAWL EFFICIENCY: 99.8%</span>
+              <span class="text-cyan-300">EXPLORE BLUEPRINT →</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- The Founding Client Advantage Section -->
+    <section id="founding" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
+      
+      <div class="lusion-card p-8 sm:p-14 rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/20 via-black to-slate-950">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-xs font-mono mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <span>LIMITED COHORT: ACCEPTING 4 FOUNDING CLIENTS FOR 2026</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-5xl font-extrabold font-display text-white mb-6 leading-tight">
+          THE FOUNDING PARTNER ADVANTAGE
+        </h2>
+
+        <p class="text-slate-300 text-base sm:text-lg font-light leading-relaxed mb-10 max-w-3xl">
+          Because AceSutra is intentionally selective and launching our flagship roster, we don't have bureaucratic layers, junior handoffs, or 20 other client distractions. <strong class="text-white">Your brand becomes our marquee case study.</strong> That means an unreasonable level of care, obsessive speed, and founder dedication.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          
+          <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="font-mono text-cyan-400 text-xs mb-2">01 // DIRECT FOUNDER ACCESS</div>
+            <div class="font-display font-bold text-white text-lg mb-2">Zero Agency Middlemen</div>
+            <p class="text-slate-400 text-xs leading-relaxed font-light">
+              You collaborate directly with principal engineers and performance marketers in a shared Slack channel. Zero account managers playing telephone.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="font-mono text-cyan-400 text-xs mb-2">02 // 100% SKIN IN THE GAME</div>
+            <div class="font-display font-bold text-white text-lg mb-2">Flagship Case Study Drive</div>
+            <p class="text-slate-400 text-xs leading-relaxed font-light">
+              We have everything to prove. We treat your campaign and software as if our reputation depends on it—because it literally does.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="font-mono text-cyan-400 text-xs mb-2">03 // PREFERENTIAL LAUNCH RATES</div>
+            <div class="font-display font-bold text-white text-lg mb-2">Founding Cohort Economics</div>
+            <p class="text-slate-400 text-xs leading-relaxed font-light">
+              Founding partners receive preferential pilot terms and grandfathered retainer rates that will never be offered again once the cohort closes.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <a href="#apply" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all text-center interactive-target" data-cursor="CLAIM SPOT">
+            Apply for Founding Partner Spot →
+          </a>
+          <span class="text-xs font-mono text-slate-500">Only 4 slots available for the current sprint cycle.</span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Interactive Scope & Stack Configurator -->
+    <section id="estimator" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/5">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">[ ESTIMATOR // 04 ]</span>
+        <h2 class="text-4xl sm:text-6xl font-extrabold font-display text-white mt-2 mb-4">
+          SYSTEM SCOPE CALCULATOR
+        </h2>
+        <p class="text-slate-400 text-sm font-light">
+          Configure your bespoke digital stack. Real-time scope, turnaround estimate, and investment calculation.
+        </p>
+      </div>
+
+      <div class="lusion-card p-8 sm:p-12 rounded-3xl border border-white/10 max-w-5xl mx-auto">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Select Systems Required:</div>
+
+            <div class="space-y-3">
+              <label class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 cursor-pointer transition-colors">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" checked class="scope-checkbox rounded text-cyan-500 focus:ring-0 bg-slate-900 border-white/20" data-label="Paid Performance Marketing" data-type="monthly" data-price="2000">
+                  <div>
+                    <div class="text-sm font-display font-bold text-white">Performance Media Buying (Meta + Google)</div>
+                    <div class="text-xs text-slate-500 font-mono">Full-funnel ads, creative testing, CAPI tracking</div>
+                  </div>
+                </div>
+                <span class="text-xs font-mono text-cyan-400">+$2,000/mo</span>
+              </label>
+
+              <label class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 cursor-pointer transition-colors">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" checked class="scope-checkbox rounded text-cyan-500 focus:ring-0 bg-slate-900 border-white/20" data-label="Next.js Web Platform" data-type="onetime" data-price="3500">
+                  <div>
+                    <div class="text-sm font-display font-bold text-white">Next.js & Three.js Web Platform</div>
+                    <div class="text-xs text-slate-500 font-mono">Sub-second load times, headless CMS, modern animations</div>
+                  </div>
+                </div>
+                <span class="text-xs font-mono text-cyan-400">+$3,500</span>
+              </label>
+
+              <label class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 cursor-pointer transition-colors">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" class="scope-checkbox rounded text-cyan-500 focus:ring-0 bg-slate-900 border-white/20" data-label="Cross-Platform Mobile App" data-type="onetime" data-price="5500">
+                  <div>
+                    <div class="text-sm font-display font-bold text-white">Cross-Platform Mobile App (iOS & Android)</div>
+                    <div class="text-xs text-slate-500 font-mono">Flutter architecture, Supabase sync, App Store submission</div>
+                  </div>
+                </div>
+                <span class="text-xs font-mono text-cyan-400">+$5,500</span>
+              </label>
+
+              <label class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 cursor-pointer transition-colors">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" class="scope-checkbox rounded text-cyan-500 focus:ring-0 bg-slate-900 border-white/20" data-label="Topical SEO & Content Pipeline" data-type="monthly" data-price="1400">
+                  <div>
+                    <div class="text-sm font-display font-bold text-white">Topical SEO & Knowledge Graph Pipeline</div>
+                    <div class="text-xs text-slate-500 font-mono">High-intent search rankings, schema validation</div>
+                  </div>
+                </div>
+                <span class="text-xs font-mono text-cyan-400">+$1,400/mo</span>
+              </label>
+
+              <label class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 cursor-pointer transition-colors">
+                <div class="flex items-center gap-3">
+                  <input type="checkbox" class="scope-checkbox rounded text-cyan-500 focus:ring-0 bg-slate-900 border-white/20" data-label="Brand Identity & Motion Assets" data-type="onetime" data-price="1800">
+                  <div>
+                    <div class="text-sm font-display font-bold text-white">Brand System & High-Converting Creatives</div>
+                    <div class="text-xs text-slate-500 font-mono">Figma design system, video ads, motion assets</div>
+                  </div>
+                </div>
+                <span class="text-xs font-mono text-cyan-400">+$1,800</span>
+              </label>
+            </div>
+
+            <div class="pt-2">
+              <label class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Execution Velocity:</label>
+              <select id="scopeTimeline" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-cyan-400">
+                <option value="standard" selected>Standard Engineering Cadence (4-6 Weeks)</option>
+                <option value="rush">Priority Rapid Sprint Mode (2-3 Weeks) [+25% Surge]</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Total Calculation Card -->
+          <div class="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-black/80 border border-white/10">
+            <div>
+              <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-1">[ ESTIMATED INVESTMENT ]</div>
+              <div id="scopeTotal" class="font-display text-2xl sm:text-3xl font-extrabold text-white mb-4">
+                $3,500 SETUP + $2,000/MO
+              </div>
+              <div id="scopeDeliverables" class="text-xs font-mono text-cyan-300 bg-white/[0.03] p-3 rounded-lg border border-white/5 leading-relaxed mb-6">
+                2 Systems Configured: Paid Performance Marketing, Next.js Web Platform
+              </div>
+              <p class="text-[11px] text-slate-400 font-light leading-relaxed mb-6">
+                Transparent scope without hidden agency overhead. Founding clients receive priority execution and direct access to founders.
+              </p>
+            </div>
+
+            <button id="scopeApplyBtn" class="w-full py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider transition-all interactive-target" data-cursor="TRANSFER">
+              Transfer Specs to Application ↓
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Founding Client Application Terminal -->
+    <section id="apply" class="py-24 px-6 sm:px-12 max-w-4xl mx-auto border-t border-white/5">
+      
+      <div class="text-center mb-12">
+        <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">[ INITIALIZE // 05 ]</span>
+        <h2 class="text-4xl sm:text-5xl font-extrabold font-display text-white mt-2 mb-3">
+          APPLY FOR FOUNDING PARTNER COHORT
+        </h2>
+        <p class="text-xs font-mono text-slate-400">
+          WE REVIEW EACH INQUIRY PERSONALLY. RESPONSE WITHIN 24 HOURS GUARANTEED.
+        </p>
+      </div>
+
+      <div class="lusion-card p-8 sm:p-12 rounded-3xl border border-white/10 shadow-2xl relative">
+        <form id="foundingClientForm" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="applicantName" class="block text-xs font-mono uppercase text-slate-400 mb-2">Founder / Name *</label>
+              <input type="text" id="applicantName" required placeholder="e.g. Alex Vance" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors">
+            </div>
+
+            <div>
+              <label for="applicantEmail" class="block text-xs font-mono uppercase text-slate-400 mb-2">Work Email *</label>
+              <input type="email" id="applicantEmail" required placeholder="alex@company.com" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="applicantCompany" class="block text-xs font-mono uppercase text-slate-400 mb-2">Company / Project URL</label>
+              <input type="text" id="applicantCompany" placeholder="acme.ai or domain.com" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors">
+            </div>
+
+            <div>
+              <label for="applicantBudget" class="block text-xs font-mono uppercase text-slate-400 mb-2">Budget Allocation Tier</label>
+              <select id="applicantBudget" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-cyan-400 transition-colors">
+                <option value="3k-6k">$3,000 - $6,000 (Pilot Sprint)</option>
+                <option value="6k-12k" selected>$6,000 - $12,000 (Full-Stack Engine)</option>
+                <option value="12k-25k">$12,000 - $25,000 (Omnichannel Scale)</option>
+                <option value="25k+">$25,000+ (Enterprise Squad)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="applicantVision" class="block text-xs font-mono uppercase text-slate-400 mb-2">Project Vision & Primary Objectives *</label>
+            <textarea id="applicantVision" rows="4" required placeholder="Describe your product, current acquisition bottleneck, target launch date, and desired outcome..." class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs font-mono text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 rounded-xl bg-white hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-xl interactive-target" data-cursor="TRANSMIT">
+            Transmit Application to Founders →
+          </button>
+
+          <div class="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-2 border-t border-white/5">
+            <span>// STRICT NDA BY DEFAULT</span>
+            <span>// ZERO JUNIORS</span>
+            <span>// DIRECT TELEGRAM / SLACK INTEGRATION</span>
+          </div>
+
+        </form>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Interactive Lab Modal for Concepts -->
+  <div id="labModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <div class="lusion-card rounded-3xl max-w-2xl w-full p-8 border border-cyan-400/40 relative shadow-2xl">
+      <button id="labModalClose" class="absolute top-6 right-6 text-slate-400 hover:text-white font-mono text-xs p-2 interactive-target" data-cursor="CLOSE">
+        [ ESC // CLOSE ]
+      </button>
+      <div class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest mb-2">[ ARCHITECTURAL BLUEPRINT ]</div>
+      <h3 id="labModalTitle" class="text-3xl font-display font-bold text-white mb-2">SYSTEM TITLE</h3>
+      <p id="labModalSubtitle" class="text-xs font-mono text-slate-400 mb-6">SUBTITLE</p>
+      
+      <p id="labModalDesc" class="text-sm text-slate-300 leading-relaxed font-light mb-8">
+        Detailed description of the architectural system.
+      </p>
+
+      <div class="border-t border-white/10 pt-6">
+        <div class="text-[10px] font-mono uppercase text-slate-400 mb-3">Core Technology Stack:</div>
+        <div id="labModalStack" class="flex flex-wrap gap-2">
+          <!-- Stack badges populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Success Modal -->
+  <div id="appSuccessModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+    <div class="lusion-card rounded-3xl max-w-md w-full p-8 border border-cyan-400 text-center shadow-2xl relative">
+      <div class="w-12 h-12 rounded-full bg-cyan-400/20 text-cyan-400 flex items-center justify-center mx-auto mb-4 border border-cyan-400/50">
+        <i data-lucide="check" class="w-6 h-6"></i>
+      </div>
+      <div class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest mb-1">[ TRANSMISSION CONFIRMED ]</div>
+      <h3 class="text-2xl font-display font-bold text-white mb-3">Application Logged</h3>
+      <p class="text-xs font-mono text-slate-300 leading-relaxed mb-6">
+        Thank you for applying to the <span class="text-cyan-300">AceSutra Founding Cohort</span>. A founder will review your architecture requirements and reach out within 24 hours.
+      </p>
+      <button id="appSuccessClose" class="w-full py-3 rounded-xl bg-white hover:bg-cyan-300 text-black font-mono font-bold text-xs uppercase tracking-wider transition-all interactive-target" data-cursor="DONE">
+        Return to Studio
+      </button>
+    </div>
+  </div>
+
+  <!-- Studio Avant-Garde Footer -->
+  <footer class="border-t border-white/10 py-16 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12">
+      <div>
+        <div class="text-2xl font-display font-bold text-white tracking-tight">Ace<span class="text-cyan-400">Sutra</span></div>
+        <div class="text-xs font-mono text-slate-500 mt-1">THE FORMULA FOR UNFAIR DIGITAL GROWTH.</div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-6 text-xs font-mono text-slate-400">
+        <a href="#disciplines" class="hover:text-cyan-400 transition-colors interactive-target" data-cursor="VIEW">CAPABILITIES</a>
+        <a href="#lab" class="hover:text-cyan-400 transition-colors interactive-target" data-cursor="VIEW">THE LAB</a>
+        <a href="#founding" class="hover:text-cyan-400 transition-colors interactive-target" data-cursor="VIEW">FOUNDING COHORT</a>
+        <a href="#estimator" class="hover:text-cyan-400 transition-colors interactive-target" data-cursor="VIEW">SCOPE CALCULATOR</a>
+        <a href="mailto:founders@acesutra.com" class="text-cyan-400 hover:underline interactive-target" data-cursor="EMAIL">FOUNDERS@ACESUTRA.COM</a>
+      </div>
+    </div>
+
+    <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-600 gap-4">
+      <div>© 2026 ACESUTRA STUDIO. ALL RIGHTS RESERVED.</div>
+      <div class="flex items-center gap-4">
+        <span>BUILT WITH THREE.JS & TAILWIND</span>
+        <span>•</span>
+        <span>ZERO JUNIORS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WebGL Three.js Engine & Studio Interactions -->
+  <script src="webgl.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

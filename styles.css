@@ -1,0 +1,205 @@
+/* AceSutra Avant-Garde / Lusion-Inspired Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@500;700;800&display=swap');
+
+:root {
+  --bg-color: #030407;
+  --text-main: #f3f4f6;
+  --accent-cyan: #00f2fe;
+  --accent-indigo: #4facfe;
+  --accent-purple: #9d4edd;
+  --accent-lime: #00ff87;
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none; /* Custom interactive cursor */
+}
+
+/* Monospace Details */
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Subtle Film Grain Noise Overlay (Lusion Signature) */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  content: "";
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 99;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* WebGL Background Canvas */
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Custom Interactive Cursor */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s, 
+              background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-follower .cursor-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #030407;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-weight: 700;
+}
+
+/* Hover States for Cursor */
+body.cursor-hover-active .cursor-follower {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: transparent;
+}
+
+body.cursor-hover-active .cursor-follower .cursor-text {
+  opacity: 1;
+}
+
+body.cursor-hover-active .cursor-dot {
+  opacity: 0;
+}
+
+body.cursor-drag-mode .cursor-follower {
+  width: 90px;
+  height: 90px;
+  background-color: rgba(0, 242, 254, 0.2);
+  border-color: #00f2fe;
+}
+
+body.cursor-drag-mode .cursor-follower .cursor-text {
+  opacity: 1;
+  color: #00f2fe;
+}
+
+/* Avant-Garde Kinetic Typography */
+.giant-title {
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+  color: transparent;
+  transition: all 0.4s ease;
+}
+
+.text-outline:hover {
+  -webkit-text-stroke: 1px rgba(0, 242, 254, 0.9);
+  color: rgba(0, 242, 254, 0.1);
+}
+
+/* Sleek Glass Surfaces */
+.lusion-card {
+  background: rgba(9, 13, 22, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.lusion-card:hover {
+  border-color: rgba(0, 242, 254, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -20px rgba(0, 242, 254, 0.15);
+}
+
+/* Subtle Glowing Pills & Badges */
+.hud-badge {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+/* Horizontal ticker animation */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 25s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Scrollbar Minimalist */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #030407;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f293d;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f2fe;
+}
