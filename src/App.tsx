@@ -25,7 +25,12 @@ import {
   Volume2,
   VolumeX,
   Sparkles,
-  Search
+  Search,
+  LayoutDashboard,
+  Briefcase,
+  Users,
+  Settings,
+  Bell
 } from 'lucide-react';
 
 // Embedded Official Visual Assets (Self-Contained for 1-Click Vercel Deployment)
@@ -102,10 +107,9 @@ const AceSutraLogo: React.FC<{ className?: string; showText?: boolean }> = ({ cl
     {showText && (
       <div className="flex flex-col">
         <div className="flex items-center font-display font-black text-xl tracking-tight text-white">
-          <span className="text-white">Ace</span>
-          <span className="bg-gradient-to-r from-amber-300 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Sutra</span>
+          <span className="text-white">AceSutra</span>
         </div>
-        <span className="text-[9px] font-mono tracking-widest uppercase text-amber-300/80 -mt-1 font-semibold">
+        <span className="text-[9px] font-mono tracking-widest uppercase text-amber-300/80 -mt-0.5 font-semibold">
           Pune Agency OS
         </span>
       </div>
@@ -186,6 +190,60 @@ const Butterfly: React.FC<{ className?: string; color?: string; style?: React.CS
   </div>
 );
 
+// Classical Renaissance Scenic Backdrop (Painting with Roman arches, cypress hills, and fresco sky)
+const ClassicalRenaissanceBackdrop: React.FC = () => (
+  <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 opacity-70">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+      <defs>
+        <linearGradient id="frescoSky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#091122" />
+          <stop offset="40%" stopColor="#13233f" />
+          <stop offset="70%" stopColor="#304358" />
+          <stop offset="100%" stopColor="#1e1812" />
+        </linearGradient>
+        <linearGradient id="hillsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#1f2d25" />
+          <stop offset="100%" stopColor="#0d140f" />
+        </linearGradient>
+        <linearGradient id="archGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#785923" />
+          <stop offset="50%" stopColor="#d4af37" />
+          <stop offset="100%" stopColor="#432f0c" />
+        </linearGradient>
+      </defs>
+
+      {/* Atmospheric Fresco Sky */}
+      <rect width="1440" height="900" fill="url(#frescoSky)" />
+
+      {/* Classical billow clouds with fresco texture */}
+      <path d="M-40 240 Q160 180 340 230 Q540 160 760 220 Q980 170 1200 240 Q1380 200 1500 250 L1500 450 L-40 450 Z" fill="#ffffff" opacity="0.07" />
+      <path d="M120 320 Q320 250 520 300 Q760 230 1020 310 Q1280 260 1480 330 L1480 500 L120 500 Z" fill="#fef08a" opacity="0.04" />
+
+      {/* Distant Classical Tuscan Hills */}
+      <path d="M-50 620 Q200 520 480 570 Q800 480 1100 560 Q1320 510 1500 580 L1500 900 L-50 900 Z" fill="url(#hillsGrad)" opacity="0.85" />
+      
+      {/* Cypress Trees Silhouette on Horizon */}
+      <path d="M180 540 C175 480, 185 480, 180 430 C175 480, 185 480, 180 540 Z" fill="#0b1710" />
+      <path d="M210 550 C205 490, 215 490, 210 440 C205 490, 215 490, 210 550 Z" fill="#0b1710" />
+      <path d="M1250 530 C1245 470, 1255 470, 1250 420 C1245 470, 1255 470, 1250 530 Z" fill="#0b1710" />
+      <path d="M1280 540 C1275 480, 1285 480, 1280 435 C1275 480, 1285 480, 1280 540 Z" fill="#0b1710" />
+
+      {/* Classical Roman Columns / Arches on Sides */}
+      <g opacity="0.25">
+        {/* Left Roman Column */}
+        <rect x="40" y="80" width="28" height="740" fill="url(#archGold)" rx="2" />
+        <rect x="30" y="65" width="48" height="18" fill="url(#archGold)" rx="2" />
+        <rect x="25" y="810" width="58" height="24" fill="url(#archGold)" rx="2" />
+        
+        {/* Right Roman Column */}
+        <rect x="1370" y="80" width="28" height="740" fill="url(#archGold)" rx="2" />
+        <rect x="1360" y="65" width="48" height="18" fill="url(#archGold)" rx="2" />
+        <rect x="1355" y="810" width="58" height="24" fill="url(#archGold)" rx="2" />
+      </g>
+    </svg>
+  </div>
+);
+
 // Classical Winged Pegasus & Rider Illustration Component
 const ClassicalPegasus: React.FC<{ className?: string }> = ({ className = "" }) => (
   <div className={`pointer-events-none select-none relative ${className}`}>
@@ -222,8 +280,6 @@ const ClassicalPegasus: React.FC<{ className?: string }> = ({ className = "" }) 
       {/* Pegasus Horse Body */}
       <path d="M120 220 C100 240, 80 270, 70 300 C68 305, 80 308, 86 300 C98 280, 115 255, 135 240 Z" fill="url(#pegasusGrad)" />
       <path d="M140 215 C130 245, 110 275, 100 310 C98 316, 112 318, 118 308 C130 280, 150 250, 160 230 Z" fill="url(#pegasusGrad)" />
-      
-      {/* Torso & Flank */}
       <path d="M130 210 C140 180, 180 170, 240 180 C290 190, 320 200, 340 225 C330 245, 290 260, 220 255 C160 250, 135 235, 130 210 Z" fill="url(#pegasusGrad)" />
       
       {/* Front Legs Galloping */}
@@ -262,15 +318,15 @@ const ClassicalPegasus: React.FC<{ className?: string }> = ({ className = "" }) 
 
 // Gilded Baroque Carved Gold Ornate Frame Component
 const BaroqueFrame: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = "" }) => (
-  <div className={`relative mx-auto w-full max-w-5xl rounded-3xl p-3 sm:p-5 md:p-6 transition-all duration-500 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),0_0_45px_rgba(217,119,6,0.25)] ${className}`}>
+  <div className={`relative mx-auto w-full max-w-6xl rounded-3xl p-3 sm:p-5 md:p-6 transition-all duration-500 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9),0_0_55px_rgba(217,119,6,0.3)] ${className}`}>
     {/* Frame Outer Layer: Burnished Carved Gold Gradient */}
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-[#b48833] via-[#755018] to-[#3a2507] p-[3px] shadow-2xl">
+    <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-[#c59a42] via-[#755018] to-[#3a2507] p-[3px] shadow-2xl">
       {/* Middle Bevel with Gold Highlight Sheen */}
-      <div className="w-full h-full rounded-[22px] bg-gradient-to-tr from-[#573b0c] via-[#d4af37] to-[#8d661b] p-[4px]">
+      <div className="w-full h-full rounded-[22px] bg-gradient-to-tr from-[#573b0c] via-[#e5c058] to-[#8d661b] p-[4px]">
         {/* Deep Carved Recess */}
         <div className="w-full h-full rounded-[18px] bg-gradient-to-b from-[#2a1b05] via-[#4d350e] to-[#1c1103] p-[5px]">
           {/* Inner Beaded Gold Lip */}
-          <div className="w-full h-full rounded-[14px] border-2 border-[#fef08a]/40 bg-[#090d16]" />
+          <div className="w-full h-full rounded-[14px] border-2 border-[#fef08a]/50 bg-[#090d16]" />
         </div>
       </div>
     </div>
@@ -294,9 +350,9 @@ const BaroqueFrame: React.FC<{ children: React.ReactNode; className?: string }> 
     </div>
 
     {/* Center Top Golden Crest */}
-    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none flex items-center justify-center">
-      <div className="px-5 py-1 rounded-full bg-gradient-to-r from-[#92681e] via-[#fef08a] to-[#92681e] text-[#3e2704] text-[10px] font-serif font-black tracking-widest uppercase border border-amber-300 shadow-md">
-        ✦ ACESUTRA OPERATING SYSTEM ✦
+    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none flex items-center justify-center">
+      <div className="px-6 py-1 rounded-full bg-gradient-to-r from-[#92681e] via-[#fef08a] to-[#92681e] text-[#3e2704] text-[11px] font-serif font-black tracking-widest uppercase border border-amber-300 shadow-lg">
+        ✦ ACESUTRA AGENCY OPERATING SYSTEM ✦
       </div>
     </div>
 
@@ -319,7 +375,7 @@ const BaroqueFrame: React.FC<{ children: React.ReactNode; className?: string }> 
     </div>
 
     {/* Frame Content Container */}
-    <div className="relative z-10 w-full rounded-[14px] overflow-hidden bg-[#0a0f1d] border border-amber-400/20 shadow-inner">
+    <div className="relative z-10 w-full rounded-[14px] overflow-hidden bg-[#fbfaf7] border border-amber-400/20 shadow-inner">
       {children}
     </div>
   </div>
@@ -377,7 +433,7 @@ export default function App() {
   // Automated WhatsApp Message
   const waUrl = "https://wa.me/918080187384?text=" + encodeURIComponent("Hi AceSutra Team, I would like to organize and scale my business growth with your Pune Growth OS.");
 
-  // Case Studies Array
+  // Case Studies Array (Connected directly to user-uploaded images)
   const caseStudies = [
     {
       id: "gym",
@@ -505,6 +561,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#070b12] text-slate-100 font-sans selection:bg-pink-500 selection:text-white relative overflow-x-hidden">
       
+      {/* Classical Renaissance Scenic Canvas Backdrop */}
+      <ClassicalRenaissanceBackdrop />
+
       {/* Fluttering 3D Butterflies across the canvas */}
       <Butterfly className="top-24 left-8 animate-bounce hidden md:block" color="#f472b6" style={{ animationDuration: '6s' }} />
       <Butterfly className="top-40 right-12 animate-pulse hidden md:block" color="#facc15" style={{ animationDuration: '7s' }} />
@@ -512,17 +571,8 @@ export default function App() {
       <Butterfly className="top-[1400px] right-20 hidden md:block" color="#38bdf8" style={{ animationDuration: '6.5s' }} />
       <Butterfly className="top-[2100px] left-10 hidden lg:block" color="#f472b6" style={{ animationDuration: '7.5s' }} />
 
-      {/* Floating Ambient Stars in Night Sky */}
-      <div className="absolute top-0 left-0 w-full h-[1200px] pointer-events-none select-none overflow-hidden z-0">
-        <div className="absolute top-10 left-1/4 w-1 h-1 bg-white rounded-full animate-ping" />
-        <div className="absolute top-32 right-1/3 w-1.5 h-1.5 bg-amber-200 rounded-full animate-pulse" />
-        <div className="absolute top-80 left-12 w-1 h-1 bg-pink-300 rounded-full animate-pulse" />
-        <div className="absolute top-96 right-16 w-1.5 h-1.5 bg-cyan-300 rounded-full animate-ping" />
-        <div className="absolute top-[600px] left-1/3 w-1 h-1 bg-white rounded-full" />
-      </div>
-
       {/* TOP HEADER / HUD NAVIGATION */}
-      <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#070b12]/80 border-b border-white/5 transition-all">
+      <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#070b12]/85 border-b border-white/10 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           
           {/* Logo & Brand Identity */}
@@ -534,7 +584,7 @@ export default function App() {
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-[#0f172a]/70 p-1.5 rounded-full border border-white/10 shadow-lg">
+          <nav className="hidden md:flex items-center gap-1 bg-[#0f172a]/80 p-1.5 rounded-full border border-white/10 shadow-lg">
             <button 
               onClick={() => { handleInteraction('click'); document.getElementById('system-os')?.scrollIntoView({ behavior: 'smooth' }); }}
               className="px-4 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all"
@@ -644,7 +694,7 @@ export default function App() {
         )}
       </header>
 
-      {/* SECTION 1: HERO & WIRO TITLE */}
+      {/* SECTION 1: HERO & PURE SOLID WHITE TITLE (Changed from colourful to one colour) */}
       <section className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 text-center z-10">
         
         {/* Skip Intro Button */}
@@ -654,32 +704,25 @@ export default function App() {
               handleInteraction('pop');
               setIntroSkipped(!introSkipped);
             }}
-            className="px-4 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider text-slate-400 hover:text-white border border-white/10 hover:border-pink-500/40 bg-white/5 hover:bg-pink-500/10 transition-all flex items-center gap-2"
+            className="px-4 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider text-slate-300 hover:text-white border border-white/20 hover:border-pink-500/50 bg-black/40 hover:bg-pink-500/10 backdrop-blur-md transition-all flex items-center gap-2 shadow"
           >
-            <span>{introSkipped ? "✦ VIEW INTRO FRESCO" : "✦ SKIP INTRO"}</span>
+            <span>{introSkipped ? "✦ VIEW INTRO FRESCO" : "✦ ENTER OPERATING SYSTEM"}</span>
           </button>
         </div>
 
-        {/* Wiro-style Colorful Rainbow Brand Title */}
-        <div className="flex items-center justify-center gap-1.5 text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4 select-none">
-          <span className="text-[#a3e635]">A</span>
-          <span className="text-[#facc15]">C</span>
-          <span className="text-[#fb923c]">E</span>
-          <span className="text-[#f472b6]">S</span>
-          <span className="text-[#c084fc]">U</span>
-          <span className="text-[#38bdf8]">T</span>
-          <span className="text-[#34d399]">R</span>
-          <span className="text-[#f472b6]">A</span>
-        </div>
-
-        {/* Hero Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight text-white max-w-4xl mx-auto leading-[1.08] mb-6">
-          Organize Your Chaos
+        {/* Clean, Elegant Pure White Brand Name (One Colour) */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight text-white mb-2 select-none filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+          AceSutra
         </h1>
 
+        {/* Hero Tagline */}
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-slate-200 max-w-4xl mx-auto leading-[1.1] mb-6">
+          Organize Your Chaos
+        </h2>
+
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-normal mb-8 leading-relaxed">
-          The operating system for ambitious Pune agencies and high-ticket local businesses.
+        <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal mb-8 leading-relaxed filter drop-shadow">
+          The operating system for modern Pune agencies and ambitious high-ticket businesses.
         </p>
 
         {/* Action Buttons */}
@@ -698,22 +741,22 @@ export default function App() {
           <button
             onClick={() => {
               handleInteraction('click');
-              document.getElementById('modules')?.scrollIntoView({ behavior: 'smooth' });
+              document.getElementById('proof')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-sm text-slate-300 hover:text-white border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-sm text-slate-200 hover:text-white border border-white/20 hover:border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md transition-all flex items-center justify-center gap-2"
           >
-            <span>See the features</span>
+            <span>Inspect client results</span>
             <ChevronDown className="w-4 h-4" />
           </button>
         </div>
 
-        {/* SECTION 2: THE GILDED BAROQUE FRAME & LIVE OPERATING SYSTEM */}
+        {/* SECTION 2: THE GILDED BAROQUE FRAME & EXACT WIRO-STYLE DESKTOP WINDOW */}
         <div id="system-os" className="relative scroll-mt-24">
           <BaroqueFrame>
             
-            {/* If intro is not skipped: Show Classical Mythological Pegasus Painting */}
+            {/* If intro fresco active: Classical Mythological Pegasus Painting */}
             {!introSkipped ? (
-              <div className="relative min-h-[540px] bg-gradient-to-b from-[#38bdf8] via-[#7dd3fc] to-[#bae6fd] p-8 flex flex-col items-center justify-between text-slate-900 overflow-hidden">
+              <div className="relative min-h-[580px] bg-gradient-to-b from-[#38bdf8] via-[#7dd3fc] to-[#bae6fd] p-8 flex flex-col items-center justify-between text-slate-900 overflow-hidden">
                 <div className="absolute top-4 left-6 flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-serif font-bold text-slate-800 shadow">
                   <span>🏛️ Classical Renaissance Canvas (c. 1640)</span>
                 </div>
@@ -723,7 +766,7 @@ export default function App() {
                     Order Born Out of Ancient Chaos
                   </h3>
                   <p className="text-xs text-slate-700 leading-relaxed mb-4">
-                    Before unified operating systems, empires managed logistics across scattered scrolls. Today, AceSutra unites your acquisition, lead triage, and retention into one shared record.
+                    Before unified operating systems, empires managed logistics across scattered silos. Today, AceSutra unites your acquisition, lead triage, and retention into one shared record.
                   </p>
                   <button
                     onClick={() => { handleInteraction('pop'); setIntroSkipped(true); }}
@@ -734,540 +777,664 @@ export default function App() {
                 </div>
               </div>
             ) : (
-              /* LIVE OPERATING SYSTEM UI INSIDE THE GOLDEN FRAME */
-              <div className="min-h-[560px] bg-[#0c1220] flex flex-col text-slate-200">
+              /* EXACT WIRO AGENCY OS DESKTOP WINDOW WITH LEFT SIDEBAR + MAIN WORKSPACE */
+              <div className="min-h-[640px] bg-[#fbfaf7] flex flex-col md:flex-row text-slate-900">
                 
-                {/* OS Top Window Bar */}
-                <div className="h-14 bg-[#090d18] border-b border-white/10 px-5 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                      <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                    </div>
-                    <div className="h-4 w-px bg-white/10 hidden sm:block" />
-                    <div className="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-300">
-                      <span className="text-amber-400 font-bold">Good afternoon,</span>
-                      <span className="text-white font-semibold">Partner</span>
-                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
-                        <Clock className="w-3 h-3 text-slate-400" />
-                        <span>[ Kharadi, Pune • 18.55° N ]</span>
+                {/* 1. LEFT SIDEBAR (Matching Wiro frame 00:02) */}
+                <div className="w-full md:w-56 bg-[#111622] text-slate-300 p-4 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800">
+                  <div className="space-y-4">
+                    
+                    {/* Sidebar Brand with Official 3D Logo */}
+                    <div className="flex items-center gap-2.5 pb-4 border-b border-white/10">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden border border-amber-300/40 p-0.5 bg-black/60 flex items-center justify-center">
+                        <img src={imgLogo} alt="AceSutra Logo" className="w-full h-full object-contain" />
                       </div>
+                      <span className="font-serif font-black text-base text-white tracking-tight">AceSutra</span>
                     </div>
+
+                    {/* Sidebar Nav Items */}
+                    <nav className="space-y-1">
+                      {[
+                        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+                        { id: 'mywork', label: 'My Work', icon: Check },
+                        { id: 'projects', label: 'Projects (Proof)', icon: Briefcase },
+                        { id: 'seo', label: 'Local SEO Engine', icon: MapPin },
+                        { id: 'ads', label: 'Ads & Growth', icon: Zap },
+                        { id: 'whatsapp', label: 'WhatsApp OS', icon: MessageCircle },
+                        { id: 'finance', label: 'Finance & ROI', icon: Sliders },
+                      ].map(item => {
+                        const Icon = item.icon;
+                        const isActive = activeTab === item.id;
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => { handleInteraction('click'); setActiveTab(item.id); }}
+                            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+                              isActive 
+                                ? 'bg-white text-slate-950 font-bold shadow-sm' 
+                                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                            }`}
+                          >
+                            <Icon className={`w-4 h-4 ${isActive ? 'text-pink-600' : 'text-slate-400'}`} />
+                            <span>{item.label}</span>
+                          </button>
+                        );
+                      })}
+                    </nav>
                   </div>
 
-                  {/* Search and Action Bar */}
-                  <div className="flex items-center gap-3">
-                    <div className="relative hidden md:block">
-                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
-                      <input 
-                        type="text" 
-                        readOnly
-                        value="Search campaigns, Kharadi leads..."
-                        className="bg-slate-900/80 border border-white/10 rounded-full pl-9 pr-4 py-1.5 text-xs text-slate-300 w-56 focus:outline-none"
-                      />
+                  {/* Sidebar Bottom: Founder Profile */}
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <VedantAvatar size="w-8 h-8" />
+                      <div>
+                        <span className="text-xs font-bold text-white block">Vedant</span>
+                        <span className="text-[10px] text-slate-400 font-mono">Kharadi, Pune</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[11px] font-mono text-emerald-400">
-                      <Zap className="w-3 h-3 text-emerald-400 fill-emerald-400" />
-                      <span>OS LIVE</span>
-                    </div>
+                    <Settings className="w-4 h-4 text-slate-400 hover:text-white cursor-pointer" />
                   </div>
                 </div>
 
-                {/* OS Main Work Area (Interactive based on activeTab) */}
-                <div className="p-4 sm:p-6 flex-1 overflow-y-auto">
+                {/* 2. MAIN WORKSPACE AREA */}
+                <div className="flex-1 flex flex-col bg-[#fbfaf7]">
                   
-                  {/* TAB 1: EXECUTIVE DASHBOARD */}
-                  {activeTab === 'dashboard' && (
-                    <div className="space-y-6">
-                      
-                      {/* Top Metric Cards (Pastel Style from Wiro recording) */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        
-                        {/* Active Projects Card (Pastel Lime/Yellow) */}
-                        <div className="bg-[#1a2517]/60 border border-lime-400/30 rounded-2xl p-4 transition-all hover:border-lime-400/50">
-                          <div className="flex items-center justify-between text-xs font-semibold text-lime-300 mb-2">
-                            <span>Active Campaigns</span>
-                            <span className="px-2 py-0.5 rounded-full bg-lime-400/20 text-[10px] font-mono text-lime-200">PUNE METRO</span>
-                          </div>
-                          <div className="flex items-baseline gap-3">
-                            <span className="text-3xl font-black text-white">34</span>
-                            <span className="text-xs text-slate-400 font-medium">03 waiting approval</span>
-                          </div>
-                          <div className="mt-3 flex items-center gap-1.5 text-[11px] text-lime-300/80">
-                            <Activity className="w-3.5 h-3.5" />
-                            <span>Club 360, Dr. Joshi Dental, Geetanjali</span>
-                          </div>
-                        </div>
-
-                        {/* Waiting for Approval Card (Pastel Pink) */}
-                        <div className="bg-[#291420]/60 border border-pink-400/30 rounded-2xl p-4 transition-all hover:border-pink-400/50">
-                          <div className="flex items-center justify-between text-xs font-semibold text-pink-300 mb-2">
-                            <span>Waiting for Approval</span>
-                            <span className="px-2 py-0.5 rounded-full bg-pink-400/20 text-[10px] font-mono text-pink-200">ACTION REQ</span>
-                          </div>
-                          <div className="flex items-baseline gap-3">
-                            <span className="text-3xl font-black text-white">2</span>
-                            <span className="text-xs text-slate-400 font-medium">Kharadi ad copy review</span>
-                          </div>
-                          <div className="mt-3 flex gap-2">
-                            <button 
-                              onClick={() => handleInteraction('pop')}
-                              className="px-2.5 py-1 rounded bg-pink-500/20 hover:bg-pink-500/30 text-[10px] font-bold text-pink-300 border border-pink-500/30 transition-all"
-                            >
-                              Approve All
-                            </button>
-                            <button 
-                              onClick={() => handleInteraction('click')}
-                              className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-bold text-slate-300 transition-all"
-                            >
-                              Inspect (2)
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Verified Pipeline Generated (Pastel Cyan) */}
-                        <div className="bg-[#122332]/60 border border-cyan-400/30 rounded-2xl p-4 transition-all hover:border-cyan-400/50">
-                          <div className="flex items-center justify-between text-xs font-semibold text-cyan-300 mb-2">
-                            <span>Pipeline Generated</span>
-                            <span className="px-2 py-0.5 rounded-full bg-cyan-400/20 text-[10px] font-mono text-cyan-200">VERIFIED</span>
-                          </div>
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-black text-white">₹71.2L</span>
-                            <span className="text-xs text-emerald-400 font-bold">+312% MoM</span>
-                          </div>
-                          <div className="mt-3 flex items-center gap-1.5 text-[11px] text-cyan-300/80">
-                            <BarChart3 className="w-3.5 h-3.5" />
-                            <span>15-sec WhatsApp consultation triage</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Main Bento Layout inside Dashboard */}
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        
-                        {/* Left 2 Cols: Projects in Motion */}
-                        <div className="lg:col-span-2 bg-slate-900/60 border border-white/10 rounded-2xl p-5">
-                          <div className="flex items-center justify-between mb-4">
-                            <div>
-                              <h4 className="font-serif font-bold text-base text-white">Projects in Motion</h4>
-                              <p className="text-xs text-slate-400">Live client campaigns running across Pune</p>
-                            </div>
-                            <span className="text-xs font-mono text-amber-300 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded-full">
-                              3 Retainers Active
-                            </span>
-                          </div>
-
-                          <div className="space-y-3">
-                            {/* Project 1: Club 360 Gym */}
-                            <div 
-                              onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(caseStudies[0]); }}
-                              className="p-3.5 rounded-xl bg-slate-950/70 border border-white/5 hover:border-cyan-400/40 cursor-pointer transition-all flex items-center justify-between group"
-                            >
-                              <div className="flex items-center gap-3">
-                                <img src={imgGym} alt="Club 360" className="w-10 h-10 rounded-lg object-cover border border-white/10" />
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">Club 360 Gym</span>
-                                    <span className="text-[10px] font-mono bg-cyan-500/15 text-cyan-400 px-2 py-0.5 rounded">FITNESS</span>
-                                  </div>
-                                  <p className="text-[11px] text-slate-400 mt-0.5">314 high-ticket members signed via geo-fenced Meta reels</p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <span className="text-xs font-black text-emerald-400">5.4x ROAS</span>
-                                <span className="block text-[10px] text-slate-500">Live</span>
-                              </div>
-                            </div>
-
-                            {/* Project 2: Dr. Joshi Dental */}
-                            <div 
-                              onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(caseStudies[1]); }}
-                              className="p-3.5 rounded-xl bg-slate-950/70 border border-white/5 hover:border-pink-400/40 cursor-pointer transition-all flex items-center justify-between group"
-                            >
-                              <div className="flex items-center gap-3">
-                                <img src={imgDental} alt="Dr. Joshi Clinic" className="w-10 h-10 rounded-lg object-cover border border-white/10" />
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-xs font-bold text-white group-hover:text-pink-300 transition-colors">Dr. Joshi Dental Clinic</span>
-                                    <span className="text-[10px] font-mono bg-pink-500/15 text-pink-400 px-2 py-0.5 rounded">HEALTHCARE</span>
-                                  </div>
-                                  <p className="text-[11px] text-slate-400 mt-0.5">#1 Google Maps rank in Kharadi • 4.2x implant consultations</p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <span className="text-xs font-black text-pink-400">₹28.4L Pipeline</span>
-                                <span className="block text-[10px] text-slate-500">Live</span>
-                              </div>
-                            </div>
-
-                            {/* Project 3: Geetanjali Salon */}
-                            <div 
-                              onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(caseStudies[2]); }}
-                              className="p-3.5 rounded-xl bg-slate-950/70 border border-white/5 hover:border-amber-400/40 cursor-pointer transition-all flex items-center justify-between group"
-                            >
-                              <div className="flex items-center gap-3">
-                                <img src={imgSalon} alt="Geetanjali Salon" className="w-10 h-10 rounded-lg object-cover border border-white/10" />
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">Geetanjali Salon</span>
-                                    <span className="text-[10px] font-mono bg-amber-500/15 text-amber-400 px-2 py-0.5 rounded">LUXURY BEAUTY</span>
-                                  </div>
-                                  <p className="text-[11px] text-slate-400 mt-0.5">180+ monthly bridal packages automated on WhatsApp</p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <span className="text-xs font-black text-amber-300">&lt; 30s Triage</span>
-                                <span className="block text-[10px] text-slate-500">Live</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Right Col: Today's Rhythm & Schedule */}
-                        <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-5 flex flex-col justify-between">
-                          <div>
-                            <div className="flex items-center justify-between mb-4">
-                              <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4 text-amber-300" />
-                                <h4 className="font-serif font-bold text-base text-white">Today's Rhythm</h4>
-                              </div>
-                              <span className="text-[10px] font-mono text-slate-400">PUNE TIME</span>
-                            </div>
-
-                            <div className="space-y-2.5">
-                              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/5 flex items-start gap-2.5">
-                                <div className="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 flex-shrink-0" />
-                                <div>
-                                  <span className="text-xs font-semibold text-slate-200">10:00 AM • Meta Ad Review</span>
-                                  <p className="text-[10px] text-slate-400">Refreshed 4 high-CTR video creatives for Club 360 Gym</p>
-                                </div>
-                              </div>
-
-                              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/5 flex items-start gap-2.5">
-                                <div className="w-2 h-2 rounded-full bg-pink-400 mt-1.5 flex-shrink-0" />
-                                <div>
-                                  <span className="text-xs font-semibold text-slate-200">02:30 PM • WhatsApp Automation</span>
-                                  <p className="text-[10px] text-slate-400">Deployed bridal inquiry bot for Geetanjali Salon</p>
-                                </div>
-                              </div>
-
-                              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/5 flex items-start gap-2.5">
-                                <div className="w-2 h-2 rounded-full bg-cyan-400 mt-1.5 flex-shrink-0" />
-                                <div>
-                                  <span className="text-xs font-semibold text-slate-200">04:45 PM • Local SEO Audit</span>
-                                  <p className="text-[10px] text-slate-400">Dr. Joshi verified Google 3-Pack rank #1 in Kharadi</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <a
-                            href={waUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => handleInteraction('chime')}
-                            className="mt-4 w-full py-2 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center gap-2 transition-all"
-                          >
-                            <MessageCircle className="w-4 h-4" />
-                            <span>Direct Chat (+918080187384)</span>
-                          </a>
-                        </div>
-                      </div>
+                  {/* Window Top Navigation & Search Bar */}
+                  <div className="h-14 border-b border-slate-200/80 px-6 flex items-center justify-between bg-white/70 backdrop-blur-sm">
+                    <div className="flex items-center gap-3">
+                      <h3 className="font-serif font-black text-base text-slate-900">
+                        Good afternoon, Partner.
+                      </h3>
+                      <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
+                        <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3 text-slate-400" /> [ Kharadi, Pune • 18.55° N ]</span>
+                      </span>
                     </div>
-                  )}
 
-                  {/* TAB 2: MY WORK (INTERACTIVE CHECKLIST) */}
-                  {activeTab === 'mywork' && (
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between bg-slate-900/60 border border-white/10 rounded-2xl p-4">
-                        <div>
-                          <h4 className="font-serif font-bold text-lg text-white">My Work & Operational Queue</h4>
-                          <p className="text-xs text-slate-400">Interactive task board powering high-speed delivery</p>
+                    <div className="flex items-center gap-3">
+                      <div className="relative hidden lg:block">
+                        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                        <input 
+                          type="text" 
+                          readOnly
+                          value="Search Kharadi leads, ROAS..."
+                          className="bg-slate-100 border border-slate-200 rounded-full pl-9 pr-4 py-1 text-xs text-slate-700 w-52 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-mono font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span>LIVE OS</span>
+                      </div>
+                      <Bell className="w-4 h-4 text-slate-500 hover:text-slate-900 cursor-pointer" />
+                    </div>
+                  </div>
+
+                  {/* Content per Tab */}
+                  <div className="p-4 sm:p-6 flex-1 overflow-y-auto space-y-6">
+                    
+                    {/* TAB 1: EXECUTIVE DASHBOARD */}
+                    {activeTab === 'dashboard' && (
+                      <div className="space-y-6">
+                        
+                        {/* 4 Pastel Metric Bento Cards (Direct from Wiro recording) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                          
+                          {/* Card 1: Action Projects (Pastel Lime) */}
+                          <div className="bg-[#f7fee7] border border-[#d9f99d] rounded-2xl p-4 shadow-sm hover:shadow transition-all">
+                            <div className="flex items-center justify-between text-xs font-bold text-lime-800 mb-1">
+                              <span className="flex items-center gap-1.5"><Activity className="w-3.5 h-3.5 text-lime-700" /><span>Action projects</span></span>
+                              <span className="text-[10px] font-mono bg-lime-200/80 px-2 py-0.5 rounded text-lime-900">PUNE</span>
+                            </div>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-3xl font-black text-slate-900">34</span>
+                              <span className="text-xs text-slate-600">03 on hold</span>
+                            </div>
+                            <div className="mt-2 text-[11px] text-lime-700 font-medium">
+                              12 completed this week
+                            </div>
+                          </div>
+
+                          {/* Card 2: Waiting for approval (Pastel Pink) */}
+                          <div className="bg-[#fdf2f8] border border-[#fbcfe8] rounded-2xl p-4 shadow-sm hover:shadow transition-all">
+                            <div className="flex items-center justify-between text-xs font-bold text-pink-800 mb-1">
+                              <span>Waiting for approval</span>
+                              <span className="text-[10px] font-mono bg-pink-200/80 px-2 py-0.5 rounded text-pink-900">2 NEW</span>
+                            </div>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-3xl font-black text-slate-900">2</span>
+                              <span className="text-xs text-slate-600">reviews pending</span>
+                            </div>
+                            <div className="mt-2 flex gap-1.5">
+                              <button 
+                                onClick={() => handleInteraction('pop')}
+                                className="px-2 py-0.5 rounded bg-pink-500 text-white text-[10px] font-bold shadow-sm"
+                              >
+                                Approve
+                              </button>
+                              <button 
+                                onClick={() => handleInteraction('click')}
+                                className="px-2 py-0.5 rounded bg-slate-200 text-slate-700 text-[10px] font-bold"
+                              >
+                                Inspect
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Card 3: WhatsApp Leads (Pastel Lilac) */}
+                          <div className="bg-[#faf5ff] border border-[#e9d5ff] rounded-2xl p-4 shadow-sm hover:shadow transition-all">
+                            <div className="flex items-center justify-between text-xs font-bold text-purple-800 mb-1">
+                              <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-purple-700" /><span>WhatsApp Leads</span></span>
+                              <span className="text-[10px] font-mono bg-purple-200/80 px-2 py-0.5 rounded text-purple-900">+918080187384</span>
+                            </div>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-3xl font-black text-slate-900">18</span>
+                              <span className="text-xs text-emerald-600 font-bold">&lt; 15s reply</span>
+                            </div>
+                            <div className="mt-2 text-[11px] text-purple-700 font-medium">
+                              Club 360, Dental, Salon
+                            </div>
+                          </div>
+
+                          {/* Card 4: Pipeline Generated (Pastel Cyan) */}
+                          <div className="bg-[#ecfeff] border border-[#a5f3fc] rounded-2xl p-4 shadow-sm hover:shadow transition-all">
+                            <div className="flex items-center justify-between text-xs font-bold text-cyan-800 mb-1">
+                              <span className="flex items-center gap-1.5"><BarChart3 className="w-3.5 h-3.5 text-cyan-700" /><span>Pipeline Generated</span></span>
+                              <span className="text-[10px] font-mono bg-cyan-200/80 px-2 py-0.5 rounded text-cyan-900">VERIFIED</span>
+                            </div>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-3xl font-black text-slate-900">₹71.2L</span>
+                              <span className="text-xs text-emerald-600 font-bold">+312%</span>
+                            </div>
+                            <div className="mt-2 text-[11px] text-cyan-700 font-medium">
+                              5.4x Verified ROAS
+                            </div>
+                          </div>
+
                         </div>
-                        <div className="flex gap-2">
-                          <span className="px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-300 font-mono">
+
+                        {/* Lower Bento Layout: Projects in Motion with VISIBLE CLIENT IMAGES */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                          
+                          {/* Left 2 Cols: Projects in Motion featuring PROMINENT UPLOADED IMAGES */}
+                          <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <h4 className="font-serif font-black text-base text-slate-900">
+                                  Projects in Motion
+                                </h4>
+                                <p className="text-xs text-slate-500">
+                                  Click any project to inspect live numbers & photos
+                                </p>
+                              </div>
+                              <span className="text-[11px] font-mono font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
+                                3 Pune Clients Active
+                              </span>
+                            </div>
+
+                            <div className="space-y-3">
+                              
+                              {/* 1. Club 360 Gym (Gym Image Prominently Displayed) */}
+                              <div 
+                                onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(caseStudies[0]); }}
+                                className="p-3.5 rounded-xl border border-slate-200 hover:border-pink-500 bg-slate-50/80 hover:bg-pink-50/30 cursor-pointer transition-all flex items-center justify-between group shadow-sm"
+                              >
+                                <div className="flex items-center gap-4">
+                                  <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 flex-shrink-0 shadow-sm">
+                                    <img 
+                                      src={imgGym} 
+                                      alt="Club 360 Gym Pune" 
+                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h5 className="font-serif font-bold text-sm text-slate-900 group-hover:text-pink-600 transition-colors">
+                                        Club 360 Gym
+                                      </h5>
+                                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-lime-100 text-lime-800 font-bold">
+                                        FITNESS
+                                      </span>
+                                    </div>
+                                    <p className="text-xs text-slate-600 mt-1 line-clamp-1">
+                                      From dead hours to 314 annual memberships in 90 days.
+                                    </p>
+                                    <span className="text-[10px] font-mono text-emerald-700 font-bold block mt-1">
+                                      5.4x Verified Meta Ad ROAS
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-pink-600 group-hover:translate-x-1 transition-all" />
+                                </div>
+                              </div>
+
+                              {/* 2. Dr. Joshi Dental Clinic (Dental Image Prominently Displayed) */}
+                              <div 
+                                onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(caseStudies[1]); }}
+                                className="p-3.5 rounded-xl border border-slate-200 hover:border-pink-500 bg-slate-50/80 hover:bg-pink-50/30 cursor-pointer transition-all flex items-center justify-between group shadow-sm"
+                              >
+                                <div className="flex items-center gap-4">
+                                  <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 flex-shrink-0 shadow-sm">
+                                    <img 
+                                      src={imgDental} 
+                                      alt="Dr. Joshi Dental Clinic" 
+                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h5 className="font-serif font-bold text-sm text-slate-900 group-hover:text-pink-600 transition-colors">
+                                        Dr. Joshi Dental Clinic
+                                      </h5>
+                                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-100 text-pink-800 font-bold">
+                                        HEALTHCARE
+                                      </span>
+                                    </div>
+                                    <p className="text-xs text-slate-600 mt-1 line-clamp-1">
+                                      4.2x increase in high-ticket implant and aligner consultations.
+                                    </p>
+                                    <span className="text-[10px] font-mono text-pink-700 font-bold block mt-1">
+                                      #1 Google Maps Kharadi Rank
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-pink-600 group-hover:translate-x-1 transition-all" />
+                                </div>
+                              </div>
+
+                              {/* 3. Geetanjali Salon (Salon Storefront Image Prominently Displayed) */}
+                              <div 
+                                onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(caseStudies[2]); }}
+                                className="p-3.5 rounded-xl border border-slate-200 hover:border-pink-500 bg-slate-50/80 hover:bg-pink-50/30 cursor-pointer transition-all flex items-center justify-between group shadow-sm"
+                              >
+                                <div className="flex items-center gap-4">
+                                  <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 flex-shrink-0 shadow-sm">
+                                    <img 
+                                      src={imgSalon} 
+                                      alt="Geetanjali Salon Pune" 
+                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h5 className="font-serif font-bold text-sm text-slate-900 group-hover:text-pink-600 transition-colors">
+                                        Geetanjali Salon
+                                      </h5>
+                                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">
+                                        LUXURY BEAUTY
+                                      </span>
+                                    </div>
+                                    <p className="text-xs text-slate-600 mt-1 line-clamp-1">
+                                      180+ monthly recurring bridal & styling bookings automated.
+                                    </p>
+                                    <span className="text-[10px] font-mono text-purple-700 font-bold block mt-1">
+                                      Sub-30s Automated WhatsApp Triage
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-pink-600 group-hover:translate-x-1 transition-all" />
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          {/* Right Col: Today's Rhythm & Schedule */}
+                          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+                            <div>
+                              <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-2">
+                                  <Calendar className="w-4 h-4 text-slate-700" />
+                                  <h4 className="font-serif font-bold text-sm text-slate-900">Today's Rhythm</h4>
+                                </div>
+                                <span className="text-[10px] font-mono text-slate-500">PUNE TIME</span>
+                              </div>
+
+                              <div className="space-y-3">
+                                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+                                  <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
+                                  <div>
+                                    <span className="text-xs font-bold text-slate-900">10:00 AM • Meta Ad Review</span>
+                                    <p className="text-[11px] text-slate-500">Refreshed 4 high-CTR reels for Club 360 Gym</p>
+                                  </div>
+                                </div>
+
+                                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+                                  <div className="w-2 h-2 rounded-full bg-pink-500 mt-1.5 flex-shrink-0" />
+                                  <div>
+                                    <span className="text-xs font-bold text-slate-900">02:30 PM • WhatsApp Automation</span>
+                                    <p className="text-[11px] text-slate-500">Deployed bridal inquiry bot for Geetanjali Salon</p>
+                                  </div>
+                                </div>
+
+                                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+                                  <div className="w-2 h-2 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0" />
+                                  <div>
+                                    <span className="text-xs font-bold text-slate-900">04:45 PM • Local SEO Audit</span>
+                                    <p className="text-[11px] text-slate-500">Dr. Joshi verified Google 3-Pack rank #1 in Kharadi</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <a
+                              href={waUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => handleInteraction('chime')}
+                              className="mt-4 w-full py-2.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-4 h-4" />
+                              <span>Direct WhatsApp (+918080187384)</span>
+                            </a>
+                          </div>
+
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 2: MY WORK (INTERACTIVE CHECKLIST) */}
+                    {activeTab === 'mywork' && (
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between bg-white border border-slate-200 rounded-2xl p-4">
+                          <div>
+                            <h4 className="font-serif font-black text-lg text-slate-900">My Work & Operational Queue</h4>
+                            <p className="text-xs text-slate-500">Interactive task board powering high-speed delivery</p>
+                          </div>
+                          <span className="px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-800 font-mono font-bold">
                             {Object.values(checkedTasks).filter(Boolean).length} / {Object.keys(checkedTasks).length} Completed
                           </span>
                         </div>
-                      </div>
 
-                      <div className="bg-slate-950/70 border border-white/10 rounded-2xl p-5 space-y-3">
-                        <div 
-                          onClick={() => toggleTask('t1')}
-                          className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 cursor-pointer border border-white/5 transition-all"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
-                              checkedTasks['t1'] ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600'
-                            }`}>
-                              {checkedTasks['t1'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                            </div>
-                            <span className={`text-xs font-semibold ${checkedTasks['t1'] ? 'line-through text-slate-500' : 'text-slate-200'}`}>
-                              Verify Kharadi geo-fenced Meta ad audience (Club 360 Gym)
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-400/10 text-cyan-400">HIGH PRIORITY</span>
-                        </div>
-
-                        <div 
-                          onClick={() => toggleTask('t2')}
-                          className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 cursor-pointer border border-white/5 transition-all"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
-                              checkedTasks['t2'] ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600'
-                            }`}>
-                              {checkedTasks['t2'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                            </div>
-                            <span className={`text-xs font-semibold ${checkedTasks['t2'] ? 'line-through text-slate-500' : 'text-slate-200'}`}>
-                              Automate patient recall WhatsApp sequence for Dr. Joshi Dental
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-400/10 text-pink-400">WHATSAPP OS</span>
-                        </div>
-
-                        <div 
-                          onClick={() => toggleTask('t3')}
-                          className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 cursor-pointer border border-white/5 transition-all"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
-                              checkedTasks['t3'] ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600'
-                            }`}>
-                              {checkedTasks['t3'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                            </div>
-                            <span className={`text-xs font-semibold ${checkedTasks['t3'] ? 'line-through text-slate-500' : 'text-slate-200'}`}>
-                              Publish 4K bridal makeover reels for Geetanjali Salon
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/10 text-amber-400">CREATIVE</span>
-                        </div>
-
-                        <div 
-                          onClick={() => toggleTask('t4')}
-                          className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 cursor-pointer border border-white/5 transition-all"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
-                              checkedTasks['t4'] ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600'
-                            }`}>
-                              {checkedTasks['t4'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                            </div>
-                            <span className={`text-xs font-semibold ${checkedTasks['t4'] ? 'line-through text-slate-500' : 'text-slate-200'}`}>
-                              Update local schema & citation indexing for Pune keywords
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-400/10 text-emerald-400">LOCAL SEO</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* TAB 3: CASE STUDIES & CLIENTS */}
-                  {activeTab === 'projects' && (
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-serif font-bold text-lg text-white">Client Systems & Case Studies</h4>
-                        <span className="text-xs text-slate-400">Click any card to inspect full metrics</span>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {caseStudies.map(cs => (
-                          <div
-                            key={cs.id}
-                            onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(cs); }}
-                            className="bg-slate-900/70 border border-white/10 hover:border-pink-500/40 rounded-2xl overflow-hidden cursor-pointer transition-all group flex flex-col justify-between"
+                        <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3">
+                          <div 
+                            onClick={() => toggleTask('t1')}
+                            className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer border border-slate-200 transition-all"
                           >
-                            <div>
-                              <div className="h-40 overflow-hidden relative">
-                                <img src={cs.image} alt={cs.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-mono text-amber-300">
-                                  {cs.category}
+                            <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
+                                checkedTasks['t1'] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-400 bg-white'
+                              }`}>
+                                {checkedTasks['t1'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                              </div>
+                              <span className={`text-xs font-semibold ${checkedTasks['t1'] ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                                Verify Kharadi geo-fenced Meta ad audience (Club 360 Gym)
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-100 text-cyan-800 font-bold">HIGH PRIORITY</span>
+                          </div>
+
+                          <div 
+                            onClick={() => toggleTask('t2')}
+                            className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer border border-slate-200 transition-all"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
+                                checkedTasks['t2'] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-400 bg-white'
+                              }`}>
+                                {checkedTasks['t2'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                              </div>
+                              <span className={`text-xs font-semibold ${checkedTasks['t2'] ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                                Automate patient recall WhatsApp sequence for Dr. Joshi Dental
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-100 text-pink-800 font-bold">WHATSAPP OS</span>
+                          </div>
+
+                          <div 
+                            onClick={() => toggleTask('t3')}
+                            className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer border border-slate-200 transition-all"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
+                                checkedTasks['t3'] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-400 bg-white'
+                              }`}>
+                                {checkedTasks['t3'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                              </div>
+                              <span className={`text-xs font-semibold ${checkedTasks['t3'] ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                                Publish 4K bridal makeover reels for Geetanjali Salon
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">CREATIVE</span>
+                          </div>
+
+                          <div 
+                            onClick={() => toggleTask('t4')}
+                            className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer border border-slate-200 transition-all"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
+                                checkedTasks['t4'] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-400 bg-white'
+                              }`}>
+                                {checkedTasks['t4'] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                              </div>
+                              <span className={`text-xs font-semibold ${checkedTasks['t4'] ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                                Update local schema & citation indexing for Pune keywords
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">LOCAL SEO</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 3: PROJECTS (FULL PROOF GALLERY WITH BIG IMAGES) */}
+                    {activeTab === 'projects' && (
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-serif font-black text-lg text-slate-900">Pune Client Growth Deployments</h4>
+                            <p className="text-xs text-slate-500">Real photographic assets, verified revenues & rankings</p>
+                          </div>
+                          <span className="text-xs font-mono text-pink-700 bg-pink-100 px-3 py-1 rounded-full font-bold">
+                            Live Pune Systems
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                          {caseStudies.map(cs => (
+                            <div
+                              key={cs.id}
+                              onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(cs); }}
+                              className="bg-white border border-slate-200 hover:border-pink-500 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 group flex flex-col justify-between shadow-sm"
+                            >
+                              <div>
+                                <div className="h-44 overflow-hidden relative border-b border-slate-100">
+                                  <img 
+                                    src={cs.image} 
+                                    alt={cs.title} 
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                                  />
+                                  <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono text-amber-300">
+                                    {cs.category}
+                                  </div>
+                                </div>
+                                <div className="p-4">
+                                  <h5 className="font-serif font-bold text-base text-slate-900 group-hover:text-pink-600 transition-colors">
+                                    {cs.title}
+                                  </h5>
+                                  <p className="text-xs text-slate-600 mt-1 line-clamp-2">
+                                    {cs.headline}
+                                  </p>
                                 </div>
                               </div>
-                              <div className="p-4">
-                                <h5 className="font-serif font-bold text-base text-white group-hover:text-pink-300 transition-colors">
-                                  {cs.title}
-                                </h5>
-                                <p className="text-xs text-slate-400 mt-1 line-clamp-2">
-                                  {cs.headline}
-                                </p>
+                              <div className="p-4 pt-0 flex items-center justify-between text-xs font-bold text-pink-600">
+                                <span className="flex items-center gap-1">
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                  <span>View Case Study</span>
+                                </span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                               </div>
                             </div>
-                            <div className="p-4 pt-0 flex items-center justify-between text-xs font-semibold text-pink-400">
-                              <span className="flex items-center gap-1">
-                                <ExternalLink className="w-3.5 h-3.5" />
-                                <span>View Results</span>
-                              </span>
-                              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 4: LOCAL SEO OS */}
+                    {activeTab === 'seo' && (
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-5">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-serif font-black text-lg text-slate-900">Kharadi & Pune Local SEO Engine</h4>
+                            <p className="text-xs text-slate-500">Real-time rank tracker for high-ticket local searches</p>
+                          </div>
+                          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold">
+                            <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                            <span>#1 GOOGLE 3-PACK</span>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <span className="text-xs text-slate-500">Dr. Joshi Dental Clinic</span>
+                            <div className="text-2xl font-black text-slate-900 mt-1">#1 in Kharadi</div>
+                            <span className="text-[11px] text-emerald-600 font-bold">142 verified 5★ reviews</span>
+                          </div>
+                          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <span className="text-xs text-slate-500">Club 360 Gym</span>
+                            <div className="text-2xl font-black text-slate-900 mt-1">#1 in Kalyani Nagar</div>
+                            <span className="text-[11px] text-cyan-600 font-bold">218 verified 5★ reviews</span>
+                          </div>
+                          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <span className="text-xs text-slate-500">Geetanjali Salon</span>
+                            <div className="text-2xl font-black text-slate-900 mt-1">#1 Bridal Studio</div>
+                            <span className="text-[11px] text-pink-600 font-bold">98% positive sentiment</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 5: ADS PERFORMANCE */}
+                    {activeTab === 'ads' && (
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-serif font-black text-lg text-slate-900">Meta & Google Ads Performance</h4>
+                            <p className="text-xs text-slate-500">Geo-targeted client campaigns across Pune</p>
+                          </div>
+                          <span className="text-xs font-mono text-cyan-800 bg-cyan-100 px-3 py-1 rounded-full font-bold">
+                            Avg ROAS: 4.8x
+                          </span>
+                        </div>
+
+                        <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                          <div>
+                            <span className="text-xs text-slate-500 font-mono">TOTAL REVENUE ATTRIBUTED</span>
+                            <div className="text-3xl font-black text-slate-900">₹71,20,000</div>
+                            <p className="text-xs text-emerald-600 font-medium mt-1">Verified patient & member checkout transactions</p>
+                          </div>
+                          <button
+                            onClick={() => { handleInteraction('chime'); setWaitlistModalOpen(true); }}
+                            className="px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow"
+                          >
+                            Launch My Campaign →
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 6: WHATSAPP OS */}
+                    {activeTab === 'whatsapp' && (
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-serif font-black text-lg text-slate-900">WhatsApp Conversion Engine</h4>
+                            <p className="text-xs text-slate-500">Sub-15 second automated lead capture on +918080187384</p>
+                          </div>
+                          <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold">
+                            99.4% DELIVERY
+                          </span>
+                        </div>
+
+                        <div className="p-4 rounded-xl bg-slate-900 text-slate-200 space-y-3 font-mono text-xs">
+                          <div className="p-3 rounded-lg bg-slate-800 text-slate-300">
+                            <span className="text-amber-400">[INCOMING 10:42 AM]</span> &ldquo;Hi, looking for dental implant cost in Kharadi.&rdquo;
+                          </div>
+                          <div className="p-3 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">
+                            <span className="text-emerald-400">[BOT 10:42 AM - 4s]</span> &ldquo;Namaste! Dr. Joshi offers laser implants with zero-pain protocol. Would you like a consultation tomorrow at 11 AM or 4 PM?&rdquo;
+                          </div>
+                        </div>
+
+                        <a
+                          href={waUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => handleInteraction('chime')}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          <span>Test Live on WhatsApp (+918080187384)</span>
+                        </a>
+                      </div>
+                    )}
+
+                    {/* TAB 7: FINANCE & ROI */}
+                    {activeTab === 'finance' && (
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-6">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Sliders className="w-5 h-5 text-amber-600" />
+                            <div>
+                              <h4 className="font-serif font-black text-lg text-slate-900">Finance & Transparent ROI Calculator</h4>
+                              <p className="text-xs text-slate-500">Drag your monthly growth budget to project returns</p>
                             </div>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                          <span className="text-xs font-mono text-amber-800 bg-amber-100 px-3 py-1 rounded-full font-bold">
+                            Zero Hidden Fees
+                          </span>
+                        </div>
 
-                  {/* TAB 4: LOCAL SEO OS */}
-                  {activeTab === 'seo' && (
-                    <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 space-y-5">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-serif font-bold text-lg text-white">Kharadi & Pune Local SEO Engine</h4>
-                          <p className="text-xs text-slate-400">Real-time rank tracker for high-ticket local searches</p>
-                        </div>
-                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
-                          <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                          <span>#1 GOOGLE 3-PACK</span>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div className="p-4 rounded-xl bg-slate-950/70 border border-white/5">
-                          <span className="text-xs text-slate-400">Dr. Joshi Dental Clinic</span>
-                          <div className="text-2xl font-black text-white mt-1">#1 in Kharadi</div>
-                          <span className="text-[10px] text-emerald-400">142 verified 5★ reviews</span>
-                        </div>
-                        <div className="p-4 rounded-xl bg-slate-950/70 border border-white/5">
-                          <span className="text-xs text-slate-400">Club 360 Gym</span>
-                          <div className="text-2xl font-black text-white mt-1">#1 in Kalyani Nagar</div>
-                          <span className="text-[10px] text-cyan-400">218 verified 5★ reviews</span>
-                        </div>
-                        <div className="p-4 rounded-xl bg-slate-950/70 border border-white/5">
-                          <span className="text-xs text-slate-400">Geetanjali Salon</span>
-                          <div className="text-2xl font-black text-white mt-1">#1 Bridal Studio</div>
-                          <span className="text-[10px] text-pink-400">98% positive sentiment</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* TAB 5: ADS PERFORMANCE */}
-                  {activeTab === 'ads' && (
-                    <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-serif font-bold text-lg text-white">Meta & Google Ads Performance</h4>
-                          <p className="text-xs text-slate-400">Geo-targeted client campaigns in Pune</p>
-                        </div>
-                        <span className="text-xs font-mono text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 rounded-full">
-                          Avg ROAS: 4.8x
-                        </span>
-                      </div>
-
-                      <div className="p-4 rounded-xl bg-slate-950/70 border border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div>
-                          <span className="text-xs text-slate-400 font-mono">TOTAL REVENUE ATTRIBUTED</span>
-                          <div className="text-3xl font-black text-white">₹71,20,000</div>
-                          <p className="text-xs text-emerald-400 mt-1">Verified patient & member checkout transactions</p>
-                        </div>
-                        <button
-                          onClick={() => { handleInteraction('chime'); setWaitlistModalOpen(true); }}
-                          className="px-5 py-2.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold transition-all shadow"
-                        >
-                          Launch My Campaign →
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* TAB 6: WHATSAPP OS */}
-                  {activeTab === 'whatsapp' && (
-                    <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-serif font-bold text-lg text-white">WhatsApp Conversion Engine</h4>
-                          <p className="text-xs text-slate-400">Sub-15 second automated lead capture on +918080187384</p>
-                        </div>
-                        <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono">
-                          99.4% DELIVERY
-                        </span>
-                      </div>
-
-                      <div className="p-4 rounded-xl bg-slate-950/80 border border-white/5 space-y-3 font-mono text-xs">
-                        <div className="p-3 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">
-                          <span className="text-amber-400">[INCOMING 10:42 AM]</span> &ldquo;Hi, looking for dental implant cost in Kharadi.&rdquo;
-                        </div>
-                        <div className="p-3 rounded-lg bg-emerald-950/40 text-emerald-300 border border-emerald-500/20">
-                          <span className="text-emerald-400">[BOT 10:42 AM - 4s]</span> &ldquo;Namaste! Dr. Joshi offers laser implants with zero-pain protocol. Would you like a consultation tomorrow at 11 AM or 4 PM?&rdquo;
-                        </div>
-                      </div>
-
-                      <a
-                        href={waUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => handleInteraction('chime')}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all shadow"
-                      >
-                        <MessageCircle className="w-4 h-4" />
-                        <span>Test Live on WhatsApp (+918080187384)</span>
-                      </a>
-                    </div>
-                  )}
-
-                  {/* TAB 7: FINANCE & ROI */}
-                  {activeTab === 'finance' && (
-                    <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 space-y-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Sliders className="w-5 h-5 text-amber-300" />
-                          <div>
-                            <h4 className="font-serif font-bold text-lg text-white">Finance & Transparent ROI Calculator</h4>
-                            <p className="text-xs text-slate-400">Drag your monthly growth budget to project returns</p>
+                        <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-slate-700 font-bold">Monthly Ad & Engine Budget:</span>
+                            <span className="text-xl font-black text-pink-600">₹{roiBudget.toLocaleString('en-IN')}</span>
                           </div>
-                        </div>
-                        <span className="text-xs font-mono text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full">
-                          Zero Hidden Fees
-                        </span>
-                      </div>
-
-                      <div className="p-5 rounded-xl bg-slate-950/70 border border-white/5 space-y-4">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-slate-300">Monthly Ad & Engine Budget:</span>
-                          <span className="text-lg font-black text-amber-300">₹{roiBudget.toLocaleString('en-IN')}</span>
-                        </div>
-                        <input
-                          type="range"
-                          min="15000"
-                          max="150000"
-                          step="5000"
-                          value={roiBudget}
-                          onChange={(e) => {
-                            handleInteraction('click');
-                            setRoiBudget(Number(e.target.value));
-                          }}
-                          className="w-full accent-pink-500 cursor-pointer"
-                        />
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                          <div className="p-3 rounded-lg bg-slate-900 border border-white/5">
-                            <span className="text-[10px] text-slate-400 block">Est. High-Intent Leads</span>
-                            <span className="text-base font-bold text-white">{Math.round(roiBudget / 240)} leads/mo</span>
-                          </div>
-                          <div className="p-3 rounded-lg bg-slate-900 border border-white/5">
-                            <span className="text-[10px] text-slate-400 block">Projected Revenue</span>
-                            <span className="text-base font-bold text-emerald-400">₹{(roiBudget * 4.4).toLocaleString('en-IN')}</span>
-                          </div>
-                          <div className="p-3 rounded-lg bg-slate-900 border border-white/5 col-span-2 sm:col-span-1">
-                            <span className="text-[10px] text-slate-400 block">Estimated ROAS</span>
-                            <span className="text-base font-bold text-pink-400">4.4x Average</span>
+                          <input
+                            type="range"
+                            min="15000"
+                            max="150000"
+                            step="5000"
+                            value={roiBudget}
+                            onChange={(e) => {
+                              handleInteraction('click');
+                              setRoiBudget(Number(e.target.value));
+                            }}
+                            className="w-full accent-pink-600 cursor-pointer"
+                          />
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                            <div className="p-3 rounded-lg bg-white border border-slate-200">
+                              <span className="text-[10px] text-slate-500 block">Est. High-Intent Leads</span>
+                              <span className="text-base font-bold text-slate-900">{Math.round(roiBudget / 240)} leads/mo</span>
+                            </div>
+                            <div className="p-3 rounded-lg bg-white border border-slate-200">
+                              <span className="text-[10px] text-slate-500 block">Projected Revenue</span>
+                              <span className="text-base font-bold text-emerald-600">₹{(roiBudget * 4.4).toLocaleString('en-IN')}</span>
+                            </div>
+                            <div className="p-3 rounded-lg bg-white border border-slate-200 col-span-2 sm:col-span-1">
+                              <span className="text-[10px] text-slate-500 block">Estimated ROAS</span>
+                              <span className="text-base font-bold text-pink-600">4.4x Average</span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
+                  </div>
                 </div>
+
               </div>
             )}
           </BaroqueFrame>
 
-          {/* REAL-TIME CLICKABLE TAB SELECTOR PILL RIBBON (Directly from Wiro recording) */}
+          {/* REAL-TIME CLICKABLE TAB SELECTOR PILL RIBBON */}
           <div className="mt-8 flex justify-center px-2">
             <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-2 px-3 max-w-full rounded-full bg-[#0c1220]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
               {[
                 { id: 'dashboard', label: 'Dashboard' },
                 { id: 'mywork', label: 'My Work' },
-                { id: 'projects', label: 'Projects' },
+                { id: 'projects', label: 'Projects (Proof)' },
                 { id: 'seo', label: 'Local SEO' },
                 { id: 'ads', label: 'Ads Engine' },
                 { id: 'whatsapp', label: 'WhatsApp OS' },
@@ -1294,10 +1461,77 @@ export default function App() {
         </div>
       </section>
 
-      {/* SECTION 3: RENAISSANCE SKY & 15-MODULE BENTO CARDS */}
-      <section id="modules" className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 z-10">
+      {/* SECTION 3: PROMINENT VISUAL PUNE CLIENT SHOWCASE (High-Resolution Uploaded Photos) */}
+      <section id="proof" className="relative py-20 px-4 sm:px-6 lg:px-8 z-10 border-t border-white/10">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-mono uppercase tracking-wider text-amber-300 bg-amber-400/10 border border-amber-400/20 px-3.5 py-1 rounded-full font-bold">
+              VERIFIED PUNE CLIENT PROOF
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-serif font-black text-white mt-4 mb-3">
+              Real results. Verified photographs.
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400">
+              Photographs, revenue attribution, and rankings directly from Pune clinics, gyms, and luxury salons.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {caseStudies.map((cs) => (
+              <div 
+                key={cs.id}
+                onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(cs); }}
+                className="bg-[#0c1220] border border-white/10 hover:border-pink-500/50 rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 group flex flex-col justify-between shadow-2xl"
+              >
+                <div>
+                  <div className="h-56 overflow-hidden relative border-b border-white/10">
+                    <img 
+                      src={cs.image} 
+                      alt={cs.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c1220] via-transparent to-transparent" />
+                    <span className="absolute bottom-3 left-4 text-[11px] font-mono text-amber-300 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-400/20">
+                      {cs.category}
+                    </span>
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="font-serif font-bold text-xl text-white group-hover:text-pink-300 transition-colors">
+                      {cs.title}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                      {cs.headline}
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-white/5">
+                      {cs.stats.slice(0, 2).map((s, idx) => (
+                        <div key={idx} className="bg-slate-900/80 p-2.5 rounded-xl border border-white/5">
+                          <span className="text-[10px] text-slate-400 block">{s.label}</span>
+                          <span className="text-xs font-black text-emerald-400">{s.val}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 pt-0 flex items-center justify-between text-xs font-bold text-pink-400">
+                  <span className="flex items-center gap-1.5">
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Inspect Full Breakdown</span>
+                  </span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: 15-MODULE BENTO GRID */}
+      <section id="modules" className="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 z-10 border-t border-white/5">
         
-        {/* Classical Cloud Cutout Banners */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono mb-4">
             <Layers className="w-3.5 h-3.5" />
@@ -1319,7 +1553,7 @@ export default function App() {
           {modules.map((m, idx) => (
             <div
               key={idx}
-              className={`bg-[#0c1220]/80 border rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between ${
+              className={`bg-[#0c1220]/90 border rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between ${
                 expandedModule === idx 
                   ? 'border-pink-500/60 bg-[#141b2d] shadow-[0_10px_35px_rgba(244,114,182,0.15)]' 
                   : 'border-white/10 hover:border-white/25'
@@ -1331,7 +1565,6 @@ export default function App() {
                     {m.badge}
                   </span>
 
-                  {/* Pink Expandable (+) Button from Wiro video */}
                   <button
                     onClick={() => {
                       handleInteraction('toggle');
@@ -1356,7 +1589,6 @@ export default function App() {
                   {m.desc}
                 </p>
 
-                {/* Expanded Details Drawer */}
                 {expandedModule === idx && (
                   <div className="pt-3 border-t border-white/10 space-y-2 animate-fadeIn">
                     <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
@@ -1374,7 +1606,7 @@ export default function App() {
 
               <div className="mt-4 pt-3 flex items-center justify-between text-[11px] font-semibold text-slate-400 border-t border-white/5">
                 <span>Integrated into OS</span>
-                <span className="text-emerald-400 flex items-center gap-1">
+                <span className="text-emerald-400 flex items-center gap-1 font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   Live Sync
                 </span>
@@ -1384,10 +1616,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* SECTION 4: TORN PAPER "JOIN THE WAITLIST" / EARLY ACCESS (From Wiro recording 00:09) */}
+      {/* SECTION 5: TORN PAPER "JOIN THE WAITLIST" / EARLY ACCESS */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 z-10">
-        
-        {/* Classical Winged Pegasus Flying in Background */}
         <div className="max-w-xl mx-auto relative">
           
           {/* Masking Tape 1: Top Left */}
@@ -1396,18 +1626,15 @@ export default function App() {
           {/* Masking Tape 2: Top Right */}
           <div className="absolute -top-4 -right-4 w-28 h-8 bg-amber-100/70 border border-amber-200/50 backdrop-blur-sm rotate-6 z-20 shadow-sm pointer-events-none" />
 
-          {/* The Torn Paper Card with realistic ripped bottom edge */}
+          {/* The Torn Paper Card */}
           <div 
             style={{
               clipPath: 'polygon(0% 0%, 100% 0%, 100% calc(100% - 10px), 98% 100%, 96% calc(100% - 8px), 94% 100%, 92% calc(100% - 6px), 90% 100%, 88% calc(100% - 10px), 86% 100%, 84% calc(100% - 7px), 82% 100%, 80% calc(100% - 9px), 78% 100%, 76% calc(100% - 8px), 74% 100%, 72% calc(100% - 6px), 70% 100%, 68% calc(100% - 10px), 66% 100%, 64% calc(100% - 7px), 62% 100%, 60% calc(100% - 9px), 58% 100%, 56% calc(100% - 8px), 54% 100%, 52% calc(100% - 6px), 50% 100%, 48% calc(100% - 10px), 46% 100%, 44% calc(100% - 7px), 42% 100%, 40% calc(100% - 9px), 38% 100%, 36% calc(100% - 8px), 34% 100%, 32% calc(100% - 6px), 30% 100%, 28% calc(100% - 10px), 26% 100%, 24% calc(100% - 7px), 22% 100%, 20% calc(100% - 9px), 18% 100%, 16% calc(100% - 8px), 14% 100%, 12% calc(100% - 6px), 10% 100%, 8% calc(100% - 10px), 6% 100%, 4% calc(100% - 7px), 2% 100%, 0% calc(100% - 9px))'
             }}
-            className="relative bg-[#fffdfa] text-slate-900 rounded-lg p-8 sm:p-12 pb-14 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] border-t border-l border-amber-200/50 overflow-hidden text-center"
+            className="relative bg-[#fffdfa] text-slate-900 rounded-lg p-8 sm:p-12 pb-14 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] border-t border-l border-amber-200/50 overflow-hidden text-center"
           >
-            
-            {/* Subtle paper grain texture */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/40 pointer-events-none" />
 
-            {/* Headline */}
             <h3 className="font-serif font-black text-3xl sm:text-5xl text-slate-950 tracking-tight leading-tight mb-3">
               Join the waitlist
             </h3>
@@ -1416,7 +1643,6 @@ export default function App() {
               Deploy the AceSutra operating system for your clinic, gym, or luxury brand. Private beta slots available for Pune founders.
             </p>
 
-            {/* Scalloped Pink Circular Button with Play/Arrow Icon */}
             <div className="flex justify-center">
               <button
                 onClick={() => {
@@ -1431,74 +1657,6 @@ export default function App() {
                 </div>
               </button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: PUNE CASE STUDIES DEEP DIVE */}
-      <section id="proof" className="relative py-20 px-4 sm:px-6 lg:px-8 z-10 border-t border-white/5">
-        <div className="max-w-6xl mx-auto">
-          
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-300 bg-amber-400/10 border border-amber-400/20 px-3 py-1 rounded-full">
-              PUNE CLIENT CASE STUDIES
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-serif font-black text-white mt-4 mb-3">
-              Real results. Not vanity numbers.
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Photographs, actual revenue numbers, and verified Google Maps rankings from Pune establishments.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {caseStudies.map((cs) => (
-              <div 
-                key={cs.id}
-                onClick={() => { handleInteraction('pop'); setSelectedCaseStudy(cs); }}
-                className="bg-[#0c1220] border border-white/10 hover:border-pink-500/50 rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 group flex flex-col justify-between shadow-xl"
-              >
-                <div>
-                  <div className="h-48 overflow-hidden relative">
-                    <img 
-                      src={cs.image} 
-                      alt={cs.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c1220] via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-4 text-[11px] font-mono text-amber-300 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-400/20">
-                      {cs.category}
-                    </span>
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="font-serif font-bold text-xl text-white group-hover:text-pink-300 transition-colors">
-                      {cs.title}
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
-                      {cs.headline}
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-white/5">
-                      {cs.stats.slice(0, 2).map((s, idx) => (
-                        <div key={idx} className="bg-slate-900/60 p-2 rounded-lg">
-                          <span className="text-[10px] text-slate-500 block">{s.label}</span>
-                          <span className="text-xs font-bold text-emerald-400">{s.val}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 pt-0 flex items-center justify-between text-xs font-semibold text-pink-400">
-                  <span className="flex items-center gap-1.5">
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Inspect Breakdown</span>
-                  </span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -1521,7 +1679,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            {/* Tier 1: Growth Starter */}
+            {/* Starter */}
             <div className="bg-[#0c1220] border border-white/10 rounded-3xl p-6 flex flex-col justify-between">
               <div>
                 <span className="text-xs font-mono text-slate-400 uppercase">Starter OS</span>
@@ -1545,7 +1703,7 @@ export default function App() {
               </button>
             </div>
 
-            {/* Tier 2: Scale OS (Highlighted) */}
+            {/* Scale OS */}
             <div className="bg-[#12192b] border-2 border-pink-500 rounded-3xl p-6 relative flex flex-col justify-between shadow-[0_10px_40px_rgba(244,114,182,0.25)]">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">
                 MOST POPULAR
@@ -1573,7 +1731,7 @@ export default function App() {
               </button>
             </div>
 
-            {/* Tier 3: Enterprise */}
+            {/* Enterprise */}
             <div className="bg-[#0c1220] border border-white/10 rounded-3xl p-6 flex flex-col justify-between">
               <div>
                 <span className="text-xs font-mono text-slate-400 uppercase">Custom Stack</span>
@@ -1621,7 +1779,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            {/* Founder 1: Vedant */}
+            {/* Vedant */}
             <div className="bg-[#0c1220] border border-white/10 rounded-3xl p-6 flex items-start gap-4">
               <VedantAvatar size="w-16 h-16" />
               <div>
@@ -1633,7 +1791,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Founder 2: Shreyash */}
+            {/* Shreyash */}
             <div className="bg-[#0c1220] border border-white/10 rounded-3xl p-6 flex items-start gap-4">
               <ShreyashAvatar size="w-16 h-16" />
               <div>
@@ -1703,14 +1861,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* SECTION 9: FOOTER WITH BENTO CARDS OVER SCENIC CLASSICAL CANVAS (From Wiro recording 00:12) */}
+      {/* SECTION 9: FOOTER */}
       <footer className="relative pt-16 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#070b12] to-[#04060a] border-t border-white/10 z-10">
         <div className="max-w-7xl mx-auto space-y-12">
           
-          {/* Bento Grid Footer Modules */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            {/* Bento Card 1: Brand & Pune Office */}
             <div className="bg-[#0c1220]/90 border border-white/10 rounded-2xl p-6 flex flex-col justify-between">
               <div>
                 <AceSutraLogo className="h-9 w-9" />
@@ -1734,7 +1890,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Bento Card 2: Platform Comparison */}
             <div className="bg-[#0c1220]/90 border border-white/10 rounded-2xl p-6">
               <span className="text-[10px] font-mono text-pink-400 uppercase tracking-wider font-bold">PLATFORM</span>
               <h4 className="font-serif font-bold text-base text-white mt-1 mb-3">Why AceSutra?</h4>
@@ -1746,7 +1901,6 @@ export default function App() {
               </ul>
             </div>
 
-            {/* Bento Card 3: Free Micro-Tools */}
             <div className="bg-[#0c1220]/90 border border-white/10 rounded-2xl p-6">
               <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider font-bold">FREE TOOLS</span>
               <h4 className="font-serif font-bold text-base text-white mt-1 mb-3">Pune Utilities</h4>
@@ -1758,7 +1912,6 @@ export default function App() {
               </ul>
             </div>
 
-            {/* Bento Card 4: Direct Launch */}
             <div className="bg-[#0c1220]/90 border border-white/10 rounded-2xl p-6 flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-bold">CONTACT</span>
@@ -1781,7 +1934,6 @@ export default function App() {
 
           </div>
 
-          {/* Bottom Copyright and Legal Line */}
           <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
             <p>© 2026 AceSutra. Kharadi, Pune, Maharashtra, India. All rights reserved.</p>
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
@@ -1791,7 +1943,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* FLOATING ACTION DOCK: BOTTOM RIGHT AUDIO & WHATSAPP WIDGET (From Wiro recording) */}
+      {/* FLOATING ACTION DOCK: BOTTOM RIGHT AUDIO & WHATSAPP WIDGET */}
       <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
         
         {/* Sound Equalizer Pill */}
@@ -1830,12 +1982,11 @@ export default function App() {
         </a>
       </div>
 
-      {/* MODAL 1: EARLY ACCESS / JOIN THE FREE BETA (From Wiro recording 00:14) */}
+      {/* MODAL 1: EARLY ACCESS / JOIN THE FREE BETA */}
       {waitlistModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
           <div className="relative w-full max-w-lg bg-[#fffdfa] text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-amber-200/50">
             
-            {/* Close Button */}
             <button
               onClick={() => { handleInteraction('click'); setWaitlistModalOpen(false); }}
               className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all"
@@ -1947,7 +2098,7 @@ export default function App() {
         </div>
       )}
 
-      {/* MODAL 2: CASE STUDY DEEP DIVE */}
+      {/* MODAL 2: CASE STUDY DEEP DIVE WITH HIGH RES IMAGE */}
       {selectedCaseStudy && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
           <div className="relative w-full max-w-2xl bg-[#0c1220] border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-100 max-h-[90vh] overflow-y-auto">
@@ -1967,7 +2118,7 @@ export default function App() {
               {selectedCaseStudy.title}
             </h3>
 
-            <div className="h-64 rounded-2xl overflow-hidden my-4 border border-white/10">
+            <div className="h-64 sm:h-72 rounded-2xl overflow-hidden my-4 border border-white/10 shadow-lg">
               <img 
                 src={selectedCaseStudy.image} 
                 alt={selectedCaseStudy.title} 
