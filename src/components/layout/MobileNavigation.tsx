@@ -86,7 +86,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                                   key={child.href}
                                   to={child.href}
                                   onClick={onClose}
-                                  className={({ isActive }) =>
+                                  className={({ isActive }: { isActive: boolean }) =>
                                     `block py-2 text-sm transition-colors ${
                                       isActive
                                         ? 'text-cyan-400 font-semibold'
@@ -109,7 +109,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
                       key={link.href}
                       to={link.href}
                       onClick={onClose}
-                      className={({ isActive }) =>
+                      className={({ isActive }: { isActive: boolean }) =>
                         `block py-3 text-base font-medium transition-colors ${
                           isActive
                             ? 'text-cyan-400 font-semibold'

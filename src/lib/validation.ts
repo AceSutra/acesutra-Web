@@ -31,7 +31,7 @@ export const contactFormSchema = z.object({
     .max(2000, { message: 'Description exceeds maximum limit of 2,000 characters.' }),
   privacyConsent: z
     .boolean()
-    .refine((val) => val === true, {
+    .refine((val: boolean) => val === true, {
       message: 'You must agree to the privacy policy to submit.',
     }),
 });

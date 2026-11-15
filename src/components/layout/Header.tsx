@@ -122,7 +122,7 @@ export const Header: React.FC = () => {
                                   key={child.href}
                                   to={child.href}
                                   onClick={() => setServicesDropdownOpen(false)}
-                                  className={({ isActive }) =>
+                                  className={({ isActive }: { isActive: boolean }) =>
                                     `group flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 ${
                                       isActive
                                         ? 'bg-charcoal-700/80 border border-brand-cyan/30'
@@ -164,7 +164,7 @@ export const Header: React.FC = () => {
                   <NavLink
                     key={link.href}
                     to={link.href}
-                    className={({ isActive }) =>
+                    className={({ isActive }: { isActive: boolean }) =>
                       `px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                         isActive
                           ? 'text-cyan-400 bg-charcoal-800/40 font-semibold'
