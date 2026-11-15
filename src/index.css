@@ -9,8 +9,56 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #070a12;
-  color: #f1f5f9;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #05070d;
+  color: #e6dfcc;
+  font-family: 'Cormorant Garamond', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   overflow-x: hidden;
 }
+
+h1, h2, h3, .font-cinzel {
+  font-family: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+/* Wiro-Style CRT / Old TV Scanline and Static Noise Animations */
+@keyframes crtScanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+@keyframes tvFlicker {
+  0% { opacity: 0.08; }
+  25% { opacity: 0.14; }
+  50% { opacity: 0.06; }
+  75% { opacity: 0.12; }
+  100% { opacity: 0.09; }
+}
+
+@keyframes magicalSparkle {
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.3; }
+  50% { transform: translateY(-25px) scale(1.3) rotate(180deg); opacity: 0.85; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+.animate-magical-sparkle {
+  animation: magicalSparkle 4s ease-in-out infinite;
+}
+
+/* Harry Potter Parchment & Spell Glow utility classes */
+.gold-glow {
+  text-shadow: 0 0 15px rgba(234, 179, 8, 0.45), 0 0 35px rgba(202, 138, 4, 0.25);
+}
+
+.spell-border {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.12);
+}
+
